@@ -22,12 +22,14 @@
     "generate:module": "ts-node src/generate-modules/index.ts"
   },
   "dependencies": {
+    "@fastify/static": "^9.0.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/platform-fastify": "^11.1.17",
     "@nestjs/sequelize": "^11.0.1",
+    "@nestjs/swagger": "^11.2.6",
     "pg": "^8.20.0",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",

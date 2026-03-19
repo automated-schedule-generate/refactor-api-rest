@@ -5,6 +5,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { SwaggerConfig } from './configuration/swagger.config';
 
 async function bootstrap() {
   const logger = new Logger();
@@ -34,6 +35,8 @@ async function bootstrap() {
   prefix += '/api';
 
   app.setGlobalPrefix(prefix);
+
+  SwaggerConfig(app);
 
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 
