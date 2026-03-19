@@ -1,6 +1,6 @@
 # ASGEN — API REST
 
-API REST do sistema **ASGEN** (Automated Schedule Generator), construída com **NestJS** e seguindo a arquitetura **Clean Architecture / DDD**.
+API REST do sistema **ASGEN** (Automated Schedule Generator), construída com **NestJS** e seguindo a arquitetura **HEXAGONAL**.
 
 ---
 
