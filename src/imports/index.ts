@@ -38,7 +38,11 @@ function generateImportsWithExports(
         walk(fullPath); // entra na subpasta
       } else if (entry.isFile() && entry.name.endsWith(`${end_file}`)) {
         const relativePath =
-          '../modules/' + path.relative(baseDir, fullPath).replace(/\\/g, '/').replace(/\.ts$/, '');
+          '../modules/' +
+          path
+            .relative(baseDir, fullPath)
+            .replace(/\\/g, '/')
+            .replace(/\.ts$/, '');
         let result = 'export ';
         if (is_export_type) {
           result += 'type ';
