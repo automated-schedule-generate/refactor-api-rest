@@ -1,0 +1,50 @@
+services:
+  asgen-database:
+    image: 'postgres:17'
+    container_name: asgen-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    restart: always
+    profiles:
+      - prd
+      - dev
+
+  api-prd:
+    image: 'asgen-api-prd:latest'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: asgen-api-prd
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    restart: always
+    profiles:
+      - prd
+    depends_on:
+      - asgen-database
+
+  api-dev:
+    image: 'asgen-api-dev:latest'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: asgen-api-dev
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    restart: always
+    profiles:
+      - dev
+    depends_on:
+      - asgen-database
+    volumes:
+      - type: bind
+        source: .
+        target: /app

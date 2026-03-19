@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+
+    "paths": {
+      "@database/*": ["src/database/*"],
+
+      "@controllers": ["src/imports/controllers"],
+      "@dtos": ["src/imports/dtos"],
+      "@entities": ["src/imports/entities"],
+      "@factories": ["src/imports/factories"],
+      "@interfaces": ["src/imports/interfaces"],
+      "@mappers": ["src/imports/mappers"],
+      "@models": ["src/imports/models"],
+      "@modules": ["src/imports/modules"],
+      "@repositories": ["src/imports/repositories"],
+      "@repositories.impl": ["src/imports/repositories.impl"],
+      "@services": ["src/imports/services"],
+      "@use-cases": ["src/imports/use-cases"],
+      "@guards": ["src/imports/guards"],
+      "@enums": ["src/imports/enums"],
+      "@contracts": ["src/imports/contracts"],
+      "@builders": ["src/imports/builders"]
+    }
+  }
+}
