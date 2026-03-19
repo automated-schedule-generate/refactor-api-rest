@@ -13,19 +13,21 @@ jobs:
     steps:
       - name: Get branch name
         id: branch
-        run: echo "branch=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "branch=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Validate branch name
         run: |
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
 
-
           echo "Branch: $BRANCH_NAME"
 
           if [[ ! "$BRANCH_NAME" =~ ^(feat|fix|hotfix|release)/[a-z0-9._-]+$ ]]; then
             echo "❌ Nome de branch inválido!"
-            echo "$(git rev-parse --abbrev-ref HEAD)"
-            echo $(git rev-parse --abbrev-ref HEAD)
             echo "Use: feat/, fix/, hotfix/, release/"
             exit 1
           fi
