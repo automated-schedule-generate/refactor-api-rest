@@ -18,6 +18,7 @@ jobs:
       - name: Validate branch name
         run: |
           BRANCH_NAME="${{ steps.branch.outputs.branch }}"
+          
 
           echo "Branch: $BRANCH_NAME"
 
