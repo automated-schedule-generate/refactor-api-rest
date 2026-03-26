@@ -114,7 +114,7 @@ createFile(
   `import { Table, Model } from 'sequelize-typescript';
 
 @Table({ tableName: '${module_name}' })
-export class ${module_name_formated}Model extends Model<${module_name_formated}Model> {}\n`,
+export class ${module_name_formated}Model extends Model<${module_name_formated}Model, Partial<${module_name_formated}Model>> {}\n`,
 );
 
 createFile(
@@ -179,6 +179,10 @@ export class ${module_name_formated}Module {}\n`,
 );
 
 execSync('npm run generate:imports', {
+  stdio: 'ignore', //não mostra o output no terminal
+});
+
+execSync('npm run format', {
   stdio: 'ignore', //não mostra o output no terminal
 });
 

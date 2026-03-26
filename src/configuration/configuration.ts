@@ -7,4 +7,5 @@ export default () => ({
     port: Number(process.env.DB_PORT),
   },
   environment: process.env.ENVIRONMENT,
+  logging: process.env.LOGGING?.trim() === 'true',
 });

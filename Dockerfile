@@ -23,4 +23,6 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 RUN pnpm install --prod
 
+ENV TZ=America/Sao_Paulo
+
 CMD ["pnpm", "start:prod"]

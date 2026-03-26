@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
-    restart: always
+    restart: unless-stopped
     profiles:
       - prd
       - dev
@@ -19,11 +19,13 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: asgen-api-prd
+    networks:
+      - asgen-network
     ports:
       - "${PORT}:${PORT}"
     env_file:
       - .env
-    restart: always
+    restart: unless-stopped
     profiles:
       - prd
     depends_on:
@@ -31,15 +33,18 @@ services:
 
   api-dev:
     image: 'asgen-api-dev:latest'
+    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: Dockerfile.dev
     container_name: asgen-api-dev
+    networks:
+      - asgen-network
     ports:
       - "${PORT}:${PORT}"
     env_file:
       - .env
-    restart: always
+    restart: unless-stopped
     profiles:
       - dev
     depends_on:
@@ -48,3 +53,7 @@ services:
       - type: bind
         source: .
         target: /app
+
+networks:
+  asgen-network:
+    driver: bridge
