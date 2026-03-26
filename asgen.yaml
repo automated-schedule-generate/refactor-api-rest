@@ -11,12 +11,12 @@ paths:
         '200':
           description: Successful response
       summary: health
-  /user:
+  /user/register:
     post:
       responses:
         '200':
           description: Successful response
-      summary: register
+      summary: user register
 components:
   schemas:
     User:
