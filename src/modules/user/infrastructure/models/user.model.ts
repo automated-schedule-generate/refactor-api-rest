@@ -19,13 +19,13 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
   @Column({ type: DataType.STRING })
   name: string;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, unique: true })
   email: string;
 
   @Column({ type: DataType.STRING })
   password: string;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, unique: true })
   cpf: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })

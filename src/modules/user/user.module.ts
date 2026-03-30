@@ -20,11 +20,6 @@ import { DeleteUserUseCase } from './application/use-cases/delete-user.use-case'
     UpdateUserUseCase,
     DeleteUserUseCase,
   ],
-  exports: [
-    {
-      provide: UserRepository,
-      useClass: UserRepositoryImpl,
-    },
-  ],
+  exports: [UserRepository],
 })
 export class UserModule {}

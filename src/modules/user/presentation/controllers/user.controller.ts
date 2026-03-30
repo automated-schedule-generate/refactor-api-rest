@@ -1,12 +1,13 @@
-import { RegisterUserDto } from '@dtos';
+import { RegisterUserDto, UpdateUserDto } from '@dtos';
 import { Body, Controller, Delete, Post, Put, Req } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   DeleteUserUseCase,
   RegisterUserUseCase,
   UpdateUserUseCase,
 } from '@use-cases';
-import type { IAuthenticated } from 'src/commons/interfaces/authenticated.interface';
+import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
+import { Public } from 'src/commons/metadata/public.metadata';
 
 @ApiTags('user')
 @Controller('user')
@@ -17,6 +18,7 @@ export class UserController {
     private readonly deleteUserUseCase: DeleteUserUseCase,
   ) {}
 
+  @Public('user')
   @ApiOperation({
     summary: 'Registrar novo usuário',
   })
@@ -28,10 +30,11 @@ export class UserController {
   @ApiOperation({
     summary: 'Atualizar usuário',
   })
+  @ApiBearerAuth()
   @Put()
   async update(
-    @Body() updateUserDto: RegisterUserDto,
-    @Req() req: IAuthenticated,
+    @Body() updateUserDto: UpdateUserDto,
+    @Req() req: IAuthenticatedRequest,
   ) {
     return await this.updateUserUseCase.execute(req.user.id, updateUserDto);
   }
@@ -39,8 +42,9 @@ export class UserController {
   @ApiOperation({
     summary: 'Deletar usuário',
   })
+  @ApiBearerAuth()
   @Delete()
-  async delete(@Req() req: IAuthenticated) {
+  async delete(@Req() req: IAuthenticatedRequest) {
     return await this.deleteUserUseCase.execute(req.user.id);
   }
 }

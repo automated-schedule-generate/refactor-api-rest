@@ -1,6 +1,10 @@
 FROM node:24-alpine AS builder
 
 WORKDIR /app
+RUN apk add --no-cache wget ca-certificates
+RUN wget -O /usr/local/bin/mkcert \
+https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-v1.4.4-linux-amd64 \
+&& chmod +x /usr/local/bin/mkcert
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -8,5 +12,11 @@ COPY . .
 
 ENV TZ=America/Sao_Paulo
 
-CMD ["sh", "-c", "pnpm install && pnpm start:dev"]
+RUN mkcert -install
 
+RUN mkdir -p src/commons/certificates && \
+    mkcert -cert-file src/commons/certificates/localhost.pem \
+           -key-file src/commons/certificates/localhost-key.pem \
+           localhost 127.0.0.1 ::1
+
+CMD ["sh", "-c", "pnpm install && pnpm start:dev"]

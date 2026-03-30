@@ -14,13 +14,17 @@ export abstract class UserRepository {
     id: string,
     name: string,
     email: string,
-    password: string,
-    cpf: string,
+    password?: string,
+    cpf?: string,
   ): Promise<UserEntity>;
 
   abstract delete(id: string): Promise<void>;
 
-  abstract findById(id: string): Promise<UserEntity>;
+  abstract findById(id: string): Promise<UserEntity | null>;
 
   abstract findAll(): Promise<UserEntity[]>;
+
+  abstract findByEmail(email: string): Promise<UserEntity | null>;
+
+  abstract findByCpf(cpf: string): Promise<UserEntity | null>;
 }

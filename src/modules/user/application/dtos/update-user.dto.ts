@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { IsCpfValidator } from 'src/commons/validations/is-cpf.validation';
 
-export class RegisterUserDto {
+export class UpdateUserDto {
   @ApiProperty({
     example: 'John Doe',
     description: 'Nome do usuário',
@@ -35,12 +35,30 @@ export class RegisterUserDto {
     message:
       'A senha deve conter letras, números e pelo menos um caractere especial ou letra maiúscula',
   })
-  password: string;
+  @IsOptional()
+  password?: string;
 
   @ApiProperty({
     example: '123.456.789-09',
     description: 'CPF do usuário',
   })
   @IsCpfValidator()
-  cpf: string;
+  @IsOptional()
+  cpf?: string;
+
+  @ApiProperty({
+    example: 'Professor',
+    description: 'Função do usuário',
+  })
+  @IsOptional()
+  @IsString({ message: 'A função deve ser uma string' })
+  role?: string;
+
+  @ApiProperty({
+    example: 'Departamento de Informática',
+    description: 'Departamento do usuário',
+  })
+  @IsOptional()
+  @IsString({ message: 'O departamento deve ser uma string' })
+  department?: string;
 }

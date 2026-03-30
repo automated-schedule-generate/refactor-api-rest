@@ -1,24 +1,52 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from '@database/database.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { AuthModel } from '@models';
+import { SessionModel } from '@models';
 import { AuthController } from '@controllers';
-import { AuthRepository } from '@repositories';
-import { AuthRepositoryImpl } from '@repositories.impl';
+import { SessionRepository } from '@repositories';
+import { SessionRepositoryImpl } from '@repositories.impl';
+import { AuthService } from '@services';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from '@guards';
+import { UserModule } from '@modules';
+import { APP_GUARD } from '@nestjs/core';
+import { LoginUseCase } from '@use-cases';
 
 @Module({
-  imports: [DatabaseModule, SequelizeModule.forFeature([AuthModel])],
+  imports: [
+    DatabaseModule,
+    SequelizeModule.forFeature([SessionModel]),
+    JwtModule.registerAsync({
+      global: true,
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('jwt.secret'),
+        signOptions: {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          expiresIn: configService.get<string>('jwt.expires_in') as any,
+        },
+      }),
+    }),
+    forwardRef(() => UserModule),
+  ],
   controllers: [AuthController],
   providers: [
     {
-      provide: AuthRepository,
-      useClass: AuthRepositoryImpl,
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
+    {
+      provide: SessionRepository,
+      useClass: SessionRepositoryImpl,
+    },
+    AuthService,
+    LoginUseCase,
   ],
   exports: [
     {
-      provide: AuthRepository,
-      useClass: AuthRepositoryImpl,
+      provide: SessionRepository,
+      useClass: SessionRepositoryImpl,
     },
   ],
 })

@@ -1,5 +1,6 @@
 import { UserEntity } from '@entities';
+import { FastifyRequest } from 'fastify';
 
-export interface IAuthenticated extends Request {
+export interface IAuthenticatedRequest extends FastifyRequest {
   user: UserEntity;
 }

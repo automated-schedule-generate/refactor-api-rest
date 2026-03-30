@@ -1,4 +1,5 @@
 #!/bin/sh
+git pull origin developer
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 
