@@ -1,47 +1,17 @@
-import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
-import { AppModule } from './app.module';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import { SwaggerConfig } from './configuration/swagger.config';
+import cluster from 'node:cluster';
+import { bootstrap } from './bootstrap';
 
-async function bootstrap() {
-  const logger = new Logger();
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter(),
-  );
-  let prefix = '';
+const isPrd = process.env.ENVIRONMENT?.trim() === 'prod';
 
-  switch (process.env.ENVIRONMENT?.trim()) {
-    case 'dev':
-      prefix = 'dev';
-      break;
-    case 'test':
-      prefix = 'test';
-      break;
-    case 'rc':
-      prefix = 'rc';
-      break;
-    case 'prod':
-      prefix = 'prod';
-      break;
-    default:
-      prefix = 'dev';
-      break;
+async function main() {
+  if (isPrd && cluster.isPrimary) {
+    const replicas = Number(process.env.REPLICAS?.trim() ?? 2);
+    for (let i = 0; i < replicas; i++) {
+      cluster.fork();
+    }
+    return;
   }
-  prefix += '/api';
-
-  app.setGlobalPrefix(prefix);
-
-  SwaggerConfig(app);
-
-  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
-
-  logger.log(
-    `Application is running on: 0.0.0.0:${process.env.PORT ?? 3000}/${prefix}`,
-  );
+  await bootstrap();
 }
-bootstrap();
+
+main();

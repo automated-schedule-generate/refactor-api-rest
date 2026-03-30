@@ -1,9 +1,32 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@database/(.*)$": "<rootDir>/../src/database/$1",
+    "^@controllers$": "<rootDir>/../src/imports/controllers",
+    "^@dtos$": "<rootDir>/../src/imports/dtos",
+    "^@entities$": "<rootDir>/../src/imports/entities",
+    "^@factories$": "<rootDir>/../src/imports/factories",
+    "^@interfaces$": "<rootDir>/../src/imports/interfaces",
+    "^@mappers$": "<rootDir>/../src/imports/mappers",
+    "^@models$": "<rootDir>/../src/imports/models",
+    "^@modules$": "<rootDir>/../src/imports/modules",
+    "^@repositories$": "<rootDir>/../src/imports/repositories",
+    "^@repositories.impl$": "<rootDir>/../src/imports/repositories.impl",
+    "^@services$": "<rootDir>/../src/imports/services",
+    "^@use-cases$": "<rootDir>/../src/imports/use-cases",
+    "^@guards$": "<rootDir>/../src/imports/guards",
+    "^@enums$": "<rootDir>/../src/imports/enums",
+    "^@contracts$": "<rootDir>/../src/imports/contracts",
+    "^@builders$": "<rootDir>/../src/imports/builders"
   }
 }

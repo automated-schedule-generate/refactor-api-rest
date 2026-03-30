@@ -7,4 +7,10 @@ export default () => ({
     port: Number(process.env.DB_PORT),
   },
   environment: process.env.ENVIRONMENT,
+  logging: process.env.LOGGING?.trim() === 'true',
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expires_in: process.env.JWT_EXPIRES_IN,
+    refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
+  },
 });
