@@ -10,3 +10,4 @@ if ! echo "$branch" | grep -E "^(feat|fix|hotfix|release)/[a-z0-9._-]+$"; then
 fi
 
 npm run format
+npm run lint
