@@ -16,21 +16,31 @@ export class ResponseFormatInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<FastifyRequest>();
 
     return next.handle().pipe(
-      map((data: any) => {
+      map((data: { data?: any; message?: string }) => {
         const isJson5 = request.headers['json-type'];
+        let newData: any = data;
+        let message: string = 'Operação realizada com sucesso';
+
+        if (data?.data) {
+          newData = data.data;
+        }
+
+        if (data?.message && typeof data.message === 'string') {
+          message = data.message;
+        }
         if (isJson5 === 'json5') {
           return json5.stringify({
             success: true,
-            data: data?.data || data,
+            data: newData,
             statusCode: response.statusCode,
-            message: data?.message || 'Operação realizada com sucesso',
+            message,
           });
         }
         return {
           success: true,
-          data: data?.data || data,
+          data: newData,
           statusCode: response.statusCode,
-          message: data?.message || 'Operação realizada com sucesso',
+          message,
         };
       }),
     );

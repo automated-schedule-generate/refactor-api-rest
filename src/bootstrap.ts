@@ -19,15 +19,18 @@ export async function bootstrap() {
     AppModule,
     new FastifyAdapter({
       http2: true,
-      https: {
-        allowHTTP1: true,
-        key: fs.readFileSync(
-          path.join(__dirname, 'commons/certificates/localhost-key.pem'),
-        ),
-        cert: fs.readFileSync(
-          path.join(__dirname, 'commons/certificates/localhost.pem'),
-        ),
-      },
+      https:
+        process.env.https_enable === 'true'
+          ? {
+              // allowHTTP1: true,
+              key: fs.readFileSync(
+                path.join(__dirname, 'commons/certificates/localhost-key.pem'),
+              ),
+              cert: fs.readFileSync(
+                path.join(__dirname, 'commons/certificates/localhost.pem'),
+              ),
+            }
+          : undefined,
       logger: false,
     }),
   );

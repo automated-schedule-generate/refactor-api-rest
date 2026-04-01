@@ -4,14 +4,13 @@ import {
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
-  ValidationArguments,
 } from 'class-validator';
 
 @ValidatorConstraint({ name: 'isCpf', async: false })
 export class IsCpfConstraint implements ValidatorConstraintInterface {
   private readonly logger = new Logger(IsCpfConstraint.name);
 
-  validate(value: any, args: ValidationArguments) {
+  validate(value: any) {
     if (typeof value !== 'string') return false;
     // Se máscara for exigida, verificar regex exata
     const maskRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
@@ -55,7 +54,7 @@ export class IsCpfConstraint implements ValidatorConstraintInterface {
     return true;
   }
 
-  defaultMessage(args: ValidationArguments): string {
+  defaultMessage(): string {
     return 'CPF inválido';
   }
 }

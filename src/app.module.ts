@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './configuration/configuration';
-import { AuthModule, UserModule } from '@modules';
+import { AuthModule, TeacherModule, UserModule } from '@modules';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
+import { PaginationMiddleware } from './commons/middlewares/pagination.middleware';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ResponseFormatInterceptor } from './commons/interceptors/response-forma
     }),
     UserModule,
     AuthModule,
+    TeacherModule,
   ],
   providers: [
     {
@@ -23,4 +25,8 @@ import { ResponseFormatInterceptor } from './commons/interceptors/response-forma
   ],
   controllers: [AppController],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(PaginationMiddleware).forRoutes('*path');
+  }
+}

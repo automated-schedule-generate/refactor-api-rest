@@ -1,3 +1,4 @@
+import { TeacherModel } from '@models';
 import {
   Table,
   Model,
@@ -5,6 +6,7 @@ import {
   Column,
   CreatedAt,
   UpdatedAt,
+  HasOne,
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'user', underscored: true, timestamps: true })
@@ -42,4 +44,7 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
 
   @UpdatedAt
   updated_at: Date;
+
+  @HasOne(() => TeacherModel)
+  teacher: TeacherModel;
 }
