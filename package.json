@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "generate:imports": "ts-node src/imports/index.ts",
     "generate:module": "ts-node src/generate-modules/index.ts",
-    "prepare": "husky"
+    "prepare": "husky || true",
+    "postinstall": "npm run prepare"
   },
   "dependencies": {
     "@fastify/compress": "^8.3.1",

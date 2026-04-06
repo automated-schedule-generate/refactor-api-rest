@@ -1,6 +1,6 @@
 services:
   asgen-database:
-    image: 'postgres:17'
+    image: 'postgres:17-alpine'
     container_name: asgen-database
     ports:
       - "5432:5432"

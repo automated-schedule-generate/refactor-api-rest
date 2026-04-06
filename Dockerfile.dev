@@ -3,8 +3,8 @@ FROM node:24-alpine AS builder
 WORKDIR /app
 RUN apk add --no-cache wget ca-certificates
 RUN wget -O /usr/local/bin/mkcert \
-https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-v1.4.4-linux-amd64 \
-&& chmod +x /usr/local/bin/mkcert
+    https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-v1.4.4-linux-amd64 \
+    && chmod +x /usr/local/bin/mkcert
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -12,6 +12,13 @@ COPY . .
 
 ENV TZ=America/Sao_Paulo
 
-RUN chmod +x /app/start.dev.sh 
+RUN mkdir -p /usr/local/share/ca-certificates && \
+    chmod 2777 -R /usr/local/share/ca-certificates && \
+    chmod 2777 -R /usr/local/bin
+
+RUN mkdir -p /etc/ssl/certs && \
+    chmod 2777 -R /etc/ssl/certs
+
+RUN chmod +x /app/start.dev.sh
 
 CMD ["sh", "/app/start.dev.sh"]
