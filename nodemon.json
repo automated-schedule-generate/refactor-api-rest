@@ -1,13 +1,7 @@
 {
-    "watch": [
-        ".env",
-        "src"
-    ],
-    "ext": "ts,json,proto,env",
-    "ignore": [
-        "node_modules",
-        "dist"
-    ],
-    "exec": "pnpm start",
-    "delay": "200ms"
+  "watch": [".env", "src"],
+  "ext": "ts,json,proto,env",
+  "ignore": ["node_modules", "dist", ".husky"],
+  "exec": "pnpm start",
+  "delay": "200ms"
 }
