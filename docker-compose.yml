@@ -2,6 +2,8 @@ services:
   asgen-database:
     image: 'postgres:17-alpine'
     container_name: asgen-database
+    networks:
+      - asgen-network
     ports:
       - "5432:5432"
     environment:
