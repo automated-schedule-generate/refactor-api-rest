@@ -9,6 +9,5 @@ if ! echo "$branch" | grep -E "^(feat|fix|hotfix|release)/[a-z0-9._-]+$"; then
   exit 1
 fi
 
-npm run format
-npm run lint
-
+npx lint-staged
+git add -A
