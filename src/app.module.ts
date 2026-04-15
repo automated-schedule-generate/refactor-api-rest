@@ -7,6 +7,7 @@ import {
   CoordinatorModule,
   TeacherModule,
   UserModule,
+  CourseModule,
 } from '@modules';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
@@ -22,6 +23,7 @@ import { PaginationMiddleware } from './commons/middlewares/pagination.middlewar
     AuthModule,
     TeacherModule,
     CoordinatorModule,
+    CourseModule,
   ],
   providers: [
     {
