@@ -24,7 +24,7 @@
     "postinstall": "npm run prepare"
   },
   "lint-staged": {
-    "**/*.{ts}": [
+    "**/*.ts": [
       "eslint --fix",
       "prettier --write"
     ],
