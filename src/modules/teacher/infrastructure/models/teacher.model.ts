@@ -1,4 +1,4 @@
-import { UserModel } from '@models';
+import { CoordinatorModel, UserModel } from '@models';
 import {
   Table,
   Model,
@@ -8,6 +8,7 @@ import {
   BelongsTo,
   CreatedAt,
   UpdatedAt,
+  HasMany,
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'teacher', underscored: true, timestamps: true })
@@ -36,4 +37,7 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
 
   @BelongsTo(() => UserModel)
   user: UserModel;
+
+  @HasMany(() => CoordinatorModel)
+  coordinators: CoordinatorModel[];
 }

@@ -34,6 +34,7 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
+
     try {
       const payload: { user_id?: string } =
         await this.authService.verifyToken(token);
@@ -41,6 +42,7 @@ export class AuthGuard implements CanActivate {
       if (!payload?.user_id) {
         throw new UnauthorizedException();
       }
+
       const user = await this.userRepository.findById(payload.user_id);
       if (!user) {
         throw new UnauthorizedException();

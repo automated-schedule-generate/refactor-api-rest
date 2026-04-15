@@ -1,3 +1,5 @@
+import { TeacherEntity } from '@entities';
+
 export class UserEntity {
   constructor(
     public id: string,
@@ -10,6 +12,7 @@ export class UserEntity {
     public is_active: boolean = true,
     public created_at: Date,
     public updated_at: Date,
+    public teacher?: TeacherEntity,
   ) {}
 
   toJSON() {

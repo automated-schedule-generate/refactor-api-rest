@@ -27,4 +27,6 @@ export abstract class UserRepository {
   abstract findByEmail(email: string): Promise<UserEntity | null>;
 
   abstract findByCpf(cpf: string): Promise<UserEntity | null>;
+
+  abstract findByIdWithAllData(id: string): Promise<UserEntity | null>;
 }

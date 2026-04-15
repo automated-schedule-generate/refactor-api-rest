@@ -1,14 +1,17 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/commons/metadata/public.metadata';
-import { LoginUseCase } from '@use-cases';
+import { LoginUseCase, MeUseCase } from '@use-cases';
 import { LoginDto } from '@dtos';
 import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly loginUseCase: LoginUseCase) {}
+  constructor(
+    private readonly loginUseCase: LoginUseCase,
+    private readonly meUseCase: MeUseCase,
+  ) {}
 
   @Public('auth')
   @ApiOperation({
@@ -24,7 +27,7 @@ export class AuthController {
     summary: 'get me my user',
   })
   @Get('me')
-  getMe(@Req() req: IAuthenticatedRequest) {
-    return req.user;
+  async getMe(@Req() req: IAuthenticatedRequest) {
+    return await this.meUseCase.execute(req.user.id);
   }
 }

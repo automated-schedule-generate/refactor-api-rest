@@ -1,7 +1,7 @@
 import { UserRepository } from '@repositories';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { UserModel } from '@models';
+import { CoordinatorModel, TeacherModel, UserModel } from '@models';
 import { UserEntity } from '@entities';
 import { UserMapper } from '@mappers';
 
@@ -88,5 +88,29 @@ export class UserRepositoryImpl implements UserRepository {
       return null;
     }
     return UserMapper.toEntity(user.dataValues);
+  }
+
+  async findByIdWithAllData(id: string): Promise<UserEntity | null> {
+    const user = await this.model.findOne({
+      where: { id },
+      include: [
+        {
+          model: TeacherModel,
+          required: false,
+          include: [
+            {
+              model: CoordinatorModel,
+              required: false,
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!user?.dataValues) {
+      return null;
+    }
+
+    return UserMapper.toEntity(user?.dataValues);
   }
 }
