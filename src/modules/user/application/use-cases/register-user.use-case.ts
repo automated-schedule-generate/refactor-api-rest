@@ -1,4 +1,10 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadGatewayException,
+  HttpException,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { RegisterUserDto } from '../dtos/register-user.dto';
 import { UserRepository } from '@repositories';
 import { HashUtil } from 'src/commons/utils/hash.util';
@@ -13,19 +19,14 @@ export class RegisterUserUseCase {
     try {
       const user = await this.userRepository.findByEmail(registerUserDto.email);
       if (user) {
-        throw new HttpException('Email ou CPF já cadastrado', 400);
+        throw new BadGatewayException('Email ou CPF já cadastrado');
       }
 
       const cpf = await this.userRepository.findByCpf(registerUserDto.cpf);
       if (cpf) {
-        throw new HttpException('Email ou CPF já cadastrado', 400);
+        throw new BadGatewayException('Email ou CPF já cadastrado');
       }
-    } catch (error) {
-      this.logger.error(error);
-      throw error;
-    }
 
-    try {
       return await this.userRepository.create(
         registerUserDto.name,
         registerUserDto.email,
@@ -34,10 +35,10 @@ export class RegisterUserUseCase {
       );
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(
-        'Internal server error: Erro ao registrar usuário',
-        500,
-      );
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new InternalServerErrorException();
     }
   }
 }

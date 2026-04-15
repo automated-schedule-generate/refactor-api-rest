@@ -6,7 +6,7 @@ Cada subpasta aqui é um **módulo de domínio** gerado com o comando:
 pnpm generate:module <nome-do-módulo>
 ```
 
-Os módulos seguem a **Arquitetura Hexagonal** (também chamada de *Ports & Adapters*), organizada em três camadas bem definidas dentro de `src/modules/<nome>/`:
+Os módulos seguem a **Arquitetura Hexagonal** (também chamada de _Ports & Adapters_), organizada em três camadas bem definidas dentro de `src/modules/<nome>/`:
 
 ---
 
@@ -42,7 +42,7 @@ Os módulos seguem a **Arquitetura Hexagonal** (também chamada de *Ports & Adap
 É a camada mais interna e **não possui dependências externas** (sem NestJS, sem ORM, sem HTTP).
 
 - **`entities/`** — Representam os objetos do domínio com seus atributos e comportamentos. São POJOs simples (Plain Old JavaScript Objects).
-- **`repositories/`** — Definem as **portas de saída** como classes abstratas. Descrevem *o que* o sistema precisa fazer com os dados, sem dizer *como*. São injetadas via DI no NestJS.
+- **`repositories/`** — Definem as **portas de saída** como classes abstratas. Descrevem _o que_ o sistema precisa fazer com os dados, sem dizer _como_. São injetadas via DI no NestJS.
 
 ```
 NomeMódulo.repository.ts   →  abstract class NomeMóduloRepository { ... }
@@ -85,6 +85,7 @@ Expõe o módulo via HTTP. Recebe as requisições, valida os dados e delega par
 ### `<módulo>.module.ts` — O conector
 
 Registra no container de injeção de dependências do NestJS:
+
 - O **controller** como ponto de entrada HTTP
 - O **repositório concreto** (`RepositoryImpl`) como provedor do contrato abstrato (`Repository`)
 - O **model ORM** via `SequelizeModule.forFeature`
@@ -128,12 +129,12 @@ Entity retorna ao Use Case → DTO → Controller → HTTP Response
 
 > As dependências sempre apontam **de fora para dentro**. O domínio nunca conhece a infraestrutura.
 
-| Camada         | Pode depender de          | Não pode depender de         |
-| -------------- | ------------------------- | -----------------------------|
-| `domain`       | _(nada externo)_          | application, infrastructure  |
-| `application`  | `domain`                  | infrastructure, presentation |
-| `infrastructure` | `domain`, `application` | `presentation`               |
-| `presentation` | `application`, `domain`   | `infrastructure` (diretamente) |
+| Camada           | Pode depender de        | Não pode depender de           |
+| ---------------- | ----------------------- | ------------------------------ |
+| `domain`         | _(nada externo)_        | application, infrastructure    |
+| `application`    | `domain`                | infrastructure, presentation   |
+| `infrastructure` | `domain`, `application` | `presentation`                 |
+| `presentation`   | `application`, `domain` | `infrastructure` (diretamente) |
 
 ---
 

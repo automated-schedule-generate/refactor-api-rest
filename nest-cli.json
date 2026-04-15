@@ -4,9 +4,7 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "assets": [
-      "commons/certificates/**/*"
-    ],
+    "assets": ["commons/certificates/**/*"],
     "watchAssets": true
   }
 }

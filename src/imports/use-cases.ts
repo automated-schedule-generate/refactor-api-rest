@@ -1,4 +1,7 @@
 export * from '../modules/auth/application/use-cases/login.use-case';
+export * from '../modules/auth/application/use-cases/me.use-case';
+export * from '../modules/coordinator/application/use-cases/add-coordinator.use-case';
+export * from '../modules/coordinator/application/use-cases/update-coordinator.use-case';
 export * from '../modules/teacher/application/use-cases/delete-teacher.use-case';
 export * from '../modules/teacher/application/use-cases/find-all-teachers.use-case';
 export * from '../modules/teacher/application/use-cases/register-teacher.use-case';

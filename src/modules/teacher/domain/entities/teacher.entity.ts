@@ -1,3 +1,5 @@
+import { CoordinatorEntity } from '@entities';
+
 export class TeacherEntity {
   constructor(
     public readonly user_id: string,
@@ -6,6 +8,7 @@ export class TeacherEntity {
     public readonly observation: string | null,
     public readonly created_at: Date,
     public readonly updated_at: Date,
+    public coordinators: CoordinatorEntity[] = [],
   ) {}
 
   toJSON() {
@@ -16,6 +19,8 @@ export class TeacherEntity {
           ? this.description_special_need
           : undefined,
       observation: this.observation !== null ? this.observation : undefined,
+      coordinators:
+        this.coordinators.length > 0 ? this.coordinators : undefined,
     };
   }
 }
