@@ -17,6 +17,7 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
+    onDelete: 'CASCADE',
   })
   user_id: string;
 

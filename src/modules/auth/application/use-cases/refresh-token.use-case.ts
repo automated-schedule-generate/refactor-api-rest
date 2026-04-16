@@ -56,7 +56,6 @@ export class RefreshTokenUseCase {
 
       return { token, refresh_token, expires_in };
     } catch (error) {
-      console.log(error);
       this.logger.error(error);
 
       if (error instanceof HttpException) {
