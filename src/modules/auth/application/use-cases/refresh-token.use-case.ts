@@ -51,6 +51,7 @@ export class RefreshTokenUseCase {
       await this.sessionRepository.update(session.id, {
         token,
         refresh_token,
+        expires_at: new Date(Date.now() + expires_in * 1000),
       });
 
       return { token, refresh_token, expires_in };
