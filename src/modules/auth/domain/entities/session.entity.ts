@@ -1,8 +1,8 @@
 export class SessionEntity {
   constructor(
-    private readonly id: string,
-    private readonly token: string,
-    private readonly refresh_token: string,
-    private readonly expires_at: Date,
+    public readonly id: string,
+    public readonly token: string,
+    public readonly refresh_token: string,
+    public readonly expires_at: Date,
   ) {}
 }
