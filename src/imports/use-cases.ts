@@ -1,5 +1,6 @@
 export * from '../modules/auth/application/use-cases/login.use-case';
 export * from '../modules/auth/application/use-cases/me.use-case';
+export * from '../modules/auth/application/use-cases/refresh-token.use-case';
 export * from '../modules/coordinator/application/use-cases/add-coordinator.use-case';
 export * from '../modules/coordinator/application/use-cases/update-coordinator.use-case';
 export * from '../modules/course/application/use-cases/delete-course.use-case';

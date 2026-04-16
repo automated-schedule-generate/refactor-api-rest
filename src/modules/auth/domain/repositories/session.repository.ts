@@ -8,4 +8,12 @@ export abstract class SessionRepository {
     refresh_token: string,
     expires_at: Date,
   ): Promise<SessionEntity>;
+  abstract findByRefreshToken(
+    refreshToken: string,
+  ): Promise<SessionEntity | null>;
+  abstract update(
+    sessionId: string,
+    updates: Partial<SessionEntity>,
+  ): Promise<SessionEntity | null>;
+  abstract deleteByRefreshToken(refreshToken: string): Promise<void>;
 }

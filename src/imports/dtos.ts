@@ -1,4 +1,5 @@
 export * from '../modules/auth/application/dtos/login.dto';
+export * from '../modules/auth/application/dtos/refresh-token.dto';
 export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/register-course.dto';

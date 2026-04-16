@@ -10,6 +10,7 @@ import { AuthService } from '@services';
 import { FastifyRequest } from 'fastify';
 import { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
 import { IS_PUBLIC_KEY } from 'src/commons/metadata/public.metadata';
+import { getJwtErrorName } from 'src/commons/utils/jwt-error.util';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -48,8 +49,15 @@ export class AuthGuard implements CanActivate {
         throw new UnauthorizedException();
       }
       request.user = user;
-    } catch {
-      throw new UnauthorizedException();
+    } catch (err) {
+      const errorName = getJwtErrorName(err);
+      if (errorName === 'TokenExpiredError') {
+        throw new UnauthorizedException('token_expired');
+      }
+
+      if (errorName === 'JsonWebTokenError') {
+        throw new UnauthorizedException('invalid_token');
+      }
     }
     return true;
   }

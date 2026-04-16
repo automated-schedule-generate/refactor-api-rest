@@ -22,4 +22,42 @@ export class SessionRepositoryImpl implements SessionRepository {
 
     return SessionMapper.toEntity(session.dataValues);
   }
+
+  async findByRefreshToken(
+    refreshToken: string,
+  ): Promise<SessionEntity | null> {
+    const session = await this.model.findOne({
+      where: {
+        refresh_token: refreshToken,
+      },
+    });
+
+    if (!session) {
+      return null;
+    }
+
+    return SessionMapper.toEntity(session.dataValues);
+  }
+
+  async update(
+    sessionId: string,
+    updates: Partial<SessionEntity>,
+  ): Promise<SessionEntity | null> {
+    const [, session] = await this.model.update(updates, {
+      where: { id: sessionId },
+      returning: true,
+    });
+    if (!session?.[0].dataValues) {
+      return null;
+    }
+    return SessionMapper.toEntity(session[0].dataValues);
+  }
+
+  async deleteByRefreshToken(refreshToken: string): Promise<void> {
+    await this.model.destroy({
+      where: {
+        refresh_token: refreshToken,
+      },
+    });
+  }
 }

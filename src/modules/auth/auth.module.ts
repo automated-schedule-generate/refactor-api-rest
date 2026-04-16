@@ -11,7 +11,7 @@ import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@guards';
 import { UserModule } from '@modules';
 import { APP_GUARD } from '@nestjs/core';
-import { LoginUseCase, MeUseCase } from '@use-cases';
+import { LoginUseCase, MeUseCase, RefreshTokenUseCase } from '@use-cases';
 
 @Module({
   imports: [
@@ -43,6 +43,7 @@ import { LoginUseCase, MeUseCase } from '@use-cases';
     AuthService,
     LoginUseCase,
     MeUseCase,
+    RefreshTokenUseCase,
   ],
   exports: [
     {
