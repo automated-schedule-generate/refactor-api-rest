@@ -4,8 +4,8 @@ import { Public } from 'src/commons/metadata/public.metadata';
 import { LoginUseCase, MeUseCase } from '@use-cases';
 import { LoginDto } from '@dtos';
 import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
-import { RefreshTokenUseCase } from '../../application/use-cases/refresh-token.use-case';
-import { RefreshTokenDto } from '../../application/dtos/refresh-token.dto';
+import { RefreshTokenUseCase } from '@use-cases';
+import { RefreshTokenDto } from '@dtos';
 
 @ApiTags('auth')
 @Controller('auth')

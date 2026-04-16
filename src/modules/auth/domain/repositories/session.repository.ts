@@ -14,6 +14,6 @@ export abstract class SessionRepository {
   abstract update(
     sessionId: string,
     updates: Partial<SessionEntity>,
-  ): Promise<SessionEntity>;
-  abstract delete(session_id: string): Promise<void>;
+  ): Promise<SessionEntity | null>;
+  abstract deleteByRefreshToken(refreshToken: string): Promise<void>;
 }

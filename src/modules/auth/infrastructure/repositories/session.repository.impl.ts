@@ -42,19 +42,22 @@ export class SessionRepositoryImpl implements SessionRepository {
   async update(
     sessionId: string,
     updates: Partial<SessionEntity>,
-  ): Promise<SessionEntity> {
-    const session = await this.model.findByPk(sessionId);
-    if (!session) {
-      throw new Error('Session not found');
+  ): Promise<SessionEntity | null> {
+    const [, session] = await this.model.update(updates, {
+      where: { id: sessionId },
+      returning: true,
+    });
+    if (!session?.[0].dataValues) {
+      return null;
     }
-    await session.update(updates);
-    return SessionMapper.toEntity(session.dataValues);
+    return SessionMapper.toEntity(session[0].dataValues);
   }
 
-  async delete(session_id: string): Promise<void> {
-    const session = await this.model.findByPk(session_id);
-    if (!session) {
-      throw new Error('Session not found');
-    }
+  async deleteByRefreshToken(refreshToken: string): Promise<void> {
+    await this.model.destroy({
+      where: {
+        refresh_token: refreshToken,
+      },
+    });
   }
 }
