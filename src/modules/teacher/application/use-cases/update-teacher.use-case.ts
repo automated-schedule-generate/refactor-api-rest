@@ -1,4 +1,4 @@
-import { RegisterTeacherDto } from '@dtos';
+import { RegisterTeacherSpecialNeedDto } from '@dtos';
 import { TeacherEntity } from '@entities';
 import {
   BadRequestException,
@@ -14,7 +14,10 @@ export class UpdateTeacherUseCase {
 
   constructor(private readonly teacherRepository: TeacherRepository) {}
 
-  async execute(id: string, data: RegisterTeacherDto): Promise<TeacherEntity> {
+  async execute(
+    id: string,
+    data: RegisterTeacherSpecialNeedDto,
+  ): Promise<TeacherEntity> {
     try {
       const teacher = await this.teacherRepository.findByUserId(id);
       if (!teacher) {

@@ -1,5 +1,6 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { WorkloadEnum } from '@enums';
 
 export class RegisterTeacherDto {
   @ApiProperty({
@@ -10,25 +11,11 @@ export class RegisterTeacherDto {
   user_id: string;
 
   @ApiProperty({
-    example: true,
-    description: 'Necessidade especial',
+    enum: WorkloadEnum,
+    example: WorkloadEnum.HR_20,
+    description: 'Carga horária',
   })
-  @IsBoolean()
-  special_need: boolean;
-
-  @ApiProperty({
-    example: 'Descrição da necessidade especial',
-    description: 'Descrição da necessidade especial',
-  })
-  @IsString()
-  @IsOptional()
-  description_special_need?: string;
-
-  @ApiProperty({
-    example: 'Observação',
-    description: 'Observação',
-  })
-  @IsString()
-  @IsOptional()
-  observation?: string;
+  @IsEnum(WorkloadEnum)
+  @IsNotEmpty()
+  workload: WorkloadEnum;
 }

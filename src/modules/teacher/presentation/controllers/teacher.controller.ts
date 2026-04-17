@@ -1,4 +1,4 @@
-import { RegisterTeacherDto } from '@dtos';
+import { RegisterTeacherDto, RegisterTeacherSpecialNeedDto } from '@dtos';
 import { TeacherEntity } from '@entities';
 import {
   Body,
@@ -9,6 +9,7 @@ import {
   Post,
   Put,
   Query,
+  Req,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
@@ -18,6 +19,7 @@ import {
   UpdateTeacherUseCase,
 } from '@use-cases';
 import { PaginationDto } from 'src/commons/dtos/pagination.dto';
+import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
 
 @ApiTags('teacher')
 @ApiBearerAuth()
@@ -41,12 +43,12 @@ export class TeacherController {
   @ApiOperation({
     summary: 'Atualizar professor',
   })
-  @Put(':user_id')
+  @Put('me')
   updateTeacher(
-    @Body() data: RegisterTeacherDto,
-    @Param() params: { user_id: string },
+    @Req() req: IAuthenticatedRequest,
+    @Body() data: RegisterTeacherSpecialNeedDto,
   ): Promise<TeacherEntity> {
-    return this.updateTeacherUseCase.execute(params.user_id, data);
+    return this.updateTeacherUseCase.execute(req.user.id, data);
   }
 
   @ApiOperation({

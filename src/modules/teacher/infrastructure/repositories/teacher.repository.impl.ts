@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { TeacherModel } from '@models';
 import { TeacherEntity } from '@entities';
 import { TeacherMapper } from '@mappers';
+import { WorkloadEnum } from '@enums';
 
 @Injectable()
 export class TeacherRepositoryImpl implements TeacherRepository {
@@ -11,15 +12,11 @@ export class TeacherRepositoryImpl implements TeacherRepository {
 
   async register(
     user_id: string,
-    special_need: boolean,
-    description_special_need?: string,
-    observation?: string,
+    workload: WorkloadEnum,
   ): Promise<TeacherEntity> {
     const teacher = await this.model.create({
       user_id,
-      special_need,
-      description_special_need,
-      observation,
+      workload,
     });
     return TeacherMapper.toEntity(teacher.dataValues);
   }
