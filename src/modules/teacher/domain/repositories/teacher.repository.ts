@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { TeacherEntity } from '../entities/teacher.entity';
+import { WorkloadEnum } from '@enums';
 
 @Injectable()
 export abstract class TeacherRepository {
   abstract register(
     user_id: string,
-    special_need: boolean,
-    description_special_need?: string,
-    observation?: string,
+    workload: WorkloadEnum,
   ): Promise<TeacherEntity>;
   abstract update(
     id: string,

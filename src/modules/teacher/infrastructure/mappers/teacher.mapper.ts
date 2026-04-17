@@ -9,6 +9,7 @@ export class TeacherMapper {
       model.special_need,
       model.description_special_need,
       model.observation,
+      model.workload,
       model.created_at,
       model.updated_at,
     );

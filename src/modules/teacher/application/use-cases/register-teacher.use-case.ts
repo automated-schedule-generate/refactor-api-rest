@@ -32,9 +32,7 @@ export class RegisterTeacherUseCase {
       try {
         return await this.teacherRepository.register(
           data.user_id,
-          data.special_need,
-          data.description_special_need,
-          data.observation,
+          data.workload,
         );
       } catch (error) {
         this.logger.error(error);
