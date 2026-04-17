@@ -1,3 +1,4 @@
+import { WorkloadEnum } from '@enums';
 import { CoordinatorModel, UserModel } from '@models';
 import {
   Table,
@@ -28,6 +29,12 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
 
   @Column({ type: DataType.STRING, allowNull: true })
   observation: string;
+
+  @Column({
+    type: DataType.ENUM(WorkloadEnum.HR_20, WorkloadEnum.HR_40),
+    defaultValue: WorkloadEnum.HR_20,
+  })
+  workload: WorkloadEnum;
 
   @CreatedAt
   created_at: Date;

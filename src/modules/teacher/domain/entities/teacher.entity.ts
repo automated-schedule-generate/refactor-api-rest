@@ -1,4 +1,5 @@
 import { CoordinatorEntity } from '@entities';
+import { WorkloadEnum } from '@enums';
 
 export class TeacherEntity {
   constructor(
@@ -6,6 +7,7 @@ export class TeacherEntity {
     public readonly special_need: boolean,
     public readonly description_special_need: string | null,
     public readonly observation: string | null,
+    public readonly workload: WorkloadEnum,
     public readonly created_at: Date,
     public readonly updated_at: Date,
     public coordinators: CoordinatorEntity[] = [],
