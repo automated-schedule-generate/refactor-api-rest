@@ -9,9 +9,10 @@ import {
   UserModule,
   CourseModule,
 } from '@modules';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
 import { PaginationMiddleware } from './commons/middlewares/pagination.middleware';
+import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-error-format.interceptor';
 
 @Module({
   imports: [
@@ -29,6 +30,10 @@ import { PaginationMiddleware } from './commons/middlewares/pagination.middlewar
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseFormatInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: ResponseErrorFormatInterceptor,
     },
   ],
   controllers: [AppController],
