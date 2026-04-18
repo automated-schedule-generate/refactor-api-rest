@@ -7,6 +7,7 @@ import {
   Param,
   Put,
   Query,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
@@ -55,7 +56,10 @@ export class SubjectController {
     summary: 'Atualizar disciplina',
   })
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateSubjectDto) {
+  async update(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Body() dto: UpdateSubjectDto,
+  ) {
     return await this.updateSubjectUseCase.execute(id, dto);
   }
 
@@ -65,7 +69,7 @@ export class SubjectController {
   })
   @HttpCode(204)
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return await this.deleteSubjectUseCase.execute(id);
   }
 
@@ -83,7 +87,9 @@ export class SubjectController {
     summary: 'Buscar todas as disciplinas de um curso',
   })
   @Get('course/:course_id/all')
-  async findAllByCourseId(@Param('course_id') course_id: string) {
+  async findAllByCourseId(
+    @Param('course_id', new ParseUUIDPipe({ version: '4' })) course_id: string,
+  ) {
     return await this.findAllByCourseIdUseCase.execute(course_id);
   }
 
@@ -93,7 +99,8 @@ export class SubjectController {
   })
   @Get('prerequisite/:prerequisite_id/all')
   async findAllByPrerequisiteId(
-    @Param('prerequisite_id') prerequisite_id: string,
+    @Param('prerequisite_id', new ParseUUIDPipe({ version: '4' }))
+    prerequisite_id: string,
   ) {
     return await this.findAllByPrerequisiteIdUseCase.execute(prerequisite_id);
   }
@@ -104,7 +111,7 @@ export class SubjectController {
   })
   @Get('course/:course_id')
   async findByCourseId(
-    @Param('course_id') course_id: string,
+    @Param('course_id', new ParseUUIDPipe({ version: '4' })) course_id: string,
     @Query() query: PaginationDto,
   ) {
     return await this.findByCourseIdUseCase.execute(
@@ -120,7 +127,8 @@ export class SubjectController {
   })
   @Get('prerequisite/:prerequisite_id')
   async findByPrerequisiteId(
-    @Param('prerequisite_id') prerequisite_id: string,
+    @Param('prerequisite_id', new ParseUUIDPipe({ version: '4' }))
+    prerequisite_id: string,
     @Query() query: PaginationDto,
   ) {
     return await this.findByPrerequisiteIdUseCase.execute(
