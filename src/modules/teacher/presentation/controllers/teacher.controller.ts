@@ -43,7 +43,7 @@ export class TeacherController {
   @ApiOperation({
     summary: 'Atualizar professor',
   })
-  @Put('me')
+  @Put()
   updateTeacher(
     @Req() req: IAuthenticatedRequest,
     @Body() data: RegisterTeacherSpecialNeedDto,
