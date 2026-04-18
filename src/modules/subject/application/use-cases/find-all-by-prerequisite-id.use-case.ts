@@ -1,5 +1,7 @@
+import { SubjectEntity } from '@entities';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { SubjectRepository } from '@repositories';
+import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
 
 @Injectable()
 export class FindAllByPrerequisiteIdUseCase {
@@ -16,9 +18,10 @@ export class FindAllByPrerequisiteIdUseCase {
         throw new NotFoundException('Prerequisite subject not found');
       }
 
-      return await this.subjectRepository.findAllByPrerequisiteId(
-        prerequisite_id,
-      );
+      const { subjects, total } =
+        await this.subjectRepository.findAllByPrerequisiteId(prerequisite_id);
+
+      return paginationWrapper<SubjectEntity>(subjects, total);
     } catch (error) {
       this.logger.error(error);
       throw error;

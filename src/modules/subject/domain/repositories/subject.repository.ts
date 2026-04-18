@@ -33,19 +33,29 @@ export abstract class SubjectRepository {
     course_id: string,
     page: number,
     limit: number,
-  ): Promise<SubjectEntity[]>;
+  ): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }>;
 
-  abstract findAllByCourseId(course_id: string): Promise<SubjectEntity[]>;
+  abstract findAllByCourseId(course_id: string): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }>;
 
   abstract findByPrerequisiteId(
     prerequisite_id: string,
     page: number,
     limit: number,
-  ): Promise<SubjectEntity[]>;
+  ): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }>;
 
-  abstract findAllByPrerequisiteId(
-    prerequisite_id: string,
-  ): Promise<SubjectEntity[]>;
+  abstract findAllByPrerequisiteId(prerequisite_id: string): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }>;
 
   abstract returningExistsIds(ids: string[]): Promise<string[]>;
 }

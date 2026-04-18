@@ -1,6 +1,7 @@
 import { SubjectEntity } from '@entities';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CourseRepository, SubjectRepository } from '@repositories';
+import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
 
 @Injectable()
 export class FindByCourseIdUseCase {
@@ -11,11 +12,7 @@ export class FindByCourseIdUseCase {
     private readonly courseRepository: CourseRepository,
   ) {}
 
-  async execute(
-    course_id: string,
-    page: number,
-    limit: number,
-  ): Promise<SubjectEntity[]> {
+  async execute(course_id: string, page: number, limit: number) {
     try {
       const courseExist = await this.courseRepository.findById(course_id);
 
@@ -23,11 +20,13 @@ export class FindByCourseIdUseCase {
         throw new NotFoundException('Course not found');
       }
 
-      return await this.subjectRepository.findByCourseId(
+      const { subjects, total } = await this.subjectRepository.findByCourseId(
         course_id,
         page,
         limit,
       );
+
+      return paginationWrapper<SubjectEntity>(subjects, total, page, limit);
     } catch (error) {
       this.logger.error(error);
       throw error;

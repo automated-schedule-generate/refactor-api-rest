@@ -8,6 +8,7 @@ import {
   TeacherModule,
   UserModule,
   CourseModule,
+  SubjectModule,
 } from '@modules';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
@@ -25,6 +26,7 @@ import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-
     TeacherModule,
     CoordinatorModule,
     CourseModule,
+    SubjectModule,
   ],
   providers: [
     {

@@ -1,11 +1,22 @@
 import { RegisterUserDto, UpdateUserDto } from '@dtos';
-import { Body, Controller, Delete, Post, Put, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   DeleteUserUseCase,
+  FindAllUserUseCase,
   RegisterUserUseCase,
   UpdateUserUseCase,
 } from '@use-cases';
+import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
 import { Public } from 'src/commons/metadata/public.metadata';
 
@@ -16,6 +27,7 @@ export class UserController {
     private readonly registerUserUseCase: RegisterUserUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase,
+    private readonly findAllUserUseCase: FindAllUserUseCase,
   ) {}
 
   @Public('user')
@@ -46,5 +58,14 @@ export class UserController {
   @Delete()
   async delete(@Req() req: IAuthenticatedRequest) {
     return await this.deleteUserUseCase.execute(req.user.id);
+  }
+
+  @ApiOperation({
+    summary: 'Listar todos os usuários',
+  })
+  @ApiBearerAuth()
+  @Get()
+  async findAll(@Query() query: PaginationDto) {
+    return await this.findAllUserUseCase.execute(query.page, query.limit);
   }
 }

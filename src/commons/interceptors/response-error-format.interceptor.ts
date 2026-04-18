@@ -6,7 +6,7 @@ import {
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { FastifyReply } from 'fastify';
 import { Error as SequelizeError } from 'sequelize';
 import { DomainException } from '../exceptions/domain-exception';
 import { handleSequelizeError } from '../utils/handle-sequelize-error.util';
@@ -17,16 +17,16 @@ export class ResponseErrorFormatInterceptor implements ExceptionFilter {
 
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
+    const response = ctx.getResponse<FastifyReply>();
 
     if (exception instanceof HttpException) {
       return response
         .status(exception.getStatus())
-        .json(exception.getResponse());
+        .send(exception.getResponse());
     }
 
     if (exception instanceof DomainException) {
-      return response.status(400).json({
+      return response.status(400).send({
         message: exception.message,
         code: exception.code,
       });
@@ -37,7 +37,7 @@ export class ResponseErrorFormatInterceptor implements ExceptionFilter {
         handleSequelizeError(exception);
       } catch (domainException) {
         if (domainException instanceof DomainException) {
-          return response.status(400).json({
+          return response.status(400).send({
             message: domainException.message,
             code: domainException.code,
           });
@@ -48,6 +48,6 @@ export class ResponseErrorFormatInterceptor implements ExceptionFilter {
     const internalError = new InternalServerErrorException();
     return response
       .status(internalError.getStatus())
-      .json(internalError.getResponse());
+      .send(internalError.getResponse());
   }
 }

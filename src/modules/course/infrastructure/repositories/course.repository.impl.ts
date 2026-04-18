@@ -33,12 +33,24 @@ export class CourseRepositoryImpl implements CourseRepository {
     return course?.dataValues ? CourseMapper.toEntity(course.dataValues) : null;
   }
 
-  async findAll(page: number, limit: number): Promise<CourseEntity[]> {
-    const courses = await this.model.findAll({
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    courses: CourseEntity[];
+    total: number;
+  }> {
+    const { rows: courses, count: total } = await this.model.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
+      order: [['name', 'ASC']],
     });
-    return courses.map((course) => CourseMapper.toEntity(course.dataValues));
+    return {
+      courses: courses.map((course) =>
+        CourseMapper.toEntity(course.dataValues),
+      ),
+      total,
+    };
   }
 
   async findById(id: string): Promise<CourseEntity | null> {

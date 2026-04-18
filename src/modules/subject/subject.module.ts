@@ -6,6 +6,16 @@ import { SubjectController } from '@controllers';
 import { SubjectRepository } from '@repositories';
 import { SubjectRepositoryImpl } from '@repositories.impl';
 import { CourseModule } from '../course/course.module';
+import {
+  DeleteSubjectUseCase,
+  FindAllByCourseIdUseCase,
+  FindAllByPrerequisiteIdUseCase,
+  FindByCourseIdUseCase,
+  FindByPrerequisiteIdUseCase,
+  RegisterManySubjectsUseCase,
+  RegisterSubjectUseCase,
+  UpdateSubjectUseCase,
+} from '@use-cases';
 
 @Module({
   imports: [
@@ -19,6 +29,14 @@ import { CourseModule } from '../course/course.module';
       provide: SubjectRepository,
       useClass: SubjectRepositoryImpl,
     },
+    DeleteSubjectUseCase,
+    FindAllByCourseIdUseCase,
+    FindAllByPrerequisiteIdUseCase,
+    FindByCourseIdUseCase,
+    FindByPrerequisiteIdUseCase,
+    RegisterManySubjectsUseCase,
+    RegisterSubjectUseCase,
+    UpdateSubjectUseCase,
   ],
   exports: [
     {

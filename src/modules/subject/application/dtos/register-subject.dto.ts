@@ -27,6 +27,7 @@ export class RegisterSubjectDto {
   @ApiProperty({
     example: false,
     description: 'Se a disciplina é optativa',
+    required: true,
   })
   @IsBoolean()
   @IsNotEmpty()

@@ -65,9 +65,21 @@ export class UserRepositoryImpl implements UserRepository {
     return UserMapper.toEntity(user.dataValues);
   }
 
-  async findAll(): Promise<UserEntity[]> {
-    const users = await this.model.findAll();
-    return users.map((user) => UserMapper.toEntity(user.dataValues));
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    users: UserEntity[];
+    total: number;
+  }> {
+    const { rows, count } = await this.model.findAndCountAll({
+      limit,
+      offset: (page - 1) * limit,
+    });
+    return {
+      users: rows.map((user) => UserMapper.toEntity(user.dataValues)),
+      total: count,
+    };
   }
 
   async findByEmail(email: string): Promise<UserEntity | null> {

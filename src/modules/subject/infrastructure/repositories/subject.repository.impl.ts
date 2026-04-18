@@ -97,58 +97,72 @@ export class SubjectRepositoryImpl implements SubjectRepository {
     course_id: string,
     page: number,
     limit: number,
-  ): Promise<SubjectEntity[]> {
-    const subjects = await this.model.findAll({
+  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
+    const { rows: subjects, count: total } = await this.model.findAndCountAll({
       where: {
         course_id,
       },
       limit,
       offset: (page - 1) * limit,
     });
-    return subjects.map((subject) =>
-      SubjectMapper.toEntity(subject.dataValues),
-    );
+    return {
+      subjects: subjects.map((subject) =>
+        SubjectMapper.toEntity(subject.dataValues),
+      ),
+      total,
+    };
   }
 
-  async findAllByCourseId(course_id: string): Promise<SubjectEntity[]> {
-    const subjects = await this.model.findAll({
+  async findAllByCourseId(
+    course_id: string,
+  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
+    const { rows: subjects, count: total } = await this.model.findAndCountAll({
       where: {
         course_id,
       },
     });
-    return subjects.map((subject) =>
-      SubjectMapper.toEntity(subject.dataValues),
-    );
+    return {
+      subjects: subjects.map((subject) =>
+        SubjectMapper.toEntity(subject.dataValues),
+      ),
+      total,
+    };
   }
 
   async findByPrerequisiteId(
     prerequisite_id: string,
     page: number,
     limit: number,
-  ): Promise<SubjectEntity[]> {
-    const subjects = await this.model.findAll({
+  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
+    const { rows: subjects, count: total } = await this.model.findAndCountAll({
       where: {
         prerequisite_id,
       },
       limit,
       offset: (page - 1) * limit,
     });
-    return subjects.map((subject) =>
-      SubjectMapper.toEntity(subject.dataValues),
-    );
+    return {
+      subjects: subjects.map((subject) =>
+        SubjectMapper.toEntity(subject.dataValues),
+      ),
+      total,
+    };
   }
 
   async findAllByPrerequisiteId(
     prerequisite_id: string,
-  ): Promise<SubjectEntity[]> {
-    const subjects = await this.model.findAll({
+  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
+    const { rows: subjects, count: total } = await this.model.findAndCountAll({
       where: {
         prerequisite_id,
       },
     });
-    return subjects.map((subject) =>
-      SubjectMapper.toEntity(subject.dataValues),
-    );
+    return {
+      subjects: subjects.map((subject) =>
+        SubjectMapper.toEntity(subject.dataValues),
+      ),
+      total,
+    };
   }
 
   async returningExistsIds(ids: string[]): Promise<string[]> {

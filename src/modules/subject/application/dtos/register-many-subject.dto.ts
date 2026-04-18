@@ -1,4 +1,4 @@
-import { RegisterSubjectDto } from '@dtos';
+import { RegisterSubjectDto } from './register-subject.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
