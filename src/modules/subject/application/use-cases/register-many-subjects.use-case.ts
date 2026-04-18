@@ -1,10 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CourseRepository, SubjectRepository } from '@repositories';
 import { RegisterManySubjectDto } from '../dtos/register-many-subject.dto';
 import { Sequelize } from 'sequelize-typescript';
@@ -44,18 +38,13 @@ export class RegisterManySubjectsUseCase {
         );
 
         await transaction.commit();
-      } catch {
+      } catch (error) {
         await transaction.rollback();
-        throw new InternalServerErrorException('Failed to register subjects');
+        throw error;
       }
     } catch (error) {
       this.logger.error(error);
-
-      if (error instanceof HttpException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

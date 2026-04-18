@@ -1,12 +1,6 @@
 import { RegisterSubjectDto } from '@dtos';
 import { SubjectEntity } from '@entities';
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CourseRepository, SubjectRepository } from '@repositories';
 
 @Injectable()
@@ -43,10 +37,7 @@ export class RegisterSubjectUseCase {
       );
     } catch (error) {
       this.logger.error(error);
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

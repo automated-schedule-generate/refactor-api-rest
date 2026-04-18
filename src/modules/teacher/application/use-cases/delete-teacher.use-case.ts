@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  HttpException,
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { TeacherRepository } from '@repositories';
 
 @Injectable()
@@ -21,7 +16,7 @@ export class DeleteTeacherUseCase {
       await this.teacherRepository.delete(id);
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException('Error ao deletar professor', 500);
+      throw error;
     }
   }
 }

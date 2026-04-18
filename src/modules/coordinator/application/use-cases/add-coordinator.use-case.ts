@@ -1,12 +1,6 @@
 import { AddCoordinatorDto } from '@dtos';
 import { CoordinatorEntity } from '@entities';
-import {
-  BadGatewayException,
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { CoordinatorRepository, TeacherRepository } from '@repositories';
 import { DateTime } from 'luxon';
 
@@ -40,10 +34,7 @@ export class AddCoordinatorUseCase {
       throw new BadGatewayException('Teacher already has a coordinator');
     } catch (error) {
       this.logger.error(error);
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

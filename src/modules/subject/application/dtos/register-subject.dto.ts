@@ -1,9 +1,8 @@
-import { WorkloadEnum } from '@enums';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
-  IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -18,12 +17,12 @@ export class RegisterSubjectDto {
   name: string;
 
   @ApiProperty({
-    example: WorkloadEnum.NUM_40,
+    example: 40,
     description: 'Carga horária da disciplina',
   })
-  @IsEnum(WorkloadEnum)
+  @IsNumber()
   @IsNotEmpty()
-  workload: WorkloadEnum;
+  workload: number;
 
   @ApiProperty({
     example: false,

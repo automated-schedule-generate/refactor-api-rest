@@ -1,10 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CourseRepository, SubjectRepository } from '@repositories';
 import { SubjectEntity } from '@entities';
 
@@ -27,12 +21,7 @@ export class FindAllByCourseIdUseCase {
       return await this.subjectRepository.findAllByCourseId(course_id);
     } catch (error) {
       this.logger.error(error);
-
-      if (error instanceof HttpException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

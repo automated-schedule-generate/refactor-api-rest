@@ -1,11 +1,10 @@
 import { CourseEntity } from '@entities';
-import { WorkloadEnum } from '@enums';
 
 export class SubjectEntity {
   constructor(
     public readonly id: string,
     public readonly name: string,
-    public readonly workload: WorkloadEnum,
+    public readonly workload: number,
     public readonly is_optional: boolean,
     public readonly prerequisite_id: string,
     public readonly course_id: string,

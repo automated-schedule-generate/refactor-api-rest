@@ -1,4 +1,3 @@
-import { WorkloadEnum } from '@enums';
 import { CourseModel } from '@models';
 import {
   Table,
@@ -25,10 +24,10 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
   name: string;
 
   @Column({
-    type: DataType.ENUM(...Object.values(WorkloadEnum)),
+    type: DataType.INTEGER,
     allowNull: false,
   })
-  workload: WorkloadEnum;
+  workload: number;
 
   @Column({
     type: DataType.BOOLEAN,

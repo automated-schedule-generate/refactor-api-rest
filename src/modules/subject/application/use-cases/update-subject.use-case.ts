@@ -2,7 +2,6 @@ import { UpdateSubjectDto } from '@dtos';
 import {
   HttpException,
   Injectable,
-  InternalServerErrorException,
   Logger,
   NotFoundException,
 } from '@nestjs/common';
@@ -55,11 +54,7 @@ export class UpdateSubjectUseCase {
       return subject;
     } catch (error) {
       this.logger.error(error);
-
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

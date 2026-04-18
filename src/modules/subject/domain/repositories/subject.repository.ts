@@ -1,5 +1,4 @@
 import { SubjectEntity } from '@entities';
-import { WorkloadEnum } from '@enums';
 import { Injectable } from '@nestjs/common';
 import { Transaction } from 'sequelize';
 
@@ -11,7 +10,7 @@ export abstract class SubjectRepository {
 
   abstract register(
     name: string,
-    workload: WorkloadEnum,
+    workload: number,
     is_optional: boolean,
     course_id: string,
     prerequisite_id?: string,
@@ -21,7 +20,7 @@ export abstract class SubjectRepository {
   abstract update(
     id: string,
     name: string,
-    workload: WorkloadEnum,
+    workload: number,
     is_optional: boolean,
     course_id: string,
     prerequisite_id?: string,

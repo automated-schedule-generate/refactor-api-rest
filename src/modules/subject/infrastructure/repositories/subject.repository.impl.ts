@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/sequelize';
 import { SubjectModel } from '@models';
 import { SubjectMapper } from '@mappers';
 import type { SubjectEntity } from '@entities';
-import { WorkloadEnum } from '@enums';
 import { Op, Transaction } from 'sequelize';
 
 @Injectable()
@@ -35,7 +34,7 @@ export class SubjectRepositoryImpl implements SubjectRepository {
 
   async register(
     name: string,
-    workload: WorkloadEnum,
+    workload: number,
     is_optional: boolean,
     course_id: string,
     prerequisite_id?: string,
@@ -57,7 +56,7 @@ export class SubjectRepositoryImpl implements SubjectRepository {
   async update(
     id: string,
     name: string,
-    workload: WorkloadEnum,
+    workload: number,
     is_optional: boolean,
     course_id: string,
     prerequisite_id?: string,

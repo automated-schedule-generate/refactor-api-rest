@@ -1,5 +1,4 @@
 import { RegisterSubjectDto } from '@dtos';
-import { WorkloadEnum } from '@enums';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -46,13 +45,13 @@ export class RegisterManySubjectDto {
     example: [
       {
         name: 'Cálculo I',
-        workload: WorkloadEnum.NUM_40,
+        workload: 40,
         is_optional: false,
         prerequisite_id: '123e4567-e89b-12d3-a456-426614174000',
       },
       {
         name: 'Cálculo II',
-        workload: WorkloadEnum.NUM_40,
+        workload: 40,
         is_optional: false,
         prerequisite_id: '123e4567-e89b-12d3-a456-426614174000',
       },

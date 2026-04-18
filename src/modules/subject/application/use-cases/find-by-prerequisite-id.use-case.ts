@@ -1,11 +1,5 @@
 import { SubjectEntity } from '@entities';
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { SubjectRepository } from '@repositories';
 
 @Injectable()
@@ -33,12 +27,7 @@ export class FindByPrerequisiteIdUseCase {
       );
     } catch (error) {
       this.logger.error(error);
-
-      if (error instanceof HttpException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

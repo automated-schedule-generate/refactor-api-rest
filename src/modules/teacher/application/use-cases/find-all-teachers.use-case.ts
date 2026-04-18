@@ -1,5 +1,5 @@
 import { TeacherEntity } from '@entities';
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { TeacherRepository } from '@repositories';
 import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
@@ -14,7 +14,7 @@ export class FindAllTeachersUseCase {
       return await this.teacherRepository.findAll(query.page, query.limit);
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException('Error ao buscar professores', 500);
+      throw error;
     }
   }
 }
