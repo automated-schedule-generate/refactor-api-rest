@@ -22,7 +22,13 @@ export abstract class UserRepository {
 
   abstract findById(id: string): Promise<UserEntity | null>;
 
-  abstract findAll(): Promise<UserEntity[]>;
+  abstract findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    users: UserEntity[];
+    total: number;
+  }>;
 
   abstract findByEmail(email: string): Promise<UserEntity | null>;
 

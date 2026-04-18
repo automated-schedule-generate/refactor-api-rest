@@ -63,7 +63,7 @@ export class TeacherController {
     summary: 'Buscar todos os professores',
   })
   @Get()
-  findAllTeachers(@Query() query: PaginationDto): Promise<TeacherEntity[]> {
+  findAllTeachers(@Query() query: PaginationDto) {
     return this.findAllTeachersUseCase.execute(query);
   }
 }

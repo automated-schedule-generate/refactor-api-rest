@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  HttpException,
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { TeacherRepository, UserRepository } from '@repositories';
 import { RegisterTeacherDto } from '../dtos/register-teacher.dto';
 import { TeacherEntity } from '@entities';
@@ -29,15 +24,7 @@ export class RegisterTeacherUseCase {
         throw new BadRequestException('Professor já cadastrado');
       }
 
-      try {
-        return await this.teacherRepository.register(
-          data.user_id,
-          data.workload,
-        );
-      } catch (error) {
-        this.logger.error(error);
-        throw new HttpException('Error ao register professor', 500);
-      }
+      return await this.teacherRepository.register(data.user_id, data.workload);
     } catch (error) {
       this.logger.error(error);
       throw error;

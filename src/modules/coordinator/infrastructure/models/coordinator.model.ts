@@ -36,6 +36,7 @@ export class CoordinatorModel extends Model<
   @Column({
     type: DataType.UUID,
     allowNull: false,
+    onDelete: 'CASCADE',
   })
   teacher_id: string;
 

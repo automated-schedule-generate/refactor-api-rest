@@ -1,10 +1,4 @@
-import {
-  BadGatewayException,
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { RegisterUserDto } from '../dtos/register-user.dto';
 import { UserRepository } from '@repositories';
 import { HashUtil } from 'src/commons/utils/hash.util';
@@ -35,10 +29,7 @@ export class RegisterUserUseCase {
       );
     } catch (error) {
       this.logger.error(error);
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

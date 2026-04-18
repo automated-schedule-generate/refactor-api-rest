@@ -5,7 +5,11 @@ import { UserModel } from '@models';
 import { UserController } from '@controllers';
 import { UserRepository } from '@repositories';
 import { UserRepositoryImpl } from '@repositories.impl';
-import { RegisterUserUseCase, UpdateUserUseCase } from '@use-cases';
+import {
+  FindAllUserUseCase,
+  RegisterUserUseCase,
+  UpdateUserUseCase,
+} from '@use-cases';
 import { DeleteUserUseCase } from './application/use-cases/delete-user.use-case';
 
 @Module({
@@ -19,6 +23,7 @@ import { DeleteUserUseCase } from './application/use-cases/delete-user.use-case'
     RegisterUserUseCase,
     UpdateUserUseCase,
     DeleteUserUseCase,
+    FindAllUserUseCase,
   ],
   exports: [UserRepository],
 })

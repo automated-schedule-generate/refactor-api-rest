@@ -4,7 +4,7 @@ import { LoginType } from '@enums';
 
 export class LoginDto {
   @ApiProperty({
-    example: 'example',
+    example: 'example@gmail.com',
     description: 'Login do usuário',
   })
   @IsString()
@@ -12,7 +12,7 @@ export class LoginDto {
   login: string;
 
   @ApiProperty({
-    example: '123456',
+    example: 'Password123!',
     description: 'Senha do usuário',
   })
   @IsString()

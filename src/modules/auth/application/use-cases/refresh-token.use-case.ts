@@ -1,10 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { getJwtErrorName } from 'src/commons/utils/jwt-error.util';
 import { SessionRepository } from '@repositories';
 import { AuthService } from '@services';
@@ -56,14 +50,8 @@ export class RefreshTokenUseCase {
 
       return { token, refresh_token, expires_in };
     } catch (error) {
-      console.log(error);
       this.logger.error(error);
-
-      if (error instanceof HttpException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }
