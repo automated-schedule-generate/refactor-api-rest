@@ -51,14 +51,23 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     }
     return TeacherMapper.toEntity(teacher.dataValues);
   }
-  async findAll(page: number, limit: number): Promise<TeacherEntity[]> {
-    const teachers = await this.model.findAll({
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    teachers: TeacherEntity[];
+    total: number;
+  }> {
+    const { rows: teachers, count: total } = await this.model.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
       order: [['created_at', 'DESC']],
     });
-    return teachers.map((teacher) =>
-      TeacherMapper.toEntity(teacher.dataValues),
-    );
+    return {
+      teachers: teachers.map((teacher) =>
+        TeacherMapper.toEntity(teacher.dataValues),
+      ),
+      total,
+    };
   }
 }

@@ -16,7 +16,13 @@ export abstract class CourseRepository {
 
   abstract findById(id: string): Promise<CourseEntity | null>;
 
-  abstract findAll(page: number, limit: number): Promise<CourseEntity[]>;
+  abstract findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    courses: CourseEntity[];
+    total: number;
+  }>;
 
   abstract update(
     id: string,

@@ -1,11 +1,5 @@
 import { UserEntity } from '@entities';
-import {
-  HttpException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from '@repositories';
 
 @Injectable()
@@ -25,10 +19,7 @@ export class MeUseCase {
       return user;
     } catch (error) {
       this.logger.error(error);
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      throw new InternalServerErrorException();
+      throw error;
     }
   }
 }

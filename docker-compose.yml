@@ -43,7 +43,7 @@ services:
     networks:
       - asgen-network
     ports:
-      - '${PORT}:${PORT}'
+      - '0.0.0.0:${PORT}:${PORT}'
     env_file:
       - .env
     restart: unless-stopped

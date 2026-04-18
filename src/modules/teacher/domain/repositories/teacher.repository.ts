@@ -16,5 +16,11 @@ export abstract class TeacherRepository {
   ): Promise<TeacherEntity | null>;
   abstract delete(id: string): Promise<void>;
   abstract findByUserId(user_id: string): Promise<TeacherEntity | null>;
-  abstract findAll(page: number, limit: number): Promise<TeacherEntity[]>;
+  abstract findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    teachers: TeacherEntity[];
+    total: number;
+  }>;
 }
