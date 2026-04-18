@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RegisterCourseDto } from '@dtos';
 import { Body, HttpCode, Post } from '@nestjs/common';
@@ -40,21 +48,24 @@ export class CourseController {
   @ApiOperation({ summary: 'Find course by id' })
   @Get(':id')
   @HttpCode(200)
-  async findById(@Param('id') id: string) {
+  async findById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return await this.findByIdCourseUseCase.execute(id);
   }
 
   @ApiOperation({ summary: 'Update course' })
   @Put(':id')
   @HttpCode(200)
-  async update(@Param('id') id: string, @Body() data: RegisterCourseDto) {
+  async update(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Body() data: RegisterCourseDto,
+  ) {
     return await this.updateCourseUseCase.execute(id, data);
   }
 
   @ApiOperation({ summary: 'Delete course' })
   @Delete(':id')
   @HttpCode(204)
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return await this.deleteCourseUseCase.execute(id);
   }
 }

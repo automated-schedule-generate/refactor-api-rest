@@ -1,5 +1,12 @@
 import { AddCoordinatorDto } from '@dtos';
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddCoordinatorUseCase, UpdateCoordinatorUseCase } from '@use-cases';
 import { UpdateCoordinatorDto } from '../../application/dtos/update-coordinator.dto';
@@ -27,7 +34,7 @@ export class CoordinatorController {
   })
   @Put(':id')
   async updateCoordinator(
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() body: UpdateCoordinatorDto,
   ) {
     return await this.updateCoordinatorUseCase.execute(id, body);
