@@ -2,7 +2,7 @@
   "name": "refactor-api-rest",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/main.js",
+  "main": "src/main.ts",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
