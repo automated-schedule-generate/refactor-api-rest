@@ -6,15 +6,6 @@ import { ApiOperation } from '@nestjs/swagger';
 export class AppController {
   @Public()
   @ApiOperation({
-    summary: 'Health check',
-  })
-  @Get('health')
-  getHealth(): string {
-    return 'ok';
-  }
-
-  @Public()
-  @ApiOperation({
     summary: 'Test compression',
   })
   @Get('test-compression')
