@@ -9,7 +9,7 @@ export async function SetCompressConfig(
 ) {
   if (process.env.NGINX_STARTED !== 'true') {
     await app.register(import('@fastify/compress') as any, {
-      global: true,
+      global: false,
       encodings: ['gzip', 'br'],
       // valor minimo para compressão em bytes
       threshold: 2048,
@@ -21,8 +21,14 @@ export async function SetCompressConfig(
         memLevel: 6,
         chunkSize: 64 * 1024,
       },
-      ignoredRoutes: (request: FastifyRequest) => {
-        return request.url.includes('docs');
+      customCondition: (request: FastifyRequest) => {
+        const url = request.url || '';
+        return !(
+          url.includes('docs') ||
+          url.includes('swagger') ||
+          url.includes('json') ||
+          url.includes('yaml')
+        );
       },
     });
     logger.log('Compress config applied');
