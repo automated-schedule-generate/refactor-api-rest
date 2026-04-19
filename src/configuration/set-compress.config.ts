@@ -22,7 +22,7 @@ export async function SetCompressConfig(
         chunkSize: 64 * 1024,
       },
       ignoredRoutes: (request: FastifyRequest) => {
-        return request.url.includes('/docs');
+        return request.url.includes('docs');
       },
     });
     logger.log('Compress config applied');
