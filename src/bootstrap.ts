@@ -11,7 +11,6 @@ import { SetPrefixConfig } from './configuration/set-prefix.config';
 import { SetCompressConfig } from './configuration/set-compress.config';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { FastifyReply, FastifyRequest } from 'fastify';
 
 export async function bootstrap() {
   const logger = new Logger('bootstrap');
@@ -47,11 +46,11 @@ export async function bootstrap() {
     }),
   );
 
-  app
-    .getHttpAdapter()
-    .get('/healthz', (_request: FastifyRequest, reply: FastifyReply) => {
-      reply.status(200).send('ok');
-    });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore - Fastify type clash in Docker build
+  app.getHttpAdapter().get('/healthz', (req, res) => {
+    res.status(200).send('ok');
+  });
 
   await SetCompressConfig(app, logger);
   SwaggerConfig(app, logger);

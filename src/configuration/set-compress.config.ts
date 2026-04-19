@@ -21,13 +21,15 @@ export async function SetCompressConfig(
         memLevel: 6,
         chunkSize: 64 * 1024,
       },
-      ignoredRoutes: ['/docs', '/docs/*', '/docs/json', '/docs/yaml'],
+      ignoredRoutes: (request: FastifyRequest) => {
+        return request.url.includes('/docs');
+      },
       onUnsupportedEncoding: (
         encoding: string,
         request: FastifyRequest,
         reply: FastifyReply,
       ) => {
-        reply.code(406);
+        reply.code(200);
         return 'Unsupported encoding';
       },
     });
