@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyRequest } from 'fastify';
 import * as zlib from 'node:zlib';
 
 export async function SetCompressConfig(
@@ -23,14 +23,6 @@ export async function SetCompressConfig(
       },
       ignoredRoutes: (request: FastifyRequest) => {
         return request.url.includes('/docs');
-      },
-      onUnsupportedEncoding: (
-        encoding: string,
-        request: FastifyRequest,
-        reply: FastifyReply,
-      ) => {
-        reply.code(200);
-        return 'Unsupported encoding';
       },
     });
     logger.log('Compress config applied');
