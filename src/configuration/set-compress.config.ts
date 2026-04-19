@@ -20,6 +20,7 @@ export async function SetCompressConfig(
         memLevel: 6,
         chunkSize: 64 * 1024,
       },
+      ignoredRoutes: ['/docs', '/docs/*', '/docs/json', '/docs/yaml'],
     });
     logger.log('Compress config applied');
   }
