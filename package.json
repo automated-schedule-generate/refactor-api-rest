@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "vercel-build": "nest build",
     "format": "prettier --write .",
     "start": "nest start --env-file .env",
     "start:dev": "nodemon",
