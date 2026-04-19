@@ -1,9 +1,14 @@
 {
   "version": 2,
+  "buildCommand": "nest build",
+  "outputDirectory": "dist",
   "builds": [
     {
       "src": "dist/main.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["dist/**"]
+      }
     }
   ],
   "routes": [
