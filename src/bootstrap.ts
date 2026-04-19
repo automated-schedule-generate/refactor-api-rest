@@ -18,7 +18,7 @@ export async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({
-      http2: true,
+      http2: process.env?.ENVIRONMENT?.trim() === 'prod' ? true : undefined,
       https:
         process.env.https_enable === 'true'
           ? {
