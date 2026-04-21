@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { Public } from './commons/metadata/public.metadata';
-import { ApiOperation } from '@nestjs/swagger';
+// import { ApiOperation } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
   @Public()
-  @ApiOperation({
-    summary: 'Test compression',
-  })
+  // @ApiOperation({
+  //   summary: 'Test compression',
+  // })
   @Get('test-compression')
   testCompression(): { index: number }[] {
     const response: { index: number }[] = [];
