@@ -12,10 +12,10 @@ import {
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   DeleteSubjectUseCase,
-  FindAllByCourseIdUseCase,
-  FindAllByPrerequisiteIdUseCase,
-  FindByCourseIdUseCase,
-  FindByPrerequisiteIdUseCase,
+  FindAllSubjectsByCourseIdUseCase,
+  FindAllSubjectsByPrerequisiteIdUseCase,
+  FindSubjectByCourseIdUseCase,
+  FindSubjectByPrerequisiteIdUseCase,
   RegisterManySubjectsUseCase,
   RegisterSubjectUseCase,
   UpdateSubjectUseCase,
@@ -27,6 +27,8 @@ import {
   UpdateSubjectDto,
 } from '@dtos';
 import { PaginationDto } from 'src/commons/dtos/pagination.dto';
+import { FindAllSubjectsUseCase } from '../../application/use-cases/find-all-subjects.use-case';
+import { FindSubjectByIdUseCase } from '../../application/use-cases/find-subject-by-id.use-case';
 
 @ApiTags('subject')
 @Controller('subject')
@@ -36,10 +38,12 @@ export class SubjectController {
     private readonly updateSubjectUseCase: UpdateSubjectUseCase,
     private readonly deleteSubjectUseCase: DeleteSubjectUseCase,
     private readonly registerManySubjectsUseCase: RegisterManySubjectsUseCase,
-    private readonly findAllByCourseIdUseCase: FindAllByCourseIdUseCase,
-    private readonly findAllByPrerequisiteIdUseCase: FindAllByPrerequisiteIdUseCase,
-    private readonly findByCourseIdUseCase: FindByCourseIdUseCase,
-    private readonly findByPrerequisiteIdUseCase: FindByPrerequisiteIdUseCase,
+    private readonly findAllByCourseIdUseCase: FindAllSubjectsByCourseIdUseCase,
+    private readonly findAllByPrerequisiteIdUseCase: FindAllSubjectsByPrerequisiteIdUseCase,
+    private readonly findByCourseIdUseCase: FindSubjectByCourseIdUseCase,
+    private readonly findByPrerequisiteIdUseCase: FindSubjectByPrerequisiteIdUseCase,
+    private readonly findAllSubjectsUseCase: FindAllSubjectsUseCase,
+    private readonly findSubjectByIdUseCase: FindSubjectByIdUseCase,
   ) {}
 
   @ApiBearerAuth()
@@ -107,7 +111,7 @@ export class SubjectController {
 
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Buscar uma disciplina de um curso',
+    summary: 'Buscar todas as disciplinas de um curso com paginação',
   })
   @Get('course/:course_id')
   async findByCourseId(
@@ -123,7 +127,7 @@ export class SubjectController {
 
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Buscar uma disciplina de um pré-requisito',
+    summary: 'Buscar todas as disciplinas de um pré-requisito com paginação',
   })
   @Get('prerequisite/:prerequisite_id')
   async findByPrerequisiteId(
@@ -136,5 +140,23 @@ export class SubjectController {
       query.page,
       query.limit,
     );
+  }
+
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Buscar todas as disciplinas com paginação',
+  })
+  @Get()
+  async findAll(@Query() query: PaginationDto) {
+    return await this.findAllSubjectsUseCase.execute(query.page, query.limit);
+  }
+
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Buscar disciplina por id',
+  })
+  @Get(':id')
+  async findById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return await this.findSubjectByIdUseCase.execute(id);
   }
 }

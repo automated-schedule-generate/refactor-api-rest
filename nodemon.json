@@ -1,7 +1,10 @@
 {
   "watch": [".env", "src"],
   "ext": "ts,json,proto,env",
-  "ignore": ["node_modules", "dist", ".husky"],
+  "ignore": ["node_modules", "dist", ".husky", "src/imports"],
+  "events": {
+    "start": "pnpm generate:imports"
+  },
   "exec": "pnpm start",
-  "delay": "200ms"
+  "delay": "500ms"
 }

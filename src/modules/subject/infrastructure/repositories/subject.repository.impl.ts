@@ -10,14 +10,23 @@ import { Op, Transaction } from 'sequelize';
 export class SubjectRepositoryImpl implements SubjectRepository {
   constructor(@InjectModel(SubjectModel) private model: typeof SubjectModel) {}
 
-  async findAll(page: number, limit: number): Promise<SubjectEntity[]> {
-    const subjects = await this.model.findAll({
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }> {
+    const { rows: subjects, count: total } = await this.model.findAndCountAll({
       limit,
       offset: (page - 1) * limit,
     });
-    return subjects.map((subject) =>
-      SubjectMapper.toEntity(subject.dataValues),
-    );
+    return {
+      subjects: subjects.map((subject) =>
+        SubjectMapper.toEntity(subject.dataValues),
+      ),
+      total,
+    };
   }
 
   async findById(id: string): Promise<SubjectEntity | null> {

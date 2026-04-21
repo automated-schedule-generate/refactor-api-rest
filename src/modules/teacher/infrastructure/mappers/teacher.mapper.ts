@@ -1,5 +1,5 @@
 import { TeacherEntity } from '@entities';
-import { CoordinatorMapper } from '@mappers';
+import { CoordinatorMapper, UserMapper } from '@mappers';
 import { TeacherModel } from '@models';
 
 export class TeacherMapper {
@@ -18,6 +18,10 @@ export class TeacherMapper {
       teacher.coordinators = model.coordinators.map((coordinator) =>
         CoordinatorMapper.toEntity(coordinator.dataValues),
       );
+    }
+
+    if (model?.user && model.user.dataValues) {
+      teacher.user = UserMapper.toEntity(model.user.dataValues);
     }
 
     return teacher;
