@@ -8,13 +8,15 @@ import { SubjectRepositoryImpl } from '@repositories.impl';
 import { CourseModule } from '../course/course.module';
 import {
   DeleteSubjectUseCase,
-  FindAllByCourseIdUseCase,
-  FindAllByPrerequisiteIdUseCase,
-  FindByCourseIdUseCase,
-  FindByPrerequisiteIdUseCase,
+  FindAllSubjectsByCourseIdUseCase,
+  FindAllSubjectsByPrerequisiteIdUseCase,
+  FindSubjectByCourseIdUseCase,
+  FindSubjectByPrerequisiteIdUseCase,
   RegisterManySubjectsUseCase,
   RegisterSubjectUseCase,
   UpdateSubjectUseCase,
+  FindAllSubjectsUseCase,
+  FindSubjectByIdUseCase,
 } from '@use-cases';
 
 @Module({
@@ -30,13 +32,15 @@ import {
       useClass: SubjectRepositoryImpl,
     },
     DeleteSubjectUseCase,
-    FindAllByCourseIdUseCase,
-    FindAllByPrerequisiteIdUseCase,
-    FindByCourseIdUseCase,
-    FindByPrerequisiteIdUseCase,
+    FindAllSubjectsByCourseIdUseCase,
+    FindAllSubjectsByPrerequisiteIdUseCase,
+    FindSubjectByCourseIdUseCase,
+    FindSubjectByPrerequisiteIdUseCase,
     RegisterManySubjectsUseCase,
     RegisterSubjectUseCase,
     UpdateSubjectUseCase,
+    FindAllSubjectsUseCase,
+    FindSubjectByIdUseCase,
   ],
   exports: [
     {

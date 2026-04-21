@@ -4,7 +4,13 @@ import { Transaction } from 'sequelize';
 
 @Injectable()
 export abstract class SubjectRepository {
-  abstract findAll(page: number, limit: number): Promise<SubjectEntity[]>;
+  abstract findAll(
+    page: number,
+    limit: number,
+  ): Promise<{
+    subjects: SubjectEntity[];
+    total: number;
+  }>;
 
   abstract findById(id: string): Promise<SubjectEntity | null>;
 

@@ -4,8 +4,10 @@ import { SubjectRepository } from '@repositories';
 import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
 
 @Injectable()
-export class FindAllByPrerequisiteIdUseCase {
-  private readonly logger = new Logger(FindAllByPrerequisiteIdUseCase.name);
+export class FindAllSubjectsByPrerequisiteIdUseCase {
+  private readonly logger = new Logger(
+    FindAllSubjectsByPrerequisiteIdUseCase.name,
+  );
 
   constructor(private readonly subjectRepository: SubjectRepository) {}
 

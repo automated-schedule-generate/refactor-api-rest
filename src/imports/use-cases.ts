@@ -9,10 +9,10 @@ export * from '../modules/course/application/use-cases/find-by-id-course.use-cas
 export * from '../modules/course/application/use-cases/register-course.use-case';
 export * from '../modules/course/application/use-cases/update-course.use-case';
 export * from '../modules/subject/application/use-cases/delete-subject.use-case';
-export * from '../modules/subject/application/use-cases/find-all-by-course-id.use-case';
-export * from '../modules/subject/application/use-cases/find-all-by-prerequisite-id.use-case';
-export * from '../modules/subject/application/use-cases/find-by-course-id.use-case';
-export * from '../modules/subject/application/use-cases/find-by-prerequisite-id.use-case';
+export * from '../modules/subject/application/use-cases/find-all-subjects-by-course-id.use-case';
+export * from '../modules/subject/application/use-cases/find-all-subjects-by-prerequisite-id.use-case';
+export * from '../modules/subject/application/use-cases/find-subject-by-course-id.use-case';
+export * from '../modules/subject/application/use-cases/find-subject-by-prerequisite-id.use-case';
 export * from '../modules/subject/application/use-cases/register-many-subjects.use-case';
 export * from '../modules/subject/application/use-cases/register-subject.use-case';
 export * from '../modules/subject/application/use-cases/update-subject.use-case';

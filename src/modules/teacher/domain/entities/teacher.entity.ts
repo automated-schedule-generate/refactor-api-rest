@@ -1,7 +1,9 @@
-import { CoordinatorEntity } from '@entities';
+import { CoordinatorEntity, type UserEntity } from '@entities';
 import { WorkloadEnum } from '@enums';
 
 export class TeacherEntity {
+  public user: UserEntity | null = null;
+
   constructor(
     public readonly user_id: string,
     public readonly special_need: boolean,

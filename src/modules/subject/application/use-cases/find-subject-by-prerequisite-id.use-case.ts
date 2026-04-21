@@ -4,8 +4,8 @@ import { SubjectRepository } from '@repositories';
 import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
 
 @Injectable()
-export class FindByPrerequisiteIdUseCase {
-  private readonly logger = new Logger(FindByPrerequisiteIdUseCase.name);
+export class FindSubjectByPrerequisiteIdUseCase {
+  private readonly logger = new Logger(FindSubjectByPrerequisiteIdUseCase.name);
   constructor(private readonly subjectRepository: SubjectRepository) {}
 
   async execute(prerequisite_id: string, page: number, limit: number) {
