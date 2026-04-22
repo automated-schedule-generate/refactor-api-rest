@@ -12,9 +12,9 @@ COPY package.json .
 
 RUN pnpm install
 
-RUN pnpm generate:imports
-
 COPY . .
+
+RUN pnpm generate:imports
 
 RUN pnpm build
 
