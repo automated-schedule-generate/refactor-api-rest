@@ -3,6 +3,8 @@ export * from '../modules/auth/application/dtos/refresh-token.dto';
 export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/register-course.dto';
+export * from '../modules/semester/application/dtos/register-semester.dto';
+export * from '../modules/semester/application/dtos/update-semester.dto';
 export * from '../modules/subject/application/dtos/register-many-subject.dto';
 export * from '../modules/subject/application/dtos/register-subject.dto';
 export * from '../modules/subject/application/dtos/update-subject.dto';

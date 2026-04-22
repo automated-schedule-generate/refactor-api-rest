@@ -46,15 +46,19 @@ export async function bootstrap() {
     }),
   );
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore - Fastify type clash in Docker build
-  app.getHttpAdapter().get('/healthz', (req, res) => {
-    res.status(200).send('ok');
-  });
-
   await SetCompressConfig(app, logger);
   SwaggerConfig(app, logger);
   const prefix = SetPrefixConfig(app, logger);
+
+  app.enableCors({
+    origin: '*',
+  });
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore - Fastify type clash in Docker build
+  app.getHttpAdapter().get('/healthz', (_, res) => {
+    res.status(200).send('ok');
+  });
 
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 

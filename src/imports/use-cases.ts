@@ -8,6 +8,11 @@ export * from '../modules/course/application/use-cases/find-all-course.use-case'
 export * from '../modules/course/application/use-cases/find-by-id-course.use-case';
 export * from '../modules/course/application/use-cases/register-course.use-case';
 export * from '../modules/course/application/use-cases/update-course.use-case';
+export * from '../modules/semester/application/use-cases/change-is-finished.use-case';
+export * from '../modules/semester/application/use-cases/delete-semester.use-case';
+export * from '../modules/semester/application/use-cases/find-all-semesters.use-case';
+export * from '../modules/semester/application/use-cases/register-semester.use-case';
+export * from '../modules/semester/application/use-cases/update-semester.use-case';
 export * from '../modules/subject/application/use-cases/delete-subject.use-case';
 export * from '../modules/subject/application/use-cases/find-all-subjects-by-course-id.use-case';
 export * from '../modules/subject/application/use-cases/find-all-subjects-by-prerequisite-id.use-case';
