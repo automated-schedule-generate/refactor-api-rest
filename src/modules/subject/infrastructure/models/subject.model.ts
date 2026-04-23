@@ -1,4 +1,9 @@
-import { CourseModel } from '@models';
+import {
+  CourseModel,
+  SemesterModel,
+  SubjectTeacherSemesterModel,
+  TeacherModel,
+} from '@models';
 import {
   Table,
   Model,
@@ -6,6 +11,7 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'subject' })
@@ -57,4 +63,10 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
 
   @BelongsTo(() => CourseModel)
   course: CourseModel;
+
+  @BelongsToMany(() => TeacherModel, () => SubjectTeacherSemesterModel)
+  teachers: TeacherModel[];
+
+  @BelongsToMany(() => SemesterModel, () => SubjectTeacherSemesterModel)
+  semesters: SemesterModel[];
 }

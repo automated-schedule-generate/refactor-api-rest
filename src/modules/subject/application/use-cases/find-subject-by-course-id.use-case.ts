@@ -20,10 +20,9 @@ export class FindSubjectByCourseIdUseCase {
         throw new NotFoundException('Course not found');
       }
 
-      const { subjects, total } = await this.subjectRepository.findByCourseId(
-        course_id,
-        page,
-        limit,
+      const { subjects, total } = await this.subjectRepository.findAll(
+        { course_id },
+        { page, limit },
       );
 
       return paginationWrapper<SubjectEntity>(subjects, total, page, limit);

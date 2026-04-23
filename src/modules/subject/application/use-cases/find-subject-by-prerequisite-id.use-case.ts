@@ -17,12 +17,10 @@ export class FindSubjectByPrerequisiteIdUseCase {
         throw new NotFoundException('Subject not found');
       }
 
-      const { subjects, total } =
-        await this.subjectRepository.findByPrerequisiteId(
-          prerequisite_id,
-          page,
-          limit,
-        );
+      const { subjects, total } = await this.subjectRepository.findAll(
+        { prerequisite_id },
+        { page, limit },
+      );
 
       return paginationWrapper<SubjectEntity>(subjects, total, page, limit);
     } catch (error) {

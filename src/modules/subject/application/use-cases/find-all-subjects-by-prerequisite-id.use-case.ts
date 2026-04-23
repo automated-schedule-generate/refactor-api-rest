@@ -20,8 +20,9 @@ export class FindAllSubjectsByPrerequisiteIdUseCase {
         throw new NotFoundException('Prerequisite subject not found');
       }
 
-      const { subjects, total } =
-        await this.subjectRepository.findAllByPrerequisiteId(prerequisite_id);
+      const { subjects, total } = await this.subjectRepository.findAll({
+        prerequisite_id,
+      });
 
       return paginationWrapper<SubjectEntity>(subjects, total);
     } catch (error) {

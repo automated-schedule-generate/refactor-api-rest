@@ -1,6 +1,9 @@
-import { CourseEntity } from '@entities';
+import { CourseEntity, SemesterEntity, TeacherEntity } from '@entities';
 
 export class SubjectEntity {
+  public teachers: TeacherEntity[] = [];
+  public semesters: SemesterEntity[] = [];
+
   constructor(
     public readonly id: string,
     public readonly name: string,
@@ -17,6 +20,8 @@ export class SubjectEntity {
       ...this,
       prerequisite: this.prerequisite === null ? undefined : this.prerequisite,
       course: this.course === null ? undefined : this.course,
+      teachers: this.teachers?.length > 0 ? this.teachers : undefined,
+      semesters: this.semesters?.length > 0 ? this.semesters : undefined,
     };
   }
 }

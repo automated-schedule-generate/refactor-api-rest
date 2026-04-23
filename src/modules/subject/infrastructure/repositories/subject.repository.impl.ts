@@ -1,7 +1,7 @@
 import { SubjectRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { SubjectModel } from '@models';
+import { SemesterModel, SubjectModel, TeacherModel, UserModel } from '@models';
 import { SubjectMapper } from '@mappers';
 import type { SubjectEntity } from '@entities';
 import { Op, Transaction } from 'sequelize';
@@ -11,15 +11,45 @@ export class SubjectRepositoryImpl implements SubjectRepository {
   constructor(@InjectModel(SubjectModel) private model: typeof SubjectModel) {}
 
   async findAll(
-    page: number,
-    limit: number,
+    where: {
+      course_id?: string;
+      prerequisite_id?: string;
+    },
+    pagination?: {
+      page: number;
+      limit: number;
+    },
   ): Promise<{
     subjects: SubjectEntity[];
     total: number;
   }> {
     const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      limit,
-      offset: (page - 1) * limit,
+      ...(pagination?.page && pagination?.limit
+        ? {
+            limit: pagination.limit,
+            offset: (pagination.page - 1) * pagination.limit,
+          }
+        : {}),
+      where,
+      include: [
+        {
+          model: TeacherModel,
+          as: 'teachers',
+          required: false,
+          include: [
+            {
+              model: UserModel,
+              as: 'user',
+              required: true,
+            },
+          ],
+        },
+        {
+          model: SemesterModel,
+          as: 'semesters',
+          required: false,
+        },
+      ],
     });
     return {
       subjects: subjects.map((subject) =>
@@ -29,11 +59,35 @@ export class SubjectRepositoryImpl implements SubjectRepository {
     };
   }
 
-  async findById(id: string): Promise<SubjectEntity | null> {
+  async findById(
+    id: string,
+    includes: boolean = false,
+  ): Promise<SubjectEntity | null> {
     const subject = await this.model.findOne({
       where: {
         id,
       },
+      include: includes
+        ? [
+            {
+              model: TeacherModel,
+              as: 'teachers',
+              required: false,
+              include: [
+                {
+                  model: UserModel,
+                  as: 'user',
+                  required: true,
+                },
+              ],
+            },
+            {
+              model: SemesterModel,
+              as: 'semesters',
+              required: false,
+            },
+          ]
+        : [],
     });
     if (!subject?.dataValues) {
       return null;
@@ -100,78 +154,6 @@ export class SubjectRepositoryImpl implements SubjectRepository {
       },
       transaction,
     });
-  }
-
-  async findByCourseId(
-    course_id: string,
-    page: number,
-    limit: number,
-  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
-    const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      where: {
-        course_id,
-      },
-      limit,
-      offset: (page - 1) * limit,
-    });
-    return {
-      subjects: subjects.map((subject) =>
-        SubjectMapper.toEntity(subject.dataValues),
-      ),
-      total,
-    };
-  }
-
-  async findAllByCourseId(
-    course_id: string,
-  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
-    const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      where: {
-        course_id,
-      },
-    });
-    return {
-      subjects: subjects.map((subject) =>
-        SubjectMapper.toEntity(subject.dataValues),
-      ),
-      total,
-    };
-  }
-
-  async findByPrerequisiteId(
-    prerequisite_id: string,
-    page: number,
-    limit: number,
-  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
-    const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      where: {
-        prerequisite_id,
-      },
-      limit,
-      offset: (page - 1) * limit,
-    });
-    return {
-      subjects: subjects.map((subject) =>
-        SubjectMapper.toEntity(subject.dataValues),
-      ),
-      total,
-    };
-  }
-
-  async findAllByPrerequisiteId(
-    prerequisite_id: string,
-  ): Promise<{ subjects: SubjectEntity[]; total: number }> {
-    const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      where: {
-        prerequisite_id,
-      },
-    });
-    return {
-      subjects: subjects.map((subject) =>
-        SubjectMapper.toEntity(subject.dataValues),
-      ),
-      total,
-    };
   }
 
   async returningExistsIds(ids: string[]): Promise<string[]> {

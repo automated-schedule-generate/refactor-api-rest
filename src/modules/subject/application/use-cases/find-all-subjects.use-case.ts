@@ -8,8 +8,8 @@ export class FindAllSubjectsUseCase {
 
   async execute(page: number, limit: number) {
     const { subjects, total } = await this.subjectRepository.findAll(
-      page,
-      limit,
+      {},
+      { page, limit },
     );
 
     return paginationWrapper(subjects, total, page, limit);

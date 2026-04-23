@@ -5,7 +5,6 @@ import { SubjectModel } from '@models';
 import { SubjectController } from '@controllers';
 import { SubjectRepository } from '@repositories';
 import { SubjectRepositoryImpl } from '@repositories.impl';
-import { CourseModule } from '../course/course.module';
 import {
   DeleteSubjectUseCase,
   FindAllSubjectsByCourseIdUseCase,
@@ -18,12 +17,14 @@ import {
   FindAllSubjectsUseCase,
   FindSubjectByIdUseCase,
 } from '@use-cases';
+import { CourseModule, SubjectTeacherSemesterModule } from '@modules';
 
 @Module({
   imports: [
     DatabaseModule,
     SequelizeModule.forFeature([SubjectModel]),
     forwardRef(() => CourseModule),
+    SubjectTeacherSemesterModule,
   ],
   controllers: [SubjectController],
   providers: [

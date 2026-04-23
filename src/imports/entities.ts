@@ -2,6 +2,7 @@ export * from '../modules/auth/domain/entities/session.entity';
 export * from '../modules/coordinator/domain/entities/coordinator.entity';
 export * from '../modules/course/domain/entities/course.entity';
 export * from '../modules/semester/domain/entities/semester.entity';
+export * from '../modules/subject-teacher-semester/domain/entities/subject-teacher-semester.entity';
 export * from '../modules/subject/domain/entities/subject.entity';
 export * from '../modules/teacher/domain/entities/teacher.entity';
 export * from '../modules/user/domain/entities/user.entity';

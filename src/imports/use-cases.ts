@@ -13,6 +13,7 @@ export * from '../modules/semester/application/use-cases/delete-semester.use-cas
 export * from '../modules/semester/application/use-cases/find-all-semesters.use-case';
 export * from '../modules/semester/application/use-cases/register-semester.use-case';
 export * from '../modules/semester/application/use-cases/update-semester.use-case';
+export * from '../modules/subject/application/use-cases/add-teacher-and-semester-in-subject.use-case';
 export * from '../modules/subject/application/use-cases/delete-subject.use-case';
 export * from '../modules/subject/application/use-cases/find-all-subjects-by-course-id.use-case';
 export * from '../modules/subject/application/use-cases/find-all-subjects-by-prerequisite-id.use-case';
