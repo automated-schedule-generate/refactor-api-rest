@@ -1,12 +1,14 @@
-FROM node:24-alpine AS builder
+# FROM node:24-alpine AS runtime
+FROM denoland/deno:alpine AS runtime
 
 WORKDIR /app
-RUN apk add --no-cache wget ca-certificates
+RUN apk add --no-cache wget ca-certificates curl
 RUN wget -O /usr/local/bin/mkcert \
     https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-v1.4.4-linux-amd64 \
     && chmod +x /usr/local/bin/mkcert
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN apk add --no-cache nodejs npm && \
+    npm install -g pnpm
 
 COPY . .
 

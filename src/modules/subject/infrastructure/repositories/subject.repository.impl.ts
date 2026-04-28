@@ -1,19 +1,26 @@
 import { SubjectRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { SemesterModel, SubjectModel, TeacherModel, UserModel } from '@models';
+import { SubjectModel } from '@models';
 import { SubjectMapper } from '@mappers';
 import type { SubjectEntity } from '@entities';
 import { Op, Transaction } from 'sequelize';
+import { SubjectQueryBuilder } from '@builders';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class SubjectRepositoryImpl implements SubjectRepository {
-  constructor(@InjectModel(SubjectModel) private model: typeof SubjectModel) {}
+  constructor(
+    @InjectModel(SubjectModel) private model: typeof SubjectModel,
+    private readonly subjectQueryBuilder: SubjectQueryBuilder,
+    private readonly sequelize: Sequelize,
+  ) {}
 
   async findAll(
     where: {
       course_id?: string;
       prerequisite_id?: string;
+      with_course?: boolean;
     },
     pagination?: {
       page: number;
@@ -23,76 +30,62 @@ export class SubjectRepositoryImpl implements SubjectRepository {
     subjects: SubjectEntity[];
     total: number;
   }> {
-    const { rows: subjects, count: total } = await this.model.findAndCountAll({
-      ...(pagination?.page && pagination?.limit
-        ? {
-            limit: pagination.limit,
-            offset: (pagination.page - 1) * pagination.limit,
-          }
-        : {}),
-      where,
-      include: [
-        {
-          model: TeacherModel,
-          as: 'teachers',
-          required: false,
-          include: [
-            {
-              model: UserModel,
-              as: 'user',
-              required: true,
-            },
-          ],
-        },
-        {
-          model: SemesterModel,
-          as: 'semesters',
-          required: false,
-        },
-      ],
-    });
+    const { query, replacements } = this.subjectQueryBuilder.findAll(
+      pagination,
+      where?.with_course,
+      where?.course_id,
+      where?.prerequisite_id,
+    );
+
+    const result = (await this.sequelize.query(query, {
+      replacements,
+      raw: true,
+      type: 'SELECT',
+    })) as { total: number; data: SubjectModel[] }[];
+
+    const subjects = result?.[0]?.data ?? [];
+    const total = result?.[0]?.total ?? 0;
+
     return {
       subjects: subjects.map((subject) =>
-        SubjectMapper.toEntity(subject.dataValues),
+        SubjectMapper.toEntity(subject, true),
       ),
-      total,
+      total: Number(total),
     };
   }
 
-  async findById(
-    id: string,
-    includes: boolean = false,
-  ): Promise<SubjectEntity | null> {
-    const subject = await this.model.findOne({
-      where: {
-        id,
-      },
-      include: includes
-        ? [
-            {
-              model: TeacherModel,
-              as: 'teachers',
-              required: false,
-              include: [
-                {
-                  model: UserModel,
-                  as: 'user',
-                  required: true,
-                },
-              ],
-            },
-            {
-              model: SemesterModel,
-              as: 'semesters',
-              required: false,
-            },
-          ]
-        : [],
-    });
-    if (!subject?.dataValues) {
+  async findById(id: string): Promise<SubjectEntity | null> {
+    const subject = await this.model.findByPk(id);
+
+    if (!subject) {
       return null;
     }
+
     return SubjectMapper.toEntity(subject.dataValues);
+  }
+
+  async findByIdWithIncludes(
+    id: string,
+    with_course?: boolean,
+  ): Promise<SubjectEntity | null> {
+    const { query, replacements } = this.subjectQueryBuilder.findById(
+      id,
+      with_course,
+    );
+
+    const result = (await this.sequelize.query(query, {
+      replacements,
+      raw: true,
+      type: 'SELECT',
+    })) as { total: number; data: SubjectModel[] }[];
+
+    const subject = result?.[0]?.data?.[0] ?? null;
+
+    if (!subject) {
+      return null;
+    }
+
+    return SubjectMapper.toEntity(subject, true);
   }
 
   async register(

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/main.js",
+  "type": "commonjs",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

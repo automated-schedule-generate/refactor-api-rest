@@ -7,23 +7,28 @@ import { SubjectRepository } from '@repositories';
 import { SubjectRepositoryImpl } from '@repositories.impl';
 import {
   DeleteSubjectUseCase,
-  FindAllSubjectsByCourseIdUseCase,
-  FindAllSubjectsByPrerequisiteIdUseCase,
-  FindSubjectByCourseIdUseCase,
-  FindSubjectByPrerequisiteIdUseCase,
   RegisterManySubjectsUseCase,
   RegisterSubjectUseCase,
   UpdateSubjectUseCase,
   FindAllSubjectsUseCase,
   FindSubjectByIdUseCase,
+  AddTeacherAndSemesterInSubjectUseCase,
 } from '@use-cases';
-import { CourseModule, SubjectTeacherSemesterModule } from '@modules';
+import {
+  CourseModule,
+  SemesterModule,
+  SubjectTeacherSemesterModule,
+  TeacherModule,
+} from '@modules';
+import { SubjectQueryBuilder } from '@builders';
 
 @Module({
   imports: [
     DatabaseModule,
     SequelizeModule.forFeature([SubjectModel]),
     forwardRef(() => CourseModule),
+    forwardRef(() => TeacherModule),
+    forwardRef(() => SemesterModule),
     SubjectTeacherSemesterModule,
   ],
   controllers: [SubjectController],
@@ -33,15 +38,13 @@ import { CourseModule, SubjectTeacherSemesterModule } from '@modules';
       useClass: SubjectRepositoryImpl,
     },
     DeleteSubjectUseCase,
-    FindAllSubjectsByCourseIdUseCase,
-    FindAllSubjectsByPrerequisiteIdUseCase,
-    FindSubjectByCourseIdUseCase,
-    FindSubjectByPrerequisiteIdUseCase,
     RegisterManySubjectsUseCase,
     RegisterSubjectUseCase,
     UpdateSubjectUseCase,
     FindAllSubjectsUseCase,
     FindSubjectByIdUseCase,
+    AddTeacherAndSemesterInSubjectUseCase,
+    SubjectQueryBuilder,
   ],
   exports: [
     {

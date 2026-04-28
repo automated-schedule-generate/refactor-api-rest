@@ -12,9 +12,11 @@ import {
   ForeignKey,
   BelongsTo,
   BelongsToMany,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'subject' })
+@Table({ tableName: 'subject', underscored: true, timestamps: true })
 export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
   @Column({
     type: DataType.UUID,
@@ -69,4 +71,16 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
 
   @BelongsToMany(() => SemesterModel, () => SubjectTeacherSemesterModel)
   semesters: SemesterModel[];
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }

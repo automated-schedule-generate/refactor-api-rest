@@ -8,7 +8,10 @@ export class FindSubjectByIdUseCase {
 
   async execute(id: string) {
     try {
-      const subject = await this.subjectRepository.findById(id);
+      const subject = await this.subjectRepository.findByIdWithIncludes(
+        id,
+        true,
+      );
 
       if (!subject) {
         throw new NotFoundException('Subject not found');

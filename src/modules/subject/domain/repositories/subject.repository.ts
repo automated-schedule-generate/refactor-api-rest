@@ -8,6 +8,7 @@ export abstract class SubjectRepository {
     where: {
       course_id?: string;
       prerequisite_id?: string;
+      with_course?: boolean;
     },
     pagination?: {
       page: number;
@@ -18,9 +19,11 @@ export abstract class SubjectRepository {
     total: number;
   }>;
 
-  abstract findById(
+  abstract findById(id: string): Promise<SubjectEntity | null>;
+
+  abstract findByIdWithIncludes(
     id: string,
-    includes?: boolean,
+    with_course?: boolean,
   ): Promise<SubjectEntity | null>;
 
   abstract register(

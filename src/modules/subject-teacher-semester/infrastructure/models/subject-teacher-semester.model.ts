@@ -8,7 +8,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'subject-teacher-semester' })
+@Table({ tableName: 'subject-teacher-semester', timestamps: false })
 export class SubjectTeacherSemesterModel extends Model<
   SubjectTeacherSemesterModel,
   Partial<SubjectTeacherSemesterModel>

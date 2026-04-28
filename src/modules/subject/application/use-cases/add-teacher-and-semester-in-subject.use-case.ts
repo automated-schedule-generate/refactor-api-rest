@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import {
   SemesterRepository,
   SubjectRepository,
@@ -9,6 +9,10 @@ import { AddTeacherAndSemesterInSubjectDto } from '@dtos';
 
 @Injectable()
 export class AddTeacherAndSemesterInSubjectUseCase {
+  private readonly logger = new Logger(
+    AddTeacherAndSemesterInSubjectUseCase.name,
+  );
+
   constructor(
     private readonly subjectRepository: SubjectRepository,
     private readonly subjectTeacherSemesterRepository: SubjectTeacherSemesterRepository,
@@ -17,34 +21,41 @@ export class AddTeacherAndSemesterInSubjectUseCase {
   ) {}
 
   async execute(subject_id: string, dto: AddTeacherAndSemesterInSubjectDto) {
-    const subjectExist = await this.subjectRepository.findById(subject_id);
+    try {
+      const subjectExist = await this.subjectRepository.findById(subject_id);
 
-    if (!subjectExist) {
-      throw new BadRequestException('Disciplina não encontrada');
+      if (!subjectExist) {
+        throw new BadRequestException('Disciplina não encontrada');
+      }
+
+      const teacherExist = await this.teacherRepository.findByUserId(
+        dto.teacher_id,
+      );
+
+      if (!teacherExist) {
+        throw new BadRequestException('Professor não encontrado');
+      }
+
+      const semesterExist = await this.semesterRepository.findById(
+        dto.semester_id,
+      );
+
+      if (!semesterExist) {
+        throw new BadRequestException('Semestre não encontrado');
+      }
+      console.log('cheguei aqui');
+      await this.subjectTeacherSemesterRepository.register(
+        subject_id,
+        dto.teacher_id,
+        dto.semester_id,
+      );
+
+      console.log('cheguei aqui 2');
+
+      return await this.subjectRepository.findById(subject_id);
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
     }
-
-    const teacherExist = await this.teacherRepository.findByUserId(
-      dto.teacher_id,
-    );
-
-    if (!teacherExist) {
-      throw new BadRequestException('Professor não encontrado');
-    }
-
-    const semesterExist = await this.semesterRepository.findById(
-      dto.semester_id,
-    );
-
-    if (!semesterExist) {
-      throw new BadRequestException('Semestre não encontrado');
-    }
-
-    await this.subjectTeacherSemesterRepository.register(
-      subject_id,
-      dto.teacher_id,
-      dto.semester_id,
-    );
-
-    return await this.subjectRepository.findById(subject_id, true);
   }
 }
