@@ -25,7 +25,7 @@ FROM base AS production
 WORKDIR /app
 
 COPY --from=builder /app/package.json /app/package.json
-COPY --from=builer /app/pnpm-lock.yaml /app/pnpm-lock.yaml
+COPY --from=builder /app/pnpm-lock.yaml /app/pnpm-lock.yaml
 
 RUN pnpm install --prod --prefer-frozen-lockfile
 
