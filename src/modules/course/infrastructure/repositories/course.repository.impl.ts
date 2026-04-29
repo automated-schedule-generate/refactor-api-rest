@@ -4,8 +4,9 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CourseModel } from '@models';
 import { CourseMapper } from '@mappers';
 import { ClassTimeEnum } from '@enums';
-import { Transaction } from 'sequelize';
+import { Transaction, literal } from 'sequelize';
 import { CourseEntity } from '@entities';
+import { generateWhereValueToSearchByColumn } from 'src/commons/utils/generate-where-value-to-search-by-column.util';
 
 @Injectable()
 export class CourseRepositoryImpl implements CourseRepository {
@@ -36,6 +37,7 @@ export class CourseRepositoryImpl implements CourseRepository {
   async findAll(
     page: number,
     limit: number,
+    search?: string,
   ): Promise<{
     courses: CourseEntity[];
     total: number;
@@ -44,6 +46,9 @@ export class CourseRepositoryImpl implements CourseRepository {
       offset: (page - 1) * limit,
       limit,
       order: [['name', 'ASC']],
+      where: search
+        ? literal(generateWhereValueToSearchByColumn('name', search))
+        : undefined,
     });
     return {
       courses: courses.map((course) =>

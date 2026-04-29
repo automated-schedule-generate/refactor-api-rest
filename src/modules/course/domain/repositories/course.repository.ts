@@ -19,6 +19,7 @@ export abstract class CourseRepository {
   abstract findAll(
     page: number,
     limit: number,
+    search?: string,
   ): Promise<{
     courses: CourseEntity[];
     total: number;

@@ -19,6 +19,7 @@ export abstract class TeacherRepository {
   abstract findAll(
     page: number,
     limit: number,
+    search?: string,
   ): Promise<{
     teachers: TeacherEntity[];
     total: number;
