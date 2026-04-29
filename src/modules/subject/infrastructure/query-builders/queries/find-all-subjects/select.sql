@@ -2,7 +2,7 @@ select (
         select count(*)
         from "subject"
     ) as total,
-    jsonb_agg(result) as data
+    coalesce(jsonb_agg(result), '[]'::jsonb) as data
 from (
         select cte_subjects.*,
             coalesce(
