@@ -37,6 +37,12 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
   })
   workload: WorkloadEnum;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
   @CreatedAt
   created_at: Date;
 

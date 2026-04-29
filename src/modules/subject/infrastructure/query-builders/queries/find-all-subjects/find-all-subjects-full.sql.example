@@ -1,7 +1,3 @@
-/** 
-* sql 
-*/
-
 with cte_subjects as (
     select subject.*,
         case
@@ -18,17 +14,26 @@ with cte_subjects as (
                 prerequisite.prerequisite_id,
                 'course_id',
                 prerequisite.course_id,
-                'createdAt',
-                prerequisite."createdAt",
-                'updatedAt',
-                prerequisite."updatedAt"
+                'created_at',
+                prerequisite."created_at",
+                'updated_at',
+                prerequisite."updated_at"
             )
             else null
-        end as prerequisite
+        end as prerequisite,
+        jsonb_build_object(
+            'id',
+            course.id,
+            'name',
+            course."name",
+            'class_time',
+            course.class_time,
+            'total_semesters',
+            course.total_semesters
+        ) as course
     from subject
         left join subject prerequisite on prerequisite.id = subject.prerequisite_id
-    order by subject.name asc
-    limit 10 offset 0
+        inner join course on course.id = subject.course_id
 ),
 cte_teachers as (
     select teacher.*,
@@ -52,12 +57,10 @@ cte_teachers as (
         ) as "user"
     from teacher
         inner join "user" on "user".id = teacher.user_id
-    order by "user".name asc,
-        teacher.created_at asc
 )
 select (
         select count(*)
-        from cte_subjects
+        from "subject"
     ) as total,
     jsonb_agg(result) as data
 from (
@@ -94,13 +97,15 @@ from (
             left join cte_teachers on cte_teachers.user_id = sts.teacher_id
             left join semester on semester.id = sts.semester_id
         group by cte_subjects.id,
+            cte_subjects.is_active,
             cte_subjects.name,
             cte_subjects.workload,
             cte_subjects.is_optional,
             cte_subjects.prerequisite_id,
             cte_subjects.course_id,
-            cte_subjects."createdAt",
-            cte_subjects."updatedAt",
-            cte_subjects.prerequisite
+            cte_subjects."created_at",
+            cte_subjects."updated_at",
+            cte_subjects.prerequisite,
+            cte_subjects.course
         order by cte_subjects.name asc
-    ) as result;
+    ) as result

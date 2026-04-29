@@ -1,11 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsOptional, IsUUID } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, IsUUID } from 'class-validator';
 import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
 export class FilterFindAllSubjectsDto extends PaginationDto {
   @ApiProperty({
-    example: true,
     description: 'Indica se deve retornar as disciplinas com seus cursos',
     required: false,
   })
@@ -19,7 +18,6 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   with_course?: boolean;
 
   @ApiProperty({
-    example: '74c09804-3216-456e-926a-b848b3431c40',
     description: 'ID do curso',
     required: false,
   })
@@ -28,7 +26,6 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   course_id?: string;
 
   @ApiProperty({
-    example: '74c09804-3216-456e-926a-b848b3431c40',
     description: 'ID do pré-requisito',
     required: false,
   })
@@ -37,7 +34,6 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   prerequisite_id?: string;
 
   @ApiProperty({
-    example: true,
     description: 'Indica se deve retornar com paginação',
     required: false,
   })
@@ -48,4 +44,12 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   })
   @IsOptional()
   with_pagination: boolean;
+
+  @ApiProperty({
+    description: 'Busca por nome da disciplina',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  search?: string;
 }

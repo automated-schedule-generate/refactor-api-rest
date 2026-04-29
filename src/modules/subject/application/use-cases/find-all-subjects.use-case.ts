@@ -10,7 +10,6 @@ export class FindAllSubjectsUseCase {
   constructor(private readonly subjectRepository: SubjectRepository) {}
 
   async execute(query: FilterFindAllSubjectsDto) {
-    this.logger.log(query);
     try {
       if (query?.course_id && query?.with_course) {
         throw new BadRequestException(
@@ -20,6 +19,7 @@ export class FindAllSubjectsUseCase {
 
       const { subjects, total } = await this.subjectRepository.findAll(
         {
+          search: query?.search,
           course_id: query?.course_id,
           prerequisite_id: query?.prerequisite_id,
           with_course: query?.with_course,

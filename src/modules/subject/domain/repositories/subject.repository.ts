@@ -6,6 +6,7 @@ import { Transaction } from 'sequelize';
 export abstract class SubjectRepository {
   abstract findAll(
     where: {
+      search?: string;
       course_id?: string;
       prerequisite_id?: string;
       with_course?: boolean;

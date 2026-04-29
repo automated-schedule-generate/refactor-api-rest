@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as path from 'node:path';
-import { Sequelize } from 'sequelize-typescript';
+import { generateWhereValueToSearchByColumn } from 'src/commons/utils/generate-where-value-to-search-by-column.util';
 import { loadSqlQueries } from 'src/commons/utils/load-sql-queries.util';
 import { normalizeSql } from 'src/commons/utils/normalize-sql.util';
 
@@ -45,6 +45,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
     with_course: boolean = false,
     course_id?: string,
     prerequisite_id?: string,
+    search?: string,
   ) {
     let limit: number | null = null;
     let offset: number | null = null;
@@ -53,11 +54,6 @@ export class SubjectQueryBuilder implements OnModuleInit {
       offset = (pagination.page - 1) * pagination.limit;
     }
 
-    console.log({
-      limit,
-      offset,
-    });
-
     const wheres: string[] = [];
     if (course_id) {
       wheres.push('subject.course_id = :course_id');
@@ -65,6 +61,11 @@ export class SubjectQueryBuilder implements OnModuleInit {
     if (prerequisite_id) {
       wheres.push('subject.prerequisite_id = :prerequisite_id');
     }
+
+    if (search) {
+      wheres.push(generateWhereValueToSearchByColumn('subject."name"', search));
+    }
+
     const query = `
         with cte_subjects as (
             ${with_course ? this.queries['cte-subjects-with-course'] : this.queries['cte-subjects']}

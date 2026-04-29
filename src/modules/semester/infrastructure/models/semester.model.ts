@@ -40,6 +40,12 @@ export class SemesterModel extends Model<
   })
   is_finished: boolean;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
   @CreatedAt
   created_at: Date;
 

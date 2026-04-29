@@ -74,7 +74,7 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
 
   @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
   })
   is_active: boolean;
 

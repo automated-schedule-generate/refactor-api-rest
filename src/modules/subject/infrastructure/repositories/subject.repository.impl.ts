@@ -18,6 +18,7 @@ export class SubjectRepositoryImpl implements SubjectRepository {
 
   async findAll(
     where: {
+      search?: string;
       course_id?: string;
       prerequisite_id?: string;
       with_course?: boolean;
@@ -35,6 +36,7 @@ export class SubjectRepositoryImpl implements SubjectRepository {
       where?.with_course,
       where?.course_id,
       where?.prerequisite_id,
+      where?.search,
     );
 
     const result = (await this.sequelize.query(query, {
