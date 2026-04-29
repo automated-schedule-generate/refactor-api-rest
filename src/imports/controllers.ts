@@ -1,4 +1,5 @@
 export * from '../modules/auth/presentation/controllers/auth.controller';
+export * from '../modules/class/presentation/controllers/class.controller';
 export * from '../modules/coordinator/presentation/controllers/coordinator.controller';
 export * from '../modules/course/presentation/controllers/course.controller';
 export * from '../modules/semester/presentation/controllers/semester.controller';

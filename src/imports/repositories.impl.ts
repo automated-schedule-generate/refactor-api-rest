@@ -1,4 +1,5 @@
 export * from '../modules/auth/infrastructure/repositories/session.repository.impl';
+export * from '../modules/class/infrastructure/repositories/class.repository.impl';
 export * from '../modules/coordinator/infrastructure/repositories/coordinator.repository.impl';
 export * from '../modules/course/infrastructure/repositories/course.repository.impl';
 export * from '../modules/semester/infrastructure/repositories/semester.repository.impl';

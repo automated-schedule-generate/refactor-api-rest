@@ -1,4 +1,5 @@
 export * from '../modules/auth/infrastructure/mappers/session.mapper';
+export * from '../modules/class/infrastructure/mappers/class.mapper';
 export * from '../modules/coordinator/infrastructure/mappers/coordinator.mapper';
 export * from '../modules/course/infrastructure/mappers/course.mapper';
 export * from '../modules/semester/infrastructure/mappers/semester.mapper';
