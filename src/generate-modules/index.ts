@@ -111,10 +111,24 @@ export class ${module_name_formated}Mapper {
 
 createFile(
   path.join(basePath, 'infrastructure/models', `${module_name}.model.ts`),
-  `import { Table, Model } from 'sequelize-typescript';
+  `import { Table, Model, Column, DataType, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
-@Table({ tableName: '${module_name}' })
-export class ${module_name_formated}Model extends Model<${module_name_formated}Model, Partial<${module_name_formated}Model>> {}\n`,
+@Table({ tableName: '${module_name}', underscored: true, timestamps: true })
+export class ${module_name_formated}Model extends Model<${module_name_formated}Model, Partial<${module_name_formated}Model>> {
+
+@Column({
+  type: DataType.BOOLEAN,
+  defaultValue: false,
+})
+is_active: boolean;
+
+@CreatedAt
+created_at: Date;
+
+@UpdatedAt
+updated_at: Date;
+
+}\n`,
 );
 
 createFile(
@@ -182,7 +196,7 @@ execSync('npm run generate:imports', {
   stdio: 'ignore', //não mostra o output no terminal
 });
 
-execSync('npm run format', {
+execSync(`npx prettier --write src/modules/${module_name}/**/*.ts`, {
   stdio: 'ignore', //não mostra o output no terminal
 });
 

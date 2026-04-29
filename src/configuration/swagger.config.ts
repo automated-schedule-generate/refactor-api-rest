@@ -14,19 +14,6 @@ export function SwaggerConfig(app: NestFastifyApplication, logger: Logger) {
   SwaggerModule.setup('docs', app, documentFactory, {
     jsonDocumentUrl: 'docs/json',
     yamlDocumentUrl: 'docs/yaml',
-    // ...(process.env?.ENVIRONMENT === 'dev'
-    //   ? {
-    //       customCssUrl:
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.min.css',
-    //       customJs: [
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.min.js',
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-bundle.min.js',
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-standalone-preset.min.js',
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-es-bundle-core.min.js',
-    //         'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui-es-bundle.min.js',
-    //       ],
-    //     }
-    //   : {}),
   });
 
   logger.log('Swagger config applied');

@@ -19,7 +19,7 @@ import { DomainException } from '../exceptions/domain-exception';
 export function handleSequelizeError(error: any): DomainException {
   if (error instanceof UniqueConstraintError) {
     throw new DomainException(
-      'Registry already Exists',
+      'O Registro já existe',
       'UNIQUE_CONSTRAINT_VIOLATION',
     );
   }

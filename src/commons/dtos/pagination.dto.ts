@@ -1,4 +1,4 @@
-import { IsInt, Min, IsOptional } from 'class-validator';
+import { IsInt, Min, IsOptional, IsEnum, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -8,9 +8,9 @@ export class PaginationDto {
     description: 'Página atual',
     required: false,
   })
-  @Type(() => Number)
   @IsInt()
   @Min(1)
+  @Type(() => Number)
   @IsOptional()
   page: number = 1;
 
@@ -19,18 +19,25 @@ export class PaginationDto {
     description: 'Limite de itens por página',
     required: false,
   })
-  @Type(() => Number)
   @IsInt()
   @Min(1)
+  @Type(() => Number)
   @IsOptional()
   limit: number = 10;
 
   @ApiProperty({
-    example: 'created_at',
-    description: 'Ordenação por',
+    description: 'Ordenação por campo (ex: id, name)',
     required: false,
   })
-  @Type(() => String)
+  @IsString()
   @IsOptional()
-  order: string = 'created_at';
+  order?: string;
+
+  @ApiProperty({
+    description: 'Ordenação ascendente ou descendente (ASC ou DESC)',
+    required: false,
+  })
+  @IsEnum(['ASC', 'DESC'])
+  @IsOptional()
+  order_direction?: 'ASC' | 'DESC';
 }

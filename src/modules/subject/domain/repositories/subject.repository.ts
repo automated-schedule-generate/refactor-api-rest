@@ -5,14 +5,27 @@ import { Transaction } from 'sequelize';
 @Injectable()
 export abstract class SubjectRepository {
   abstract findAll(
-    page: number,
-    limit: number,
+    where: {
+      search?: string;
+      course_id?: string;
+      prerequisite_id?: string;
+      with_course?: boolean;
+    },
+    pagination?: {
+      page: number;
+      limit: number;
+    },
   ): Promise<{
     subjects: SubjectEntity[];
     total: number;
   }>;
 
   abstract findById(id: string): Promise<SubjectEntity | null>;
+
+  abstract findByIdWithIncludes(
+    id: string,
+    with_course?: boolean,
+  ): Promise<SubjectEntity | null>;
 
   abstract register(
     name: string,
@@ -34,34 +47,6 @@ export abstract class SubjectRepository {
   ): Promise<SubjectEntity | null>;
 
   abstract delete(id: string, transaction?: Transaction): Promise<void>;
-
-  abstract findByCourseId(
-    course_id: string,
-    page: number,
-    limit: number,
-  ): Promise<{
-    subjects: SubjectEntity[];
-    total: number;
-  }>;
-
-  abstract findAllByCourseId(course_id: string): Promise<{
-    subjects: SubjectEntity[];
-    total: number;
-  }>;
-
-  abstract findByPrerequisiteId(
-    prerequisite_id: string,
-    page: number,
-    limit: number,
-  ): Promise<{
-    subjects: SubjectEntity[];
-    total: number;
-  }>;
-
-  abstract findAllByPrerequisiteId(prerequisite_id: string): Promise<{
-    subjects: SubjectEntity[];
-    total: number;
-  }>;
 
   abstract returningExistsIds(ids: string[]): Promise<string[]>;
 }

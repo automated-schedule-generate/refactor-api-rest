@@ -1,5 +1,6 @@
 import { UpdateSubjectDto } from '@dtos';
 import {
+  BadRequestException,
   HttpException,
   Injectable,
   Logger,
@@ -21,12 +22,12 @@ export class UpdateSubjectUseCase {
       const subjectExist = await this.subjectRepository.findById(id);
 
       if (!subjectExist) {
-        throw new NotFoundException('Subject not found');
+        throw new NotFoundException('Disciplina não encontrada');
       }
 
       const course = await this.courseRepository.findById(dto.course_id);
       if (!course) {
-        throw new NotFoundException('Course not found');
+        throw new NotFoundException('Curso não encontrado');
       }
 
       if (dto?.prerequisite_id) {
@@ -34,7 +35,12 @@ export class UpdateSubjectUseCase {
           dto.prerequisite_id,
         );
         if (!subjectExistPre) {
-          throw new NotFoundException('Prerequisite subject not found');
+          throw new NotFoundException('Pré requisito não encontrado');
+        }
+        if (subjectExistPre.course_id !== dto.course_id) {
+          throw new BadRequestException(
+            'Pré requisito deve pertencer ao mesmo curso',
+          );
         }
       }
 
@@ -48,7 +54,10 @@ export class UpdateSubjectUseCase {
       );
 
       if (!subject) {
-        throw new HttpException('Subject not updated', 500);
+        throw new HttpException(
+          'Não foi possível atualizar a disciplina.',
+          500,
+        );
       }
 
       return subject;

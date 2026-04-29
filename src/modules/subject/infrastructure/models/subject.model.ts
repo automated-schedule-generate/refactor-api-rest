@@ -1,4 +1,9 @@
-import { CourseModel } from '@models';
+import {
+  CourseModel,
+  SemesterModel,
+  SubjectTeacherSemesterModel,
+  TeacherModel,
+} from '@models';
 import {
   Table,
   Model,
@@ -6,9 +11,12 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'subject' })
+@Table({ tableName: 'subject', underscored: true, timestamps: true })
 export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
   @Column({
     type: DataType.UUID,
@@ -57,4 +65,22 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
 
   @BelongsTo(() => CourseModel)
   course: CourseModel;
+
+  @BelongsToMany(() => TeacherModel, () => SubjectTeacherSemesterModel)
+  teachers: TeacherModel[];
+
+  @BelongsToMany(() => SemesterModel, () => SubjectTeacherSemesterModel)
+  semesters: SemesterModel[];
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }
