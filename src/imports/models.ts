@@ -1,4 +1,5 @@
 export * from '../modules/auth/infrastructure/models/session.model';
+export * from '../modules/class/infrastructure/models/class.model';
 export * from '../modules/coordinator/infrastructure/models/coordinator.model';
 export * from '../modules/course/infrastructure/models/course.model';
 export * from '../modules/semester/infrastructure/models/semester.model';

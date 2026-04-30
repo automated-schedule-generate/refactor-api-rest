@@ -5,6 +5,8 @@ import { TeacherModel, UserModel } from '@models';
 import { TeacherEntity } from '@entities';
 import { TeacherMapper } from '@mappers';
 import { WorkloadEnum } from '@enums';
+import { literal } from 'sequelize';
+import { generateWhereValueToSearchByColumn } from 'src/commons/utils/generate-where-value-to-search-by-column.util';
 
 @Injectable()
 export class TeacherRepositoryImpl implements TeacherRepository {
@@ -63,6 +65,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
   async findAll(
     page: number,
     limit: number,
+    search?: string,
   ): Promise<{
     teachers: TeacherEntity[];
     total: number;
@@ -71,6 +74,9 @@ export class TeacherRepositoryImpl implements TeacherRepository {
       offset: (page - 1) * limit,
       limit,
       order: [[{ model: UserModel, as: 'user' }, 'name', 'ASC']],
+      where: search
+        ? literal(generateWhereValueToSearchByColumn('"user"."name"', search))
+        : undefined,
       include: [
         {
           model: UserModel,
@@ -79,6 +85,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
         },
       ],
     });
+
     return {
       teachers: teachers.map((teacher) =>
         TeacherMapper.toEntity(teacher.dataValues),
