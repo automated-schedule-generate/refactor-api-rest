@@ -1,6 +1,11 @@
 import { RegisterSubjectDto } from '@dtos';
 import { SubjectEntity } from '@entities';
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { CourseRepository, SubjectRepository } from '@repositories';
 
 @Injectable()
@@ -16,7 +21,7 @@ export class RegisterSubjectUseCase {
     try {
       const course = await this.courseRepository.findById(dto.course_id);
       if (!course) {
-        throw new NotFoundException('Course not found');
+        throw new NotFoundException('Curso não encontrado');
       }
 
       if (dto?.prerequisite_id) {
@@ -24,7 +29,13 @@ export class RegisterSubjectUseCase {
           dto.prerequisite_id,
         );
         if (!subjectExist) {
-          throw new NotFoundException('Prerequisite subject not found');
+          throw new NotFoundException('Pré requisito não encontrado');
+        }
+
+        if (subjectExist.course_id !== dto.course_id) {
+          throw new BadRequestException(
+            'Pré requisito deve pertencer ao mesmo curso',
+          );
         }
       }
 

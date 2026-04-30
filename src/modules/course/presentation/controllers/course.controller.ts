@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { RegisterCourseDto } from '@dtos';
+import { RegisterCourseDto, FilterFindAllCourseDto } from '@dtos';
 import { Body, HttpCode, Post } from '@nestjs/common';
 import {
   DeleteCourseUseCase,
@@ -17,7 +17,6 @@ import {
   FindAllCourseUseCase,
   RegisterCourseUseCase,
 } from '@use-cases';
-import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
 @ApiTags('course')
 @ApiBearerAuth()
@@ -41,8 +40,8 @@ export class CourseController {
   @ApiOperation({ summary: 'Find all courses' })
   @Get()
   @HttpCode(200)
-  async findAll(@Query() query: PaginationDto) {
-    return await this.findAllCourseUseCase.execute(query.page, query.limit);
+  async findAll(@Query() query: FilterFindAllCourseDto) {
+    return await this.findAllCourseUseCase.execute(query);
   }
 
   @ApiOperation({ summary: 'Find course by id' })

@@ -1,10 +1,12 @@
 import { TeacherRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { TeacherModel } from '@models';
+import { TeacherModel, UserModel } from '@models';
 import { TeacherEntity } from '@entities';
 import { TeacherMapper } from '@mappers';
 import { WorkloadEnum } from '@enums';
+import { literal } from 'sequelize';
+import { generateWhereValueToSearchByColumn } from 'src/commons/utils/generate-where-value-to-search-by-column.util';
 
 @Injectable()
 export class TeacherRepositoryImpl implements TeacherRepository {
@@ -45,7 +47,16 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     await this.model.destroy({ where: { id } });
   }
   async findByUserId(user_id: string): Promise<TeacherEntity | null> {
-    const teacher = await this.model.findOne({ where: { user_id } });
+    const teacher = await this.model.findOne({
+      where: { user_id },
+      include: [
+        {
+          model: UserModel,
+          as: 'user',
+          required: true,
+        },
+      ],
+    });
     if (!teacher) {
       return null;
     }
@@ -54,6 +65,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
   async findAll(
     page: number,
     limit: number,
+    search?: string,
   ): Promise<{
     teachers: TeacherEntity[];
     total: number;
@@ -61,8 +73,19 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     const { rows: teachers, count: total } = await this.model.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
-      order: [['created_at', 'DESC']],
+      order: [[{ model: UserModel, as: 'user' }, 'name', 'ASC']],
+      where: search
+        ? literal(generateWhereValueToSearchByColumn('"user"."name"', search))
+        : undefined,
+      include: [
+        {
+          model: UserModel,
+          as: 'user',
+          required: true,
+        },
+      ],
     });
+
     return {
       teachers: teachers.map((teacher) =>
         TeacherMapper.toEntity(teacher.dataValues),

@@ -11,22 +11,22 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
+  AddTeacherAndSemesterInSubjectUseCase,
   DeleteSubjectUseCase,
-  FindAllByCourseIdUseCase,
-  FindAllByPrerequisiteIdUseCase,
-  FindByCourseIdUseCase,
-  FindByPrerequisiteIdUseCase,
   RegisterManySubjectsUseCase,
   RegisterSubjectUseCase,
   UpdateSubjectUseCase,
+  FindAllSubjectsUseCase,
+  FindSubjectByIdUseCase,
 } from '@use-cases';
 import { Post } from '@nestjs/common';
 import {
+  AddTeacherAndSemesterInSubjectDto,
   RegisterManySubjectDto,
   RegisterSubjectDto,
   UpdateSubjectDto,
+  FilterFindAllSubjectsDto,
 } from '@dtos';
-import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
 @ApiTags('subject')
 @Controller('subject')
@@ -36,10 +36,9 @@ export class SubjectController {
     private readonly updateSubjectUseCase: UpdateSubjectUseCase,
     private readonly deleteSubjectUseCase: DeleteSubjectUseCase,
     private readonly registerManySubjectsUseCase: RegisterManySubjectsUseCase,
-    private readonly findAllByCourseIdUseCase: FindAllByCourseIdUseCase,
-    private readonly findAllByPrerequisiteIdUseCase: FindAllByPrerequisiteIdUseCase,
-    private readonly findByCourseIdUseCase: FindByCourseIdUseCase,
-    private readonly findByPrerequisiteIdUseCase: FindByPrerequisiteIdUseCase,
+    private readonly findAllSubjectsUseCase: FindAllSubjectsUseCase,
+    private readonly findSubjectByIdUseCase: FindSubjectByIdUseCase,
+    private readonly addTeacherAndSemesterInSubjectUseCase: AddTeacherAndSemesterInSubjectUseCase,
   ) {}
 
   @ApiBearerAuth()
@@ -84,57 +83,31 @@ export class SubjectController {
 
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Buscar todas as disciplinas de um curso',
+    summary: 'Buscar disciplinas',
   })
-  @Get('course/:course_id/all')
-  async findAllByCourseId(
-    @Param('course_id', new ParseUUIDPipe({ version: '4' })) course_id: string,
-  ) {
-    return await this.findAllByCourseIdUseCase.execute(course_id);
+  @Get()
+  async findAll(@Query() query: FilterFindAllSubjectsDto) {
+    return await this.findAllSubjectsUseCase.execute(query);
   }
 
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Buscar todas as disciplinas de um pré-requisito',
+    summary: 'Buscar disciplina por id',
   })
-  @Get('prerequisite/:prerequisite_id/all')
-  async findAllByPrerequisiteId(
-    @Param('prerequisite_id', new ParseUUIDPipe({ version: '4' }))
-    prerequisite_id: string,
-  ) {
-    return await this.findAllByPrerequisiteIdUseCase.execute(prerequisite_id);
+  @Get(':id')
+  async findById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return await this.findSubjectByIdUseCase.execute(id);
   }
 
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Buscar uma disciplina de um curso',
+    summary: 'Adicionar professor e semestre em disciplina',
   })
-  @Get('course/:course_id')
-  async findByCourseId(
-    @Param('course_id', new ParseUUIDPipe({ version: '4' })) course_id: string,
-    @Query() query: PaginationDto,
+  @Post(':id/add-teacher-and-semester')
+  async addTeacherAndSemesterInSubject(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Body() dto: AddTeacherAndSemesterInSubjectDto,
   ) {
-    return await this.findByCourseIdUseCase.execute(
-      course_id,
-      query.page,
-      query.limit,
-    );
-  }
-
-  @ApiBearerAuth()
-  @ApiOperation({
-    summary: 'Buscar uma disciplina de um pré-requisito',
-  })
-  @Get('prerequisite/:prerequisite_id')
-  async findByPrerequisiteId(
-    @Param('prerequisite_id', new ParseUUIDPipe({ version: '4' }))
-    prerequisite_id: string,
-    @Query() query: PaginationDto,
-  ) {
-    return await this.findByPrerequisiteIdUseCase.execute(
-      prerequisite_id,
-      query.page,
-      query.limit,
-    );
+    return await this.addTeacherAndSemesterInSubjectUseCase.execute(id, dto);
   }
 }

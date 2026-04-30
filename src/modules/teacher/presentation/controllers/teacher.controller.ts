@@ -1,4 +1,8 @@
-import { RegisterTeacherDto, RegisterTeacherSpecialNeedDto } from '@dtos';
+import {
+  RegisterTeacherDto,
+  RegisterTeacherSpecialNeedDto,
+  FilterFindAllTeachersDto,
+} from '@dtos';
 import { TeacherEntity } from '@entities';
 import {
   Body,
@@ -18,7 +22,6 @@ import {
   RegisterTeacherUseCase,
   UpdateTeacherUseCase,
 } from '@use-cases';
-import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
 
 @ApiTags('teacher')
@@ -63,7 +66,7 @@ export class TeacherController {
     summary: 'Buscar todos os professores',
   })
   @Get()
-  findAllTeachers(@Query() query: PaginationDto) {
+  findAllTeachers(@Query() query: FilterFindAllTeachersDto) {
     return this.findAllTeachersUseCase.execute(query);
   }
 }

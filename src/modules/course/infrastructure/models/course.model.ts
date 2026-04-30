@@ -1,7 +1,14 @@
 import { ClassTimeEnum } from '@enums';
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  CreatedAt,
+  UpdatedAt,
+} from 'sequelize-typescript';
 
-@Table({ tableName: 'course' })
+@Table({ tableName: 'course', timestamps: true, underscored: true })
 export class CourseModel extends Model<CourseModel, Partial<CourseModel>> {
   @Column({
     type: DataType.UUID,
@@ -27,4 +34,16 @@ export class CourseModel extends Model<CourseModel, Partial<CourseModel>> {
     defaultValue: ClassTimeEnum.MIN_45,
   })
   class_time: ClassTimeEnum;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }

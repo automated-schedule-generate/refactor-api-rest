@@ -11,6 +11,8 @@ import {
   SubjectModule,
   PreferenceModule,
   PreferenceTimeModule,
+  SemesterModule,
+  ClassModule,
 } from '@modules';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
@@ -31,6 +33,8 @@ import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-
     SubjectModule,
     PreferenceModule,
     PreferenceTimeModule,
+    SemesterModule,
+    ClassModule,
   ],
   providers: [
     {

@@ -1,7 +1,7 @@
+import { FilterFindAllTeachersDto } from '@dtos';
 import { TeacherEntity } from '@entities';
 import { Injectable, Logger } from '@nestjs/common';
 import { TeacherRepository } from '@repositories';
-import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
 
 @Injectable()
@@ -10,11 +10,12 @@ export class FindAllTeachersUseCase {
 
   constructor(private readonly teacherRepository: TeacherRepository) {}
 
-  async execute(query: PaginationDto) {
+  async execute(query: FilterFindAllTeachersDto) {
     try {
       const { teachers, total } = await this.teacherRepository.findAll(
         query.page,
         query.limit,
+        query?.search,
       );
 
       return paginationWrapper<TeacherEntity>(

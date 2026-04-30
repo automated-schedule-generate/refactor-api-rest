@@ -1,0 +1,111 @@
+with cte_subjects as (
+    select subject.*,
+        case
+            when prerequisite.id is not null then jsonb_build_object(
+                'id',
+                prerequisite.id,
+                'name',
+                prerequisite.name,
+                'workload',
+                prerequisite.workload,
+                'is_optional',
+                prerequisite.is_optional,
+                'prerequisite_id',
+                prerequisite.prerequisite_id,
+                'course_id',
+                prerequisite.course_id,
+                'created_at',
+                prerequisite."created_at",
+                'updated_at',
+                prerequisite."updated_at"
+            )
+            else null
+        end as prerequisite,
+        jsonb_build_object(
+            'id',
+            course.id,
+            'name',
+            course."name",
+            'class_time',
+            course.class_time,
+            'total_semesters',
+            course.total_semesters
+        ) as course
+    from subject
+        left join subject prerequisite on prerequisite.id = subject.prerequisite_id
+        inner join course on course.id = subject.course_id
+),
+cte_teachers as (
+    select teacher.*,
+        jsonb_build_object(
+            'id',
+            "user".id,
+            'name',
+            "user".name,
+            'email',
+            "user".email,
+            'cpf',
+            "user".cpf,
+            'role',
+            "user".role,
+            'department',
+            "user".department,
+            'created_at',
+            "user".created_at,
+            'updated_at',
+            "user".updated_at
+        ) as "user"
+    from teacher
+        inner join "user" on "user".id = teacher.user_id
+)
+select (
+        select count(*)
+        from "subject"
+    ) as total,
+    coalesce(jsonb_agg(result), '[]'::jsonb) as data
+from (
+        select cte_subjects.*,
+            coalesce(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'id',
+                        semester.id,
+                        'year',
+                        semester.year,
+                        'semester',
+                        semester.semester,
+                        'is_finished',
+                        semester.is_finished,
+                        'created_at',
+                        semester.created_at,
+                        'updated_at',
+                        semester.updated_at
+                    )
+                ) filter (
+                    where semester.id is not null
+                ),
+                '[]'::jsonb
+            ) as semesters,
+            coalesce(
+                jsonb_agg(cte_teachers.*) filter (
+                    where cte_teachers.user_id is not null
+                ),
+                '[]'::jsonb
+            ) as teachers
+        from cte_subjects
+            left join "subject-teacher-semester" sts on sts.subject_id = cte_subjects.id
+            left join cte_teachers on cte_teachers.user_id = sts.teacher_id
+            left join semester on semester.id = sts.semester_id
+        group by cte_subjects.id,
+            cte_subjects.is_active,
+            cte_subjects.name,
+            cte_subjects.workload,
+            cte_subjects.is_optional,
+            cte_subjects.prerequisite_id,
+            cte_subjects.course_id,
+            cte_subjects."created_at",
+            cte_subjects."updated_at",
+            cte_subjects.prerequisite,
+            cte_subjects.course
+        order by cte_subjects.name asc
+    ) as result;

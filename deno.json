@@ -1,0 +1,32 @@
+{
+  "nodeModulesDir": "auto",
+  "unstable": ["sloppy-imports"],
+  "tasks": {
+    "start": "deno serve -A --env-file=.env src/main.ts",
+    "dev": "deno serve -A --env-file=.env --watch src/main.ts",
+    "dev:docker": "deno serve -A --unsafely-ignore-certificate-errors dist/main.js",
+    "start:prod": "deno serve -A dist/main.js",
+    "start:prod-cache": "deno cache dist/main.js"
+  },
+  "imports": {
+    "src/": "./src/",
+    "@database/": "./src/database/",
+
+    "@controllers": "./src/imports/controllers.ts",
+    "@dtos": "./src/imports/dtos.ts",
+    "@entities": "./src/imports/entities.ts",
+    "@factories": "./src/imports/factories.ts",
+    "@interfaces": "./src/imports/interfaces.ts",
+    "@mappers": "./src/imports/mappers.ts",
+    "@models": "./src/imports/models.ts",
+    "@modules": "./src/imports/modules.ts",
+    "@repositories": "./src/imports/repositories.ts",
+    "@repositories.impl": "./src/imports/repositories.impl.ts",
+    "@services": "./src/imports/services.ts",
+    "@use-cases": "./src/imports/use-cases.ts",
+    "@guards": "./src/imports/guards.ts",
+    "@enums": "./src/imports/enums.ts",
+    "@contracts": "./src/imports/contracts.ts",
+    "@builders": "./src/imports/builders.ts"
+  }
+}

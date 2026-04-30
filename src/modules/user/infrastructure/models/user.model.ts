@@ -30,14 +30,17 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
   @Column({ type: DataType.STRING, unique: true })
   cpf: string;
 
-  @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  is_active: boolean;
-
   @Column({ type: DataType.STRING, allowNull: true })
   role?: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
   department?: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
 
   @CreatedAt
   created_at: Date;

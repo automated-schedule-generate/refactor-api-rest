@@ -18,6 +18,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         autoLoadModels: true,
         synchronize: true,
         logging: configService.get<boolean>('logging'),
+        // sync: {
+        //   force: true,
+        // },
         dialectOptions:
           configService.get<string>('environment') === 'prod'
             ? {

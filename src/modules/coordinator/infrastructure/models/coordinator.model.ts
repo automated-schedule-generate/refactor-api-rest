@@ -6,9 +6,11 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'coordinator' })
+@Table({ tableName: 'coordinator', timestamps: true, underscored: true })
 export class CoordinatorModel extends Model<
   CoordinatorModel,
   Partial<CoordinatorModel>
@@ -42,4 +44,16 @@ export class CoordinatorModel extends Model<
 
   @BelongsTo(() => TeacherModel)
   teacher: TeacherModel;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }
