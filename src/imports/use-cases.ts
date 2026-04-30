@@ -8,6 +8,7 @@ export * from '../modules/course/application/use-cases/find-all-course.use-case'
 export * from '../modules/course/application/use-cases/find-by-id-course.use-case';
 export * from '../modules/course/application/use-cases/register-course.use-case';
 export * from '../modules/course/application/use-cases/update-course.use-case';
+export * from '../modules/preference/application/use-cases/register-preference.use-case';
 export * from '../modules/subject/application/use-cases/delete-subject.use-case';
 export * from '../modules/subject/application/use-cases/find-all-by-course-id.use-case';
 export * from '../modules/subject/application/use-cases/find-all-by-prerequisite-id.use-case';

@@ -1,3 +1,6 @@
 export * from '../modules/auth/domain/enums/login-type.enum';
 export * from '../modules/course/domain/enums/class-time.enum';
+export * from '../modules/preference/domain/enums/day-preference.enum';
+export * from '../modules/preference/domain/enums/turn-preference.enum';
+export * from '../modules/preferenceTime/domain/enums/selected-time.enum';
 export * from '../modules/teacher/domain/enums/workload.enum';

@@ -3,6 +3,8 @@ export * from '../modules/auth/application/dtos/refresh-token.dto';
 export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/register-course.dto';
+export * from '../modules/preference/application/dtos/register-preference.dto';
+export * from '../modules/preferenceTime/application/dtos/register-preference-time.dto';
 export * from '../modules/subject/application/dtos/register-many-subject.dto';
 export * from '../modules/subject/application/dtos/register-subject.dto';
 export * from '../modules/subject/application/dtos/update-subject.dto';
