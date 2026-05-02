@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit, Logger } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Sequelize } from 'sequelize-typescript';
 
 @Module({
   imports: [
@@ -37,4 +38,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   providers: [],
   exports: [],
 })
-export class DatabaseModule {}
+export class DatabaseModule implements OnModuleInit {
+  private readonly logger = new Logger(DatabaseModule.name);
+
+  constructor(private readonly sequelize: Sequelize) {}
+
+  async onModuleInit() {}
+}
