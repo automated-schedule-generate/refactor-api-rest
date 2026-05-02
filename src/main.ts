@@ -9,27 +9,15 @@ import { SwaggerConfig } from './configuration/swagger.config';
 import { LogginDevInterceptor } from './commons/interceptors/loggin-dev.interceptor';
 import { SetPrefixConfig } from './configuration/set-prefix.config';
 import { SetCompressConfig } from './configuration/set-compress.config';
-// import * as fs from 'node:fs';
-// import * as path from 'node:path';
+import { RawServerDefault } from 'fastify';
+import { HttpMethods } from './commons/types/http-methods.type';
 
-export async function main() {
-  const logger = new Logger('bootstrap');
+async function main() {
+  const logger = new Logger('main');
 
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({
-      // http2: process.env?.HTTPS_ENABLE?.trim() === 'true' ? true : undefined,
-      // https:
-      //   process.env.https_enable === 'true'
-      //     ? {
-      //         key: fs.readFileSync(
-      //           path.join(__dirname, 'commons/certificates/localhost-key.pem'),
-      //         ),
-      //         cert: fs.readFileSync(
-      //           path.join(__dirname, 'commons/certificates/localhost.pem'),
-      //         ),
-      //       }
-      //     : undefined,
       logger: false,
     }),
   );
@@ -58,12 +46,47 @@ export async function main() {
   app.getHttpAdapter().get('/healthz', (_, res) => {
     res.status(200).send('ok');
   });
-
-  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
-
   logger.log(
     `Application is running on: 0.0.0.0:${process.env.PORT ?? 3000}/${prefix}`,
   );
+  await app.init();
+  return app;
 }
 
-main();
+let app: NestFastifyApplication<RawServerDefault>;
+
+main()
+  .then((x) => (app = x))
+  .catch((error) => {
+    console.log(error);
+    process.exit(1);
+  });
+
+export default {
+  fetch: async (req: Request) => {
+    const fastify = app.getHttpAdapter().getInstance();
+
+    // Converte Request (Web API) → Fastify inject
+    const url = new URL(req.url);
+    const body = req.body ? await req.text() : undefined;
+
+    const response = await fastify.inject({
+      method: req.method as HttpMethods,
+      url: url.pathname + url.search,
+      headers: Object.fromEntries(req.headers.entries()),
+      payload: body,
+    });
+
+    // Status codes 204, 205 and 304 cannot have a body (Fetch spec / Deno enforcement)
+    const responseBody: BodyInit | null = [101, 204, 205, 304].includes(
+      response.statusCode,
+    )
+      ? null
+      : (response.rawPayload as BodyInit);
+
+    return new Response(responseBody, {
+      status: response.statusCode,
+      headers: response.headers as HeadersInit,
+    });
+  },
+} satisfies Deno.ServeDefaultExport;

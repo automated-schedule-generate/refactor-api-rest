@@ -49,5 +49,5 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
   updated_at: Date;
 
   @HasOne(() => TeacherModel)
-  teacher: TeacherModel;
+  teacher: InstanceType<typeof TeacherModel>;
 }
