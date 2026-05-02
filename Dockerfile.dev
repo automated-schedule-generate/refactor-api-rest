@@ -2,24 +2,13 @@
 FROM denoland/deno:alpine AS runtime
 
 WORKDIR /app
-RUN apk add --no-cache wget ca-certificates curl
-RUN wget -O /usr/local/bin/mkcert \
-    https://github.com/FiloSottile/mkcert/releases/latest/download/mkcert-v1.4.4-linux-amd64 \
-    && chmod +x /usr/local/bin/mkcert
 
-RUN apk add --no-cache nodejs npm && \
+RUN apk add nodejs npm && \
     npm install -g pnpm
 
 COPY . .
 
 ENV TZ=America/Sao_Paulo
-
-RUN mkdir -p /usr/local/share/ca-certificates && \
-    chmod 2777 -R /usr/local/share/ca-certificates && \
-    chmod 2777 -R /usr/local/bin
-
-RUN mkdir -p /etc/ssl/certs && \
-    chmod 2777 -R /etc/ssl/certs
 
 RUN chmod +x /app/start.dev.sh
 

@@ -11,4 +11,10 @@
 
 # export https_enable=true
 
-pnpm install && pnpm nodemon --exec 'pnpm build && deno task dev:docker'
+
+rm -Rf dist/ node_modules/ .pnpm-store/ pnpm-lock.yaml deno.lock
+
+pnpm install 
+deno install
+
+pnpm nodemon --exec 'deno check src/main.ts && pnpm build && deno serve -A --port ${PORT} dist/main.js'

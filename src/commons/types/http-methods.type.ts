@@ -1,0 +1,15 @@
+export type HttpMethods =
+  | 'DELETE'
+  | 'GET'
+  | 'HEAD'
+  | 'PATCH'
+  | 'POST'
+  | 'PUT'
+  | 'OPTIONS'
+  | 'delete'
+  | 'get'
+  | 'head'
+  | 'patch'
+  | 'post'
+  | 'put'
+  | 'options';
