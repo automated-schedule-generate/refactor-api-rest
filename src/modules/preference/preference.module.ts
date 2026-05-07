@@ -1,14 +1,11 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from '@database/database.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { PreferenceModel, PreferenceTimeModel } from '@models';
+import { PreferenceModel } from '@models';
 import { PreferenceController } from '@controllers';
-import { PreferenceRepository, PreferenceTimeRepository } from '@repositories';
-import {
-  PreferenceRepositoryImpl,
-  PreferenceTimeRepositoryImpl,
-} from '@repositories.impl';
-import { TeacherModule } from '@modules';
+import { PreferenceRepository } from '@repositories';
+import { PreferenceRepositoryImpl } from '@repositories.impl';
+import { PreferenceTimeModule, TeacherModule } from '@modules';
 import {
   DeletePreferenceUseCase,
   GetOneTeacherPreference,
@@ -20,18 +17,15 @@ import { GetTeacherPreference } from './application/use-cases/get-teacher-prefer
 @Module({
   imports: [
     DatabaseModule,
-    SequelizeModule.forFeature([PreferenceModel, PreferenceTimeModel]),
+    SequelizeModule.forFeature([PreferenceModel]),
     forwardRef(() => TeacherModule),
+    PreferenceTimeModule,
   ],
   controllers: [PreferenceController],
   providers: [
     {
       provide: PreferenceRepository,
       useClass: PreferenceRepositoryImpl,
-    },
-    {
-      provide: PreferenceTimeRepository,
-      useClass: PreferenceTimeRepositoryImpl,
     },
     RegisterPreferenceUseCase,
     GetOneTeacherPreference,
@@ -43,10 +37,6 @@ import { GetTeacherPreference } from './application/use-cases/get-teacher-prefer
     {
       provide: PreferenceRepository,
       useClass: PreferenceRepositoryImpl,
-    },
-    {
-      provide: PreferenceTimeRepository,
-      useClass: PreferenceTimeRepositoryImpl,
     },
   ],
 })

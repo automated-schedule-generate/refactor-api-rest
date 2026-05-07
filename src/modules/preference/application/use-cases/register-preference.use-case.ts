@@ -1,7 +1,7 @@
 import { RegisterPreferenceDto } from '@dtos';
 import { PreferenceEntity, PreferenceTimeEntity } from '@entities';
 import { DayPreferenceEnum, SelectedTimeEnum } from '@enums';
-import { Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { PreferenceRepository, PreferenceTimeRepository } from '@repositories';
 import { Sequelize } from 'sequelize-typescript';
 
@@ -17,6 +17,11 @@ export class RegisterPreferenceUseCase {
     const transaction = await this.sequelize.transaction();
     const preferences: PreferenceEntity[] = [];
     try {
+      const existingPreferences =
+        await this.preferenceRepository.findByUserId(userId);
+      if (existingPreferences.total > 0) {
+        throw new ConflictException('Preferences already exist for this user');
+      }
       for (const pref of dto.preferences) {
         for (let i = 0; i < pref.preference.length; i++) {
           const preferenceTime = pref.preference[i];

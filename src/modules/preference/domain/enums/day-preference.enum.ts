@@ -1,7 +1,7 @@
 export enum DayPreferenceEnum {
-  SEGUNDA = '0',
-  TERCA = '1',
-  QUARTA = '2',
-  QUINTA = '3',
-  SEXTA = '4',
+  MONDAY = '0',
+  TUESDAY = '1',
+  WEDNESDAY = '2',
+  THURSDAY = '3',
+  FRIDAY = '4',
 }

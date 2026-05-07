@@ -24,11 +24,11 @@ export class PreferenceModel extends Model<
 
   @Column({
     type: DataType.ENUM(
-      DayPreferenceEnum.SEGUNDA,
-      DayPreferenceEnum.TERCA,
-      DayPreferenceEnum.QUARTA,
-      DayPreferenceEnum.QUINTA,
-      DayPreferenceEnum.SEXTA,
+      DayPreferenceEnum.MONDAY,
+      DayPreferenceEnum.TUESDAY,
+      DayPreferenceEnum.WEDNESDAY,
+      DayPreferenceEnum.THURSDAY,
+      DayPreferenceEnum.FRIDAY,
     ),
     allowNull: false,
   })
@@ -36,9 +36,9 @@ export class PreferenceModel extends Model<
 
   @Column({
     type: DataType.ENUM(
-      TurnPreferenceEnum.MATUTINO,
-      TurnPreferenceEnum.VESPERTINO,
-      TurnPreferenceEnum.NOTURNO,
+      TurnPreferenceEnum.MORNING,
+      TurnPreferenceEnum.AFTERNOON,
+      TurnPreferenceEnum.NIGHT,
     ),
     allowNull: false,
   })
@@ -51,6 +51,6 @@ export class PreferenceModel extends Model<
   @BelongsTo(() => TeacherModel)
   teacher: TeacherModel;
 
-  @HasMany(() => PreferenceTimeModel, { onDelete: 'CASCADE', hooks: true })
+  @HasMany(() => PreferenceTimeModel)
   preferenceTimes: PreferenceTimeModel[];
 }

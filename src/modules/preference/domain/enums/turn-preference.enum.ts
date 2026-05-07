@@ -1,5 +1,5 @@
 export enum TurnPreferenceEnum {
-  MATUTINO = 'matutino',
-  VESPERTINO = 'vespertino',
-  NOTURNO = 'noturno',
+  MORNING = 'morning',
+  AFTERNOON = 'afternoon',
+  NIGHT = 'night',
 }

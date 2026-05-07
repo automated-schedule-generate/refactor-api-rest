@@ -32,11 +32,12 @@ export class PreferenceTimeModel extends Model<
     ),
     allowNull: false,
   })
-  declare selected: SelectedTimeEnum;
+  selected: SelectedTimeEnum;
 
+  @Column(DataType.UUID)
   @ForeignKey(() => PreferenceModel)
-  declare preference_id: string;
+  preference_id: string;
 
-  @BelongsTo(() => PreferenceModel)
-  declare preference: PreferenceModel;
+  @BelongsTo(() => PreferenceModel, { onDelete: 'CASCADE', hooks: true })
+  preference: PreferenceModel;
 }

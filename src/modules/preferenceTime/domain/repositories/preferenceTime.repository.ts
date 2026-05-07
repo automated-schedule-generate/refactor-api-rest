@@ -8,6 +8,6 @@ export abstract class PreferenceTimeRepository {
   abstract register(
     preferenceId: string,
     selected: SelectedTimeEnum,
-    transaction: Transaction,
+    transaction?: Transaction,
   ): Promise<PreferenceTimeEntity>;
 }

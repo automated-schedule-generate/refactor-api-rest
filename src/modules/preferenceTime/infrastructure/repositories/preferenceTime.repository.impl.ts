@@ -15,7 +15,7 @@ export class PreferenceTimeRepositoryImpl implements PreferenceTimeRepository {
   async register(
     preferenceId: string,
     selected: SelectedTimeEnum,
-    transaction: Transaction,
+    transaction?: Transaction,
   ): Promise<PreferenceTimeEntity> {
     const preferenceTime = await this.model.create(
       {
