@@ -4,7 +4,7 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "assets": ["commons/certificates/**/*.pem", "modules/**/*.sql"],
+    "assets": ["modules/**/*.sql"],
     "watchAssets": true
   }
 }

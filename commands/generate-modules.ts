@@ -40,7 +40,7 @@ const toPascalCase = (value: string) =>
     .join('');
 
 const module_name_formated = toPascalCase(module_name);
-const basePath = path.resolve(__dirname + '/../modules', module_name);
+const basePath = path.resolve(process.cwd() + '/src/modules', module_name);
 
 //verifica se o modulo já existe
 if (fs.existsSync(basePath)) {

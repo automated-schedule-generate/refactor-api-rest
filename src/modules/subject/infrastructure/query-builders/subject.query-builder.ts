@@ -10,7 +10,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
 
   async onModuleInit() {
     this.queries = await loadSqlQueries(
-      path.join(__dirname, 'queries', 'find-all-subjects'),
+      path.join(import.meta?.dirname ?? '', 'queries', 'find-all-subjects'),
     );
   }
 

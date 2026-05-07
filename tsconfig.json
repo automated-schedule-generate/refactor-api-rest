@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolvePackageJsonExports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -13,7 +13,7 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -23,24 +23,26 @@
     "noFallthroughCasesInSwitch": false,
 
     "paths": {
-      "@database/*": ["src/database/*"],
+      "src/*": ["*"],
 
-      "@controllers": ["src/imports/controllers"],
-      "@dtos": ["src/imports/dtos"],
-      "@entities": ["src/imports/entities"],
-      "@factories": ["src/imports/factories"],
-      "@interfaces": ["src/imports/interfaces"],
-      "@mappers": ["src/imports/mappers"],
-      "@models": ["src/imports/models"],
-      "@modules": ["src/imports/modules"],
-      "@repositories": ["src/imports/repositories"],
-      "@repositories.impl": ["src/imports/repositories.impl"],
-      "@services": ["src/imports/services"],
-      "@use-cases": ["src/imports/use-cases"],
-      "@guards": ["src/imports/guards"],
-      "@enums": ["src/imports/enums"],
-      "@contracts": ["src/imports/contracts"],
-      "@builders": ["src/imports/builders"]
+      "@database/*": ["database/*"],
+
+      "@controllers": ["imports/controllers"],
+      "@dtos": ["imports/dtos"],
+      "@entities": ["imports/entities"],
+      "@factories": ["imports/factories"],
+      "@interfaces": ["imports/interfaces"],
+      "@mappers": ["imports/mappers"],
+      "@models": ["imports/models"],
+      "@modules": ["imports/modules"],
+      "@repositories": ["imports/repositories"],
+      "@repositories.impl": ["imports/repositories.impl"],
+      "@services": ["imports/services"],
+      "@use-cases": ["imports/use-cases"],
+      "@guards": ["imports/guards"],
+      "@enums": ["imports/enums"],
+      "@contracts": ["imports/contracts"],
+      "@builders": ["imports/builders"]
     }
   }
 }
