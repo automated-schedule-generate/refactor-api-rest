@@ -46,11 +46,11 @@ export class PreferenceModel extends Model<
 
   @ForeignKey(() => TeacherModel)
   @Column(DataType.UUID)
-  teacherId: string;
+  user_id: string;
 
   @BelongsTo(() => TeacherModel)
   teacher: TeacherModel;
 
-  @HasMany(() => PreferenceTimeModel)
+  @HasMany(() => PreferenceTimeModel, { onDelete: 'CASCADE', hooks: true })
   preferenceTimes: PreferenceTimeModel[];
 }

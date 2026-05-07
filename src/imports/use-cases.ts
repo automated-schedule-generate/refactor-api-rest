@@ -12,7 +12,11 @@ export * from '../modules/course/application/use-cases/find-all-course.use-case'
 export * from '../modules/course/application/use-cases/find-by-id-course.use-case';
 export * from '../modules/course/application/use-cases/register-course.use-case';
 export * from '../modules/course/application/use-cases/update-course.use-case';
+export * from '../modules/preference/application/use-cases/delete-preference.use-case';
+export * from '../modules/preference/application/use-cases/get-one-teacher-preference.use-case';
+export * from '../modules/preference/application/use-cases/get-teacher-preference.use-case';
 export * from '../modules/preference/application/use-cases/register-preference.use-case';
+export * from '../modules/preference/application/use-cases/uptade-preference.use-case';
 export * from '../modules/semester/application/use-cases/change-is-finished.use-case';
 export * from '../modules/semester/application/use-cases/delete-semester.use-case';
 export * from '../modules/semester/application/use-cases/find-all-semesters.use-case';

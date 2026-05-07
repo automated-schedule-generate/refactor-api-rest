@@ -1,8 +1,8 @@
 module.exports = {
   development: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    username: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASS || 'root',
+    database: process.env.DB_NAME || 'asgen',
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT) || 5432,
     dialect: 'postgres',

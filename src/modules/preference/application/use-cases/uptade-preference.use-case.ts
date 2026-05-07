@@ -6,17 +6,19 @@ import { PreferenceRepository, PreferenceTimeRepository } from '@repositories';
 import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
-export class RegisterPreferenceUseCase {
-  private readonly logger = new Logger(RegisterPreferenceUseCase.name);
+export class UpdatePreferenceUseCase {
+  private readonly logger: Logger = new Logger(UpdatePreferenceUseCase.name);
   constructor(
     private readonly preferenceRepository: PreferenceRepository,
     private readonly preferenceTimeRepository: PreferenceTimeRepository,
     private readonly sequelize: Sequelize,
   ) {}
+
   async execute(userId: string, dto: RegisterPreferenceDto) {
     const transaction = await this.sequelize.transaction();
     const preferences: PreferenceEntity[] = [];
     try {
+      await this.preferenceRepository.delete(userId);
       for (const pref of dto.preferences) {
         for (let i = 0; i < pref.preference.length; i++) {
           const preferenceTime = pref.preference[i];

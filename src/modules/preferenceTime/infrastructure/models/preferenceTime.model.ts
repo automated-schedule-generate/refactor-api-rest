@@ -23,19 +23,19 @@ export class PreferenceTimeModel extends Model<
 
   @Column({
     type: DataType.ENUM(
-      SelectedTimeEnum.AULA_0,
-      SelectedTimeEnum.AULA_1,
-      SelectedTimeEnum.AULA_2,
-      SelectedTimeEnum.AULA_3,
-      SelectedTimeEnum.AULA_4,
-      SelectedTimeEnum.AULA_5,
+      SelectedTimeEnum.CLASS_0,
+      SelectedTimeEnum.CLASS_1,
+      SelectedTimeEnum.CLASS_2,
+      SelectedTimeEnum.CLASS_3,
+      SelectedTimeEnum.CLASS_4,
+      SelectedTimeEnum.CLASS_5,
     ),
     allowNull: false,
   })
-  selected: SelectedTimeEnum;
+  declare selected: SelectedTimeEnum;
 
   @ForeignKey(() => PreferenceModel)
-  declare preferenceId: string;
+  declare preference_id: string;
 
   @BelongsTo(() => PreferenceModel)
   declare preference: PreferenceModel;

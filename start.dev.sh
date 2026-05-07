@@ -11,4 +11,6 @@
 
 # export https_enable=true
 
+mkdir -p /deno-dir && chmod 2777 -R /deno-dir
+
 pnpm install && pnpm nodemon --exec 'pnpm build && deno task dev:docker'
