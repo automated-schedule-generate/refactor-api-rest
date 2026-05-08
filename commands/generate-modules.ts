@@ -111,7 +111,7 @@ export class ${module_name_formated}Mapper {
 
 createFile(
   path.join(basePath, 'infrastructure/models', `${module_name}.model.ts`),
-  `import { Table, Model, Column, DataType, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+  `import { Table, Model, Column, DataType, CreatedAt, UpdatedAt, BeforeUpdate } from 'sequelize-typescript';
 
 @Table({ tableName: '${module_name}', underscored: true, timestamps: true })
 export class ${module_name_formated}Model extends Model<${module_name_formated}Model, Partial<${module_name_formated}Model>> {
@@ -127,6 +127,13 @@ created_at: Date;
 
 @UpdatedAt
 updated_at: Date;
+
+@BeforeUpdate
+static validateBeforeUpdate(instance: ${module_name_formated}Model) {
+  if (!instance.is_active) {
+    throw new Error('Item in ${module_name} cannot be updated because it is not active');
+  }
+}
 
 }\n`,
 );

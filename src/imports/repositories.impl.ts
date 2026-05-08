@@ -2,6 +2,7 @@ export * from '../modules/auth/infrastructure/repositories/session.repository.im
 export * from '../modules/class/infrastructure/repositories/class.repository.impl';
 export * from '../modules/coordinator/infrastructure/repositories/coordinator.repository.impl';
 export * from '../modules/course/infrastructure/repositories/course.repository.impl';
+export * from '../modules/organization/infrastructure/repositories/organization.repository.impl';
 export * from '../modules/semester/infrastructure/repositories/semester.repository.impl';
 export * from '../modules/subject-teacher-semester/infrastructure/repositories/subject-teacher-semester.repository.impl';
 export * from '../modules/subject/infrastructure/repositories/subject.repository.impl';
