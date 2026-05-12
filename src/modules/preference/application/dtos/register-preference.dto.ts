@@ -9,18 +9,18 @@ export class RegisterPreferenceDto {
       {
         turn: 'morning',
         preference: [
-          [true, false, true, false, true],
+          [true, false, true, false, true, true],
           [],
-          [true, true, false, false, true],
+          [true, true, false, false, true, false],
           [],
         ],
       },
       {
         turn: 'afternoon',
         preference: [
-          [true, false, true, false, true],
+          [true, false, true, false, true, false],
           [],
-          [true, true, false, false, true],
+          [true, true, false, false, true, true],
           [],
         ],
       },
