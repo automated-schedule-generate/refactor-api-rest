@@ -34,10 +34,10 @@ export class PreferenceTimeModel extends Model<
   })
   selected: SelectedTimeEnum;
 
-  @Column(DataType.UUID)
   @ForeignKey(() => PreferenceModel)
+  @Column({ type: DataType.UUID, onDelete: 'CASCADE' })
   preference_id: string;
 
-  @BelongsTo(() => PreferenceModel, { onDelete: 'CASCADE', hooks: true })
+  @BelongsTo(() => PreferenceModel, { hooks: true })
   preference: PreferenceModel;
 }

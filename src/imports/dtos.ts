@@ -7,7 +7,7 @@ export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/filter-find-all-course.dto';
 export * from '../modules/course/application/dtos/register-course.dto';
-export * from '../modules/preferenceTime/application/dtos/register-preference-time.dto';
+export * from '../modules/preference-time/application/dtos/register-preference-time.dto';
 export * from '../modules/preference/application/dtos/register-preference.dto';
 export * from '../modules/semester/application/dtos/register-semester.dto';
 export * from '../modules/semester/application/dtos/update-semester.dto';

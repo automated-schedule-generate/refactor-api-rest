@@ -2,7 +2,7 @@ export * from '../modules/auth/domain/entities/session.entity';
 export * from '../modules/class/domain/entities/class.entity';
 export * from '../modules/coordinator/domain/entities/coordinator.entity';
 export * from '../modules/course/domain/entities/course.entity';
-export * from '../modules/preferenceTime/domain/entities/preferenceTime.entity';
+export * from '../modules/preference-time/domain/entities/preference-time.entity';
 export * from '../modules/preference/domain/entities/preference.entity';
 export * from '../modules/semester/domain/entities/semester.entity';
 export * from '../modules/subject-teacher-semester/domain/entities/subject-teacher-semester.entity';

@@ -19,6 +19,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   DeleteTeacherUseCase,
   FindAllTeachersUseCase,
+  FindTeacherByIdUseCase,
   RegisterTeacherUseCase,
   UpdateTeacherUseCase,
 } from '@use-cases';
@@ -33,6 +34,7 @@ export class TeacherController {
     private readonly updateTeacherUseCase: UpdateTeacherUseCase,
     private readonly deleteTeacherUseCase: DeleteTeacherUseCase,
     private readonly findAllTeachersUseCase: FindAllTeachersUseCase,
+    private readonly findTeacherByIdUseCase: FindTeacherByIdUseCase,
   ) {}
 
   @ApiOperation({
@@ -68,5 +70,13 @@ export class TeacherController {
   @Get()
   findAllTeachers(@Query() query: FilterFindAllTeachersDto) {
     return this.findAllTeachersUseCase.execute(query);
+  }
+
+  @ApiOperation({
+    summary: 'Buscar professor por ID',
+  })
+  @Get(':user_id')
+  findTeacherById(@Param() params: { user_id: string }) {
+    return this.findTeacherByIdUseCase.execute(params.user_id);
   }
 }

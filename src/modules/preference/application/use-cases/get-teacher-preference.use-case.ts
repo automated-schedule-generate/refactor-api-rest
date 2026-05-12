@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PreferenceRepository } from '@repositories';
+import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
+import { PreferenceEntity } from 'src/imports/entities';
 
 @Injectable()
 export class GetTeacherPreference {
@@ -9,7 +11,7 @@ export class GetTeacherPreference {
   async execute() {
     try {
       const { preference, total } = await this.preferenceRepository.find();
-      return { preference, total };
+      return paginationWrapper<PreferenceEntity>(preference, total);
     } catch (error) {
       this.logger.error(error);
       throw error;

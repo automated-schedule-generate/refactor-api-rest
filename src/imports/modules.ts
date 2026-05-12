@@ -2,7 +2,7 @@ export * from '../modules/auth/auth.module';
 export * from '../modules/class/class.module';
 export * from '../modules/coordinator/coordinator.module';
 export * from '../modules/course/course.module';
-export * from '../modules/preferenceTime/preferenceTime.module';
+export * from '../modules/preference-time/preference-time.module';
 export * from '../modules/preference/preference.module';
 export * from '../modules/semester/semester.module';
 export * from '../modules/subject-teacher-semester/subject-teacher-semester.module';

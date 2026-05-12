@@ -9,6 +9,7 @@ import { UserModule } from '@modules';
 import {
   DeleteTeacherUseCase,
   FindAllTeachersUseCase,
+  FindTeacherByIdUseCase,
   RegisterTeacherUseCase,
   UpdateTeacherUseCase,
 } from '@use-cases';
@@ -29,6 +30,7 @@ import {
     UpdateTeacherUseCase,
     DeleteTeacherUseCase,
     FindAllTeachersUseCase,
+    FindTeacherByIdUseCase,
   ],
   exports: [
     {

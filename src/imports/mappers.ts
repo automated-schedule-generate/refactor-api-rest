@@ -2,7 +2,7 @@ export * from '../modules/auth/infrastructure/mappers/session.mapper';
 export * from '../modules/class/infrastructure/mappers/class.mapper';
 export * from '../modules/coordinator/infrastructure/mappers/coordinator.mapper';
 export * from '../modules/course/infrastructure/mappers/course.mapper';
-export * from '../modules/preferenceTime/infrastructure/mappers/preferenceTime.mapper';
+export * from '../modules/preference-time/infrastructure/mappers/preference-time.mapper';
 export * from '../modules/preference/infrastructure/mappers/preference.mapper';
 export * from '../modules/semester/infrastructure/mappers/semester.mapper';
 export * from '../modules/subject-teacher-semester/infrastructure/mappers/subject-teacher-semester.mapper';
