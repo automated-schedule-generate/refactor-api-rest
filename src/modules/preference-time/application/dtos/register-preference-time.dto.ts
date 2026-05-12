@@ -1,6 +1,6 @@
 import { TurnPreferenceEnum } from '@enums';
 import { ArrayMaxSize, ArrayMinSize, IsArray, IsEnum } from 'class-validator';
-import { IsNestedBooleanArray } from 'src/modules/preference/infrastructure/decorators/Is-Nested-Boolean-array.decorator';
+import { IsNestedBooleanArray } from 'src/imports/decorators';
 
 export class RegisterPreferenceTimeDto {
   @IsEnum(TurnPreferenceEnum)
