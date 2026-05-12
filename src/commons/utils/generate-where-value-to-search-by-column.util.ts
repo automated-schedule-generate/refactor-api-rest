@@ -3,7 +3,7 @@ import { removeConnectivesUtil } from './remove-connectives.util';
 export function generateWhereValueToSearchByColumn(
   column_name: string,
   search: string,
-) {
+): string {
   const search_without_connectives = removeConnectivesUtil(search);
   const search_formated = search_without_connectives
     .split(' ')
