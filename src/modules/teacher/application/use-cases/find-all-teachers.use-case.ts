@@ -12,6 +12,7 @@ export class FindAllTeachersUseCase {
 
   async execute(query: FilterFindAllTeachersDto) {
     try {
+      console.log('query log', query);
       const { teachers, total } = await this.teacherRepository.findAll(
         query.page,
         query.limit,

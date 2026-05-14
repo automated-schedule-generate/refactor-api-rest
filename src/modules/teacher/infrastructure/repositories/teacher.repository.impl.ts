@@ -91,7 +91,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     const { rows: teachers, count: total } = await this.model.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
-      order: [['created_at', 'ASC']],
+      order: [literal('"user.name" ASC'), ['created_at', 'ASC']],
       where: search
         ? literal(generateWhereValueToSearchByColumn('"user"."name"', search))
         : undefined,
@@ -105,12 +105,12 @@ export class TeacherRepositoryImpl implements TeacherRepository {
           ? [
               {
                 model: PreferenceModel,
-                as: 'preferences',
-                required: true,
+                // as: 'preference',
+                required: false,
                 include: [
                   {
                     model: PreferenceTimeModel,
-                    as: 'preferenceTimes',
+                    // as: 'preference-time',
                     required: false,
                   },
                 ],

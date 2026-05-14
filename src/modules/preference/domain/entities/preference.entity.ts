@@ -9,4 +9,14 @@ export class PreferenceEntity {
     public readonly teacherId: string,
     public preferenceTimes?: PreferenceTimeEntity[],
   ) {}
+
+  toJSON() {
+    return {
+      ...this,
+      preferenceTimes:
+        this.preferenceTimes && this.preferenceTimes.length > 0
+          ? this.preferenceTimes
+          : undefined,
+    };
+  }
 }
