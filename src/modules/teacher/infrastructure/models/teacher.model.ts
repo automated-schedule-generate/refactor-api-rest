@@ -55,6 +55,6 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
   @HasMany(() => CoordinatorModel)
   coordinators: CoordinatorModel[];
 
-  @HasMany(() => PreferenceModel)
+  @HasMany(() => PreferenceModel, 'user_id')
   preferences: PreferenceModel[];
 }

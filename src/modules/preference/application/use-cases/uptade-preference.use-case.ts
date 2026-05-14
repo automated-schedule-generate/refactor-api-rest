@@ -1,8 +1,12 @@
 import { RegisterPreferenceDto } from '@dtos';
 import { PreferenceEntity, PreferenceTimeEntity } from '@entities';
 import { DayPreferenceEnum, SelectedTimeEnum } from '@enums';
-import { Injectable, Logger } from '@nestjs/common';
-import { PreferenceRepository, PreferenceTimeRepository } from '@repositories';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  PreferenceRepository,
+  PreferenceTimeRepository,
+  TeacherRepository,
+} from '@repositories';
 import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
@@ -12,9 +16,15 @@ export class UpdatePreferenceUseCase {
     private readonly preferenceRepository: PreferenceRepository,
     private readonly preferenceTimeRepository: PreferenceTimeRepository,
     private readonly sequelize: Sequelize,
+    private readonly teacherRepository: TeacherRepository,
   ) {}
 
   async execute(userId: string, dto: RegisterPreferenceDto) {
+    const teacherExist = await this.teacherRepository.findByUserId(userId);
+    if (!teacherExist) {
+      throw new NotFoundException('Professor não encontrado');
+    }
+
     const transaction = await this.sequelize.transaction();
     const preferences: PreferenceEntity[] = [];
     try {

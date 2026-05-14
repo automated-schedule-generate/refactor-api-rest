@@ -14,6 +14,7 @@ import {
   Put,
   Query,
   Req,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
@@ -60,8 +61,10 @@ export class TeacherController {
     summary: 'Deletar professor',
   })
   @Delete(':user_id')
-  deleteTeacher(@Param() params: { user_id: string }): Promise<void> {
-    return this.deleteTeacherUseCase.execute(params.user_id);
+  deleteTeacher(
+    @Param('user_id', new ParseUUIDPipe({ version: '4' })) user_id: string,
+  ): Promise<void> {
+    return this.deleteTeacherUseCase.execute(user_id);
   }
 
   @ApiOperation({
@@ -76,7 +79,9 @@ export class TeacherController {
     summary: 'Buscar professor por ID',
   })
   @Get(':user_id')
-  findTeacherById(@Param() params: { user_id: string }) {
-    return this.findTeacherByIdUseCase.execute(params.user_id);
+  findTeacherById(
+    @Param('user_id', new ParseUUIDPipe({ version: '4' })) user_id: string,
+  ) {
+    return this.findTeacherByIdUseCase.execute(user_id);
   }
 }

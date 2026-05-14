@@ -8,17 +8,18 @@ export function IsNestedBooleanArray(validationOptions?: ValidationOptions) {
       propertyName,
       options: validationOptions,
       validator: {
-        validate(value: any) {
-          if (!Array.isArray(value)) return false;
+        validate(value: unknown) {
+          if (!value || !Array.isArray(value) || value.length !== 5)
+            return false;
           return value.every(
-            (inner) =>
+            (inner: unknown) =>
               Array.isArray(inner) &&
-              inner.length <= 6 &&
+              inner.length === 6 &&
               inner.every((v) => typeof v === 'boolean'),
           );
         },
         defaultMessage() {
-          return 'Each inner array must contain at most 6 booleans';
+          return 'Each inner array must contain exactly 6 booleans';
         },
       },
     });

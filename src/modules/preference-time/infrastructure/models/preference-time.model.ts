@@ -9,7 +9,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'preferenceTime' })
+@Table({ tableName: 'preference-time', underscored: true, timestamps: false })
 export class PreferenceTimeModel extends Model<
   PreferenceTimeModel,
   Partial<PreferenceTimeModel>

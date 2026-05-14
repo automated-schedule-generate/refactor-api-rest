@@ -10,7 +10,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'preference' })
+@Table({ tableName: 'preference', underscored: true, timestamps: false })
 export class PreferenceModel extends Model<
   PreferenceModel,
   Partial<PreferenceModel>
@@ -45,7 +45,10 @@ export class PreferenceModel extends Model<
   turn: TurnPreferenceEnum;
 
   @ForeignKey(() => TeacherModel)
-  @Column(DataType.UUID)
+  @Column({
+    type: DataType.UUID,
+    onDelete: 'CASCADE',
+  })
   user_id: string;
 
   @BelongsTo(() => TeacherModel)

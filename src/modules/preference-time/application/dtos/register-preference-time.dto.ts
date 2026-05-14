@@ -1,5 +1,5 @@
 import { TurnPreferenceEnum } from '@enums';
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsEnum } from 'class-validator';
+import { IsArray, IsEnum } from 'class-validator';
 import { IsNestedBooleanArray } from 'src/imports/decorators';
 
 export class RegisterPreferenceTimeDto {
@@ -7,8 +7,6 @@ export class RegisterPreferenceTimeDto {
   turn: TurnPreferenceEnum;
 
   @IsArray()
-  @ArrayMinSize(5)
-  @ArrayMaxSize(5)
   @IsNestedBooleanArray()
   preference: boolean[][];
 }
