@@ -1,6 +1,6 @@
-allowBuilds:
-  '@nestjs/core': true
-  '@scarf/scarf': true
-  argon2: true
-  esbuild: true
-  unrs-resolver: true
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@scarf/scarf'
+  - argon2
+  - esbuild
+  - unrs-resolver
