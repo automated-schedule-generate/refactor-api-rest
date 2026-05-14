@@ -1,6 +1,6 @@
 FROM node:24-alpine AS base
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@11.1.2 --activate
 
 
 
@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN pnpm approve-builds && pnpm install 
+RUN pnpm approve-builds && pnpm install
 
 COPY . .
 
