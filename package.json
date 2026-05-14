@@ -22,8 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "generate:imports": "tsx commands/imports.ts",
     "generate:module": "tsx commands/generate-modules.ts",
-    "prepare": "husky || true",
-    "postinstall": "npm run prepare"
+    "prepare": "husky || true"
   },
   "lint-staged": {
     "**/*.ts": [
