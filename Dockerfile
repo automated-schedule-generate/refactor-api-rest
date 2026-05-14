@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN pnpm install
+RUN pnpm install 
 
 COPY . .
 
