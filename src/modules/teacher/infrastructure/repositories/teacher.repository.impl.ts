@@ -1,7 +1,12 @@
 import { TeacherRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { TeacherModel, UserModel } from '@models';
+import {
+  PreferenceModel,
+  PreferenceTimeModel,
+  TeacherModel,
+  UserModel,
+} from '@models';
 import { TeacherEntity } from '@entities';
 import { TeacherMapper } from '@mappers';
 import { WorkloadEnum } from '@enums';
@@ -55,6 +60,18 @@ export class TeacherRepositoryImpl implements TeacherRepository {
           as: 'user',
           required: true,
         },
+        {
+          model: PreferenceModel,
+          as: 'preferences',
+          required: false,
+          include: [
+            {
+              model: PreferenceTimeModel,
+              as: 'preferenceTimes',
+              required: false,
+            },
+          ],
+        },
       ],
     });
     if (!teacher) {
@@ -66,6 +83,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     page: number,
     limit: number,
     search?: string,
+    preferences?: boolean,
   ): Promise<{
     teachers: TeacherEntity[];
     total: number;
@@ -73,7 +91,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     const { rows: teachers, count: total } = await this.model.findAndCountAll({
       offset: (page - 1) * limit,
       limit,
-      order: [[{ model: UserModel, as: 'user' }, 'name', 'ASC']],
+      order: [['created_at', 'ASC']],
       where: search
         ? literal(generateWhereValueToSearchByColumn('"user"."name"', search))
         : undefined,
@@ -83,6 +101,22 @@ export class TeacherRepositoryImpl implements TeacherRepository {
           as: 'user',
           required: true,
         },
+        ...(preferences
+          ? [
+              {
+                model: PreferenceModel,
+                as: 'preferences',
+                required: true,
+                include: [
+                  {
+                    model: PreferenceTimeModel,
+                    as: 'preferenceTimes',
+                    required: false,
+                  },
+                ],
+              },
+            ]
+          : []),
       ],
     });
 

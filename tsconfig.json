@@ -42,7 +42,8 @@
       "@guards": ["imports/guards"],
       "@enums": ["imports/enums"],
       "@contracts": ["imports/contracts"],
-      "@builders": ["imports/builders"]
+      "@builders": ["imports/builders"],
+      "@decorators": ["imports/decorators"]
     }
   }
 }

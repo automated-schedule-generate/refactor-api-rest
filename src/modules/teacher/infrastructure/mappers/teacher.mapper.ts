@@ -1,5 +1,5 @@
 import { TeacherEntity } from '@entities';
-import { CoordinatorMapper, UserMapper } from '@mappers';
+import { CoordinatorMapper, PreferenceMapper, UserMapper } from '@mappers';
 import { TeacherModel } from '@models';
 
 export class TeacherMapper {
@@ -26,6 +26,12 @@ export class TeacherMapper {
 
       if (model?.user && model.user.dataValues) {
         teacher.user = UserMapper.toEntity(model.user.dataValues);
+      }
+
+      if (model?.preferences && model.preferences.length > 0) {
+        teacher.preferences = model.preferences.map((preference) =>
+          PreferenceMapper.toEntity(preference.dataValues),
+        );
       }
     } else {
       if (model?.coordinators && model.coordinators.length > 0) {

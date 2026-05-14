@@ -9,6 +9,8 @@ import {
   UserModule,
   CourseModule,
   SubjectModule,
+  PreferenceModule,
+  PreferenceTimeModule,
   SemesterModule,
   ClassModule,
 } from '@modules';
@@ -29,6 +31,8 @@ import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-
     CoordinatorModule,
     CourseModule,
     SubjectModule,
+    PreferenceModule,
+    PreferenceTimeModule,
     SemesterModule,
     ClassModule,
   ],

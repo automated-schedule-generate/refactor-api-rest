@@ -1,5 +1,5 @@
 import { WorkloadEnum } from '@enums';
-import { CoordinatorModel, UserModel } from '@models';
+import { CoordinatorModel, PreferenceModel, UserModel } from '@models';
 import {
   Table,
   Model,
@@ -54,4 +54,7 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
 
   @HasMany(() => CoordinatorModel)
   coordinators: CoordinatorModel[];
+
+  @HasMany(() => PreferenceModel)
+  preferences: PreferenceModel[];
 }
