@@ -16,6 +16,7 @@ export class FindAllTeachersUseCase {
         query.page,
         query.limit,
         query?.search,
+        query?.preferences,
       );
 
       return paginationWrapper<TeacherEntity>(

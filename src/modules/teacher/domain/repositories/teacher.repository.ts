@@ -20,6 +20,7 @@ export abstract class TeacherRepository {
     page: number,
     limit: number,
     search?: string,
+    preferences?: boolean,
   ): Promise<{
     teachers: TeacherEntity[];
     total: number;

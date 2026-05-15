@@ -3,6 +3,8 @@ export * from '../modules/class/presentation/controllers/class.controller';
 export * from '../modules/coordinator/presentation/controllers/coordinator.controller';
 export * from '../modules/course/presentation/controllers/course.controller';
 export * from '../modules/organization/presentation/controllers/organization.controller';
+export * from '../modules/preference-time/presentation/controllers/preference-time.controller';
+export * from '../modules/preference/presentation/controllers/preference.controller';
 export * from '../modules/semester/presentation/controllers/semester.controller';
 export * from '../modules/subject/presentation/controllers/subject.controller';
 export * from '../modules/teacher/presentation/controllers/teacher.controller';

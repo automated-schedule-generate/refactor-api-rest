@@ -17,6 +17,7 @@ generateImportsWithExports('use-cases.ts', '.use-case.ts');
 generateImportsWithExports('guards.ts', '.guard.ts');
 generateImportsWithExports('enums.ts', '.enum.ts');
 generateImportsWithExports('contracts.ts', '.service-contract.ts');
+generateImportsWithExports('decorators.ts', '.decorator.ts');
 
 function generateImportsWithExports(
   output: string,
