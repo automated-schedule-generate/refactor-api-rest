@@ -1,16 +1,17 @@
 {
   "nodeModulesDir": "auto",
-  "unstable": ["sloppy-imports"],
+  "unstable": ["sloppy-imports", "detect-cjs"],
   "tasks": {
     "start": "deno serve -A --env-file=.env src/main.ts",
-    "dev": "deno serve -A --env-file=.env --watch --port=3000 src/main.ts",
-    "dev:docker": "deno serve -A --cached-only --unsafely-ignore-certificate-errors --no-remote dist/main.js",
+    "dev": "deno serve -A --env-file=.env --watch --check --port 3000 src/main.ts",
+    "dev:docker": "sh -c 'deno serve -A --watch --check --port ${PORT} src/main.ts'",
     "start:prod": "sh -c 'deno serve --parallel -A --port ${PORT} --cached-only dist/main.js'",
     "start:prod-cache": "deno cache dist/main.js"
   },
   "imports": {
     "src/": "./src/",
     "@database/": "./src/database/",
+    "@commons/": "./src/commons/",
 
     "@controllers": "./src/imports/controllers.ts",
     "@dtos": "./src/imports/dtos.ts",
@@ -27,6 +28,7 @@
     "@guards": "./src/imports/guards.ts",
     "@enums": "./src/imports/enums.ts",
     "@contracts": "./src/imports/contracts.ts",
-    "@builders": "./src/imports/builders.ts"
+    "@builders": "./src/imports/builders.ts",
+    "@decorators": "./src/imports/decorators.ts"
   }
 }

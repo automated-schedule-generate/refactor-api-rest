@@ -44,10 +44,10 @@
     "@nestjs/platform-fastify": "^11.1.17",
     "@nestjs/sequelize": "^11.0.1",
     "@nestjs/swagger": "^11.2.6",
-    "@types/deno": "^2.5.0",
     "argon2": "^0.44.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "deno": "^2.7.14",
     "fastify": "5.8.4",
     "json5": "^2.2.3",
     "luxon": "^3.7.2",
@@ -59,7 +59,8 @@
     "rxjs": "^7.8.1",
     "sequelize": "^6.37.8",
     "sequelize-cli": "^6.6.5",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "ws": "^8.20.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
@@ -70,6 +71,7 @@
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.1",
+    "@types/deno": "^2.5.0",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/luxon": "^3.7.1",
@@ -78,6 +80,7 @@
     "@types/sequelize": "^6.12.0",
     "@types/supertest": "^6.0.2",
     "chalk": "^5.6.2",
+    "console-ninja": "^1.0.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",

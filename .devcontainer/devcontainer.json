@@ -1,0 +1,24 @@
+{
+  "name": "Refactor API REST",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "api-dev",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "WallabyJs.console-ninja",
+        "denoland.vscode-deno",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "deno.enable": true,
+        "deno.lint": true,
+        "deno.unstable": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+  "remoteUser": "root"
+}

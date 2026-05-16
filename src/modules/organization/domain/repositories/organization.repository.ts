@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OrganizationEntity } from '../entities/organization.entity.ts';
+import { OrganizationEntity } from '@entities';
 
 @Injectable()
 export abstract class OrganizationRepository {

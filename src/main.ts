@@ -13,6 +13,7 @@ import { RawServerDefault } from 'fastify';
 import { HttpMethods } from './commons/types/http-methods.type';
 
 async function main() {
+  console.log('testing');
   const logger = new Logger('main');
 
   const app = await NestFactory.create<NestFastifyApplication>(
