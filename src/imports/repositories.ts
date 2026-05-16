@@ -2,6 +2,7 @@ export * from '../modules/auth/domain/repositories/session.repository';
 export * from '../modules/class/domain/repositories/class.repository';
 export * from '../modules/coordinator/domain/repositories/coordinator.repository';
 export * from '../modules/course/domain/repositories/course.repository';
+export * from '../modules/organization/domain/repositories/organization.repository';
 export * from '../modules/preference-time/domain/repositories/preference-time.repository';
 export * from '../modules/preference/domain/repositories/preference.repository';
 export * from '../modules/semester/domain/repositories/semester.repository';

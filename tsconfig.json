@@ -26,6 +26,7 @@
       "src/*": ["*"],
 
       "@database/*": ["database/*"],
+      "@commons/*": ["commons/*"],
 
       "@controllers": ["imports/controllers"],
       "@dtos": ["imports/dtos"],
