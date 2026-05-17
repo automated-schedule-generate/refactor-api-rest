@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN pnpm approve-builds && pnpm install
+RUN pnpm install
 
 COPY . .
 
@@ -44,4 +44,4 @@ RUN deno task start:prod-cache
 
 ENV TZ=America/Sao_Paulo
 
-CMD ["task", "start:prod"]
+CMD ["sh", "-c", "deno serve --parallel -A --port ${PORT} --cached-only dist/main.js"]

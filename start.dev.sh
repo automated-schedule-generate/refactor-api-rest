@@ -22,4 +22,4 @@ pnpm sequelize-cli db:migrate --name 20260429011230-subject-name-index-unaccent
 pnpm sequelize-cli db:migrate --name 20260429011429-course-name-index-unaccent
 pnpm sequelize-cli db:migrate --name 20260429011439-user-name-index-unaccent
 
-deno task dev:docker
+deno serve -A --watch --check --port ${PORT} src/main.ts
