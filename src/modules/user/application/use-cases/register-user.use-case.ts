@@ -2,6 +2,7 @@ import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { RegisterUserDto } from '../dtos/register-user.dto';
 import { UserRepository } from '@repositories';
 import { HashUtil } from 'src/commons/utils/hash.util';
+import { normalizeGmail } from 'src/commons/utils/normalize-gmail.util';
 
 @Injectable()
 export class RegisterUserUseCase {
@@ -11,6 +12,12 @@ export class RegisterUserUseCase {
 
   async execute(registerUserDto: RegisterUserDto) {
     try {
+      const { is_gmail, normalized_email } = normalizeGmail(
+        registerUserDto.email,
+      );
+      if (is_gmail) {
+        registerUserDto.email = normalized_email;
+      }
       const user = await this.userRepository.findByEmail(registerUserDto.email);
       if (user) {
         throw new BadGatewayException('Email ou CPF já cadastrado');
