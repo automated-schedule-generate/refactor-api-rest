@@ -2,7 +2,7 @@ export function normalizeGmail(email: string): {
   is_gmail: boolean;
   normalized_email: string;
 } {
-  const lower = email.trim().toLowerCase();
+  const lower = email.trim();
   const [local, domain] = lower.split('@');
 
   if (!domain || !local) {
