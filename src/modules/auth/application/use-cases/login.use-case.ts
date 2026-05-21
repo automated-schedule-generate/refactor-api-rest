@@ -5,6 +5,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { SessionRepository, UserRepository } from '@repositories';
 import { AuthService } from '@services';
 import { HashUtil } from 'src/commons/utils/hash.util';
+import { normalizeGmail } from 'src/commons/utils/normalize-gmail.util';
 
 @Injectable()
 export class LoginUseCase {
@@ -18,6 +19,12 @@ export class LoginUseCase {
 
   async execute(loginDto: LoginDto) {
     try {
+      const { is_gmail, normalized_email } = normalizeGmail(loginDto.login);
+
+      if (is_gmail) {
+        loginDto.login = normalized_email;
+      }
+
       let user: UserEntity | null = null;
       if (loginDto.login_type === LoginType.EMAIL) {
         user = await this.userRepository.findByEmail(loginDto.login);
