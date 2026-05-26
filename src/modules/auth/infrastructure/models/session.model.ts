@@ -1,9 +1,16 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  CreatedAt,
+  UpdatedAt,
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'session',
   underscored: true,
-  timestamps: false,
+  timestamps: true,
 })
 export class SessionModel extends Model<SessionModel, Partial<SessionModel>> {
   @Column({
@@ -21,4 +28,16 @@ export class SessionModel extends Model<SessionModel, Partial<SessionModel>> {
 
   @Column({ type: DataType.DATE, allowNull: false })
   expires_at: Date;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }
