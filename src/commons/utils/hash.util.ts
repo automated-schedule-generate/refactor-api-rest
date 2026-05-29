@@ -11,6 +11,7 @@ export class HashUtil {
         memoryCost: 2 ** 16,
         timeCost: 3,
         parallelism: 1,
+        secret: Buffer.from(process.env.JWT_SECRET || ''),
       });
     } catch (error) {
       this.logger.error(error);
