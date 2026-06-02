@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import * as argon2 from 'argon2';
+import { Buffer } from 'node:buffer';
 
 export class HashUtil {
   private static readonly logger = new Logger(HashUtil.name);
@@ -21,7 +22,9 @@ export class HashUtil {
 
   static async compare(hash: string, password: string): Promise<boolean> {
     try {
-      return await argon2.verify(hash, password);
+      return await argon2.verify(hash, password, {
+        secret: Buffer.from(process.env.JWT_SECRET || ''),
+      });
     } catch (error) {
       this.logger.error(error);
       throw new Error('Erro ao verificar hash');
