@@ -42,6 +42,11 @@ export class UpdateSubjectUseCase {
             'Pré requisito deve pertencer ao mesmo curso',
           );
         }
+        if (subjectExistPre.prerequisite_id === id) {
+          throw new BadRequestException(
+            'Disciplina não pode ter como pré requisito uma disciplina que tem ela como pré requisito',
+          );
+        }
       }
 
       const subject = await this.subjectRepository.update(

@@ -6,12 +6,14 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
 @Table({
   tableName: 'subject-teacher-semester',
   underscored: true,
-  timestamps: false,
+  timestamps: true,
 })
 export class SubjectTeacherSemesterModel extends Model<
   SubjectTeacherSemesterModel,
@@ -53,4 +55,16 @@ export class SubjectTeacherSemesterModel extends Model<
 
   @BelongsTo(() => SemesterModel)
   semester: SemesterModel;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }

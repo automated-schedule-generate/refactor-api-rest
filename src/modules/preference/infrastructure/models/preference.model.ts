@@ -8,9 +8,11 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'preference', underscored: true, timestamps: false })
+@Table({ tableName: 'preference', underscored: true, timestamps: true })
 export class PreferenceModel extends Model<
   PreferenceModel,
   Partial<PreferenceModel>
@@ -56,4 +58,16 @@ export class PreferenceModel extends Model<
 
   @HasMany(() => PreferenceTimeModel)
   preferenceTimes: PreferenceTimeModel[];
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  is_active: boolean;
+
+  @CreatedAt
+  created_at: Date;
+
+  @UpdatedAt
+  updated_at: Date;
 }
