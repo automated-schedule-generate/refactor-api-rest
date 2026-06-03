@@ -47,7 +47,6 @@
     "argon2": "^0.44.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "deno": "^2.7.14",
     "fastify": "5.8.4",
     "json5": "^2.2.3",
     "luxon": "^3.7.2",
@@ -65,7 +64,6 @@
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
-    "@deno/types": "^0.0.1",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",
@@ -117,5 +115,5 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "packageManager": "pnpm@10.33.4"
+  "packageManager": "pnpm@11.5.1"
 }
