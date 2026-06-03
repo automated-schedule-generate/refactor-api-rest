@@ -1,7 +1,11 @@
-const path = require('path');
+const path = require('node:path');
 
-module.exports = {
+const config = {
   config: path.resolve(__dirname, 'src/database/config.cjs'),
   'migrations-path': path.resolve(__dirname, 'src/database/migrations'),
   'seeders-path': path.resolve(__dirname, 'src/database/seeders'),
 };
+
+console.log(config);
+
+module.exports = config;

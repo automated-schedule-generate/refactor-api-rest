@@ -20,14 +20,14 @@ RUN pnpm build
 
 
 
-FROM base AS production
+# FROM base AS production
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY --from=builder /app/package.json /app/package.json
-COPY --from=builder /app/pnpm-lock.yaml /app/pnpm-lock.yaml
+# COPY --from=builder /app/package.json /app/package.json
+# COPY --from=builder /app/pnpm-lock.yaml /app/pnpm-lock.yaml
 
-RUN pnpm install --prod --prefer-frozen-lockfile
+# # RUN pnpm install --prod --prefer-frozen-lockfile
 
 
 
@@ -38,7 +38,7 @@ WORKDIR /app
 COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/deno.json /app/deno.json
-COPY --from=production /app/node_modules /app/node_modules
+# COPY --from=production /app/node_modules /app/node_modules
 
 RUN deno task start:prod-cache
 
