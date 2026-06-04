@@ -51,7 +51,7 @@ export class PreferenceController {
   @Get(':userId')
   @HttpCode(200)
   async get(
-    @Param('userId', new ParseUUIDPipe({ version: '4' })) userId: string,
+    @Param('userId', new ParseUUIDPipe({ version: '7' })) userId: string,
   ) {
     return await this.getOneTeacherPreference.execute(userId);
   }
@@ -73,7 +73,7 @@ export class PreferenceController {
   @Delete(':userId')
   @HttpCode(204)
   async delete(
-    @Param('userId', new ParseUUIDPipe({ version: '4' })) userId: string,
+    @Param('userId', new ParseUUIDPipe({ version: '7' })) userId: string,
   ) {
     return await this.deletePreferenceUseCase.execute(userId);
   }

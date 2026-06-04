@@ -62,7 +62,7 @@ export class TeacherController {
   })
   @Delete(':user_id')
   deleteTeacher(
-    @Param('user_id', new ParseUUIDPipe({ version: '4' })) user_id: string,
+    @Param('user_id', new ParseUUIDPipe({ version: '7' })) user_id: string,
   ): Promise<void> {
     return this.deleteTeacherUseCase.execute(user_id);
   }
@@ -80,7 +80,7 @@ export class TeacherController {
   })
   @Get(':user_id')
   findTeacherById(
-    @Param('user_id', new ParseUUIDPipe({ version: '4' })) user_id: string,
+    @Param('user_id', new ParseUUIDPipe({ version: '7' })) user_id: string,
   ) {
     return this.findTeacherByIdUseCase.execute(user_id);
   }

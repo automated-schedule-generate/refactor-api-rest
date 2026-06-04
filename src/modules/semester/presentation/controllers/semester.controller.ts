@@ -59,7 +59,7 @@ export class SemesterController {
   @ApiBearerAuth()
   @Put(':id')
   async update(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() body: UpdateSemesterDto,
   ) {
     return await this.updateSemesterUseCase.execute(id, body);
@@ -71,7 +71,7 @@ export class SemesterController {
   })
   @ApiBearerAuth()
   @Delete(':id')
-  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.deleteSemesterUseCase.execute(id);
   }
 
@@ -82,7 +82,7 @@ export class SemesterController {
   @ApiBearerAuth()
   @Patch(':id')
   async changeIsFinished(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
   ) {
     return await this.changeIsFinishedUseCase.execute(id);
   }

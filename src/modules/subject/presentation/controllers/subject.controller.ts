@@ -56,7 +56,7 @@ export class SubjectController {
   })
   @Put(':id')
   async update(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() dto: UpdateSubjectDto,
   ) {
     return await this.updateSubjectUseCase.execute(id, dto);
@@ -68,7 +68,7 @@ export class SubjectController {
   })
   @HttpCode(204)
   @Delete(':id')
-  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.deleteSubjectUseCase.execute(id);
   }
 
@@ -95,7 +95,7 @@ export class SubjectController {
     summary: 'Buscar disciplina por id',
   })
   @Get(':id')
-  async findById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async findById(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.findSubjectByIdUseCase.execute(id);
   }
 
@@ -105,7 +105,7 @@ export class SubjectController {
   })
   @Post(':id/add-teacher-and-semester')
   async addTeacherAndSemesterInSubject(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() dto: AddTeacherAndSemesterInSubjectDto,
   ) {
     return await this.addTeacherAndSemesterInSubjectUseCase.execute(id, dto);
