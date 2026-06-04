@@ -23,6 +23,7 @@ export class FindAllSubjectsUseCase {
           course_id: query?.course_id,
           prerequisite_id: query?.prerequisite_id,
           with_course: query?.with_course,
+          course_semester: query?.course_semester,
         },
         query?.with_pagination
           ? {

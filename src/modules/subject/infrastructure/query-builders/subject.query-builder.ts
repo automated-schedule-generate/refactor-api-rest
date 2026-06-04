@@ -46,6 +46,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
     course_id?: string,
     prerequisite_id?: string,
     search?: string,
+    course_semester?: number,
   ) {
     let limit: number | null = null;
     let offset: number | null = null;
@@ -60,6 +61,10 @@ export class SubjectQueryBuilder implements OnModuleInit {
     }
     if (prerequisite_id) {
       wheres.push('subject.prerequisite_id = :prerequisite_id');
+    }
+
+    if (course_semester) {
+      wheres.push('subject.course_semester = :course_semester');
     }
 
     if (search) {
@@ -87,6 +92,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
       offset,
       course_id,
       prerequisite_id,
+      course_semester,
     };
 
     return {

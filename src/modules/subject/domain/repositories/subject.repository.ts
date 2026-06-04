@@ -10,6 +10,7 @@ export abstract class SubjectRepository {
       course_id?: string;
       prerequisite_id?: string;
       with_course?: boolean;
+      course_semester?: number;
     },
     pagination?: {
       page: number;
