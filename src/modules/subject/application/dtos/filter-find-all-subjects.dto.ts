@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
 export class FilterFindAllSubjectsDto extends PaginationDto {
@@ -34,6 +40,7 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   prerequisite_id?: string;
 
   @ApiProperty({
+    example: true,
     description: 'Indica se deve retornar com paginação',
     required: false,
   })
@@ -52,4 +59,14 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
   @IsString()
   @IsOptional()
   search?: string;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Buscar por periodo do curso',
+    required: false,
+  })
+  @IsInt()
+  @Transform(({ value }) => Number(value))
+  @IsOptional()
+  course_semester?: number;
 }

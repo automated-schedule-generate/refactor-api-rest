@@ -15,13 +15,14 @@ import {
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'subject', underscored: true, timestamps: true })
 export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
   })
   declare id: string;
 
@@ -43,6 +44,13 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
     defaultValue: false,
   })
   is_optional: boolean;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
+  })
+  course_semester: number;
 
   @ForeignKey(() => SubjectModel)
   @Column({

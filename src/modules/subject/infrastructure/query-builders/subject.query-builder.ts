@@ -46,6 +46,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
     course_id?: string,
     prerequisite_id?: string,
     search?: string,
+    course_semester?: number,
   ) {
     let limit: number | null = null;
     let offset: number | null = null;
@@ -62,6 +63,10 @@ export class SubjectQueryBuilder implements OnModuleInit {
       wheres.push('subject.prerequisite_id = :prerequisite_id');
     }
 
+    if (course_semester) {
+      wheres.push('subject.course_semester = :course_semester');
+    }
+
     if (search) {
       wheres.push(generateWhereValueToSearchByColumn('subject."name"', search));
     }
@@ -70,7 +75,10 @@ export class SubjectQueryBuilder implements OnModuleInit {
         with cte_subjects as (
             ${with_course ? this.queries['cte-subjects-with-course'] : this.queries['cte-subjects']}
             ${wheres.length > 0 ? `where ${wheres.join(' and ')}` : ''}
-            order by subject.name asc
+            order by
+              subject.course_id,
+              subject.course_semester, 
+              subject.name
             ${limit !== null && offset !== null ? 'limit :limit offset :offset' : ''}
         ),
         cte_teachers as (
@@ -84,6 +92,7 @@ export class SubjectQueryBuilder implements OnModuleInit {
       offset,
       course_id,
       prerequisite_id,
+      course_semester,
     };
 
     return {

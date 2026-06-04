@@ -1,6 +1,6 @@
 FROM node:24-alpine AS base
 
-RUN corepack enable && corepack prepare pnpm@10.33.4 --activate
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 
 
@@ -8,11 +8,10 @@ FROM base AS builder
 
 WORKDIR /app
 
-COPY package.json .
-
-RUN pnpm install
-
 COPY . .
+
+RUN pnpm approve-builds --all
+RUN pnpm install
 
 RUN pnpm generate:imports
 
@@ -31,7 +30,7 @@ RUN pnpm build
 
 
 
-FROM denoland/deno AS runtime
+FROM denoland/deno:alpine AS runtime
 
 WORKDIR /app
 
@@ -40,7 +39,7 @@ COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/deno.json /app/deno.json
 # COPY --from=production /app/node_modules /app/node_modules
 
-RUN deno task start:prod-cache
+RUN deno cache dist/main.js
 
 ENV TZ=America/Sao_Paulo
 

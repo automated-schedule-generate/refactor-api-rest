@@ -9,6 +9,7 @@ import {
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'coordinator', timestamps: true, underscored: true })
 export class CoordinatorModel extends Model<
@@ -17,8 +18,8 @@ export class CoordinatorModel extends Model<
 > {
   @Column({
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
     primaryKey: true,
+    defaultValue: uuidv7,
   })
   declare id: string;
 

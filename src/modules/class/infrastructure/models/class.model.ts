@@ -10,13 +10,14 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'class', underscored: true, timestamps: true })
 export class ClassModel extends Model<ClassModel, Partial<ClassModel>> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
   })
   declare id: string;
 

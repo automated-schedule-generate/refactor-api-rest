@@ -10,6 +10,7 @@ import {
   BeforeUpdate,
 } from 'sequelize-typescript';
 import { UserModel } from '@models';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'organization', underscored: true, timestamps: true })
 export class OrganizationModel extends Model<
@@ -18,8 +19,8 @@ export class OrganizationModel extends Model<
 > {
   @Column({
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
     primaryKey: true,
+    defaultValue: uuidv7,
   })
   declare id: string;
 
