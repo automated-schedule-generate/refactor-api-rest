@@ -9,6 +9,7 @@ import {
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({
   tableName: 'subject-teacher-semester',
@@ -22,7 +23,7 @@ export class SubjectTeacherSemesterModel extends Model<
   @Column({
     type: DataType.UUID,
     primaryKey: true,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
   })
   declare id: string;
 

@@ -10,6 +10,7 @@ import {
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'preference-time', underscored: true, timestamps: true })
 export class PreferenceTimeModel extends Model<
@@ -18,7 +19,7 @@ export class PreferenceTimeModel extends Model<
 > {
   @Column({
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
     primaryKey: true,
   })
   declare id: string;
