@@ -1,4 +1,9 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { SubjectRepository } from '@repositories';
 
 @Injectable()
@@ -12,6 +17,16 @@ export class DeleteSubjectUseCase {
       const subjectExist = await this.subjectRepository.findById(id);
       if (!subjectExist) {
         throw new NotFoundException('Subject not found');
+      }
+      const prerequisiteSubjects = await this.subjectRepository.findAll({
+        prerequisite_id: id,
+      });
+      if (prerequisiteSubjects.total > 0) {
+        throw new ConflictException({
+          message:
+            'Subject cannot be deleted because it is a prerequisite for other subjects',
+          subjects: prerequisiteSubjects.subjects,
+        });
       }
       await this.subjectRepository.delete(id);
     } catch (error) {
