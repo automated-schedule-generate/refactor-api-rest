@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PreferenceRepository } from '@repositories';
-import { mapPreferenceFormatUtil } from 'src/commons/utils/map-preference-format.util';
+import { preferenceFormat } from 'src/commons/utils/preference-format.util';
 
 @Injectable()
 export class GetOneTeacherPreference {
@@ -11,7 +11,7 @@ export class GetOneTeacherPreference {
     try {
       const { preference } =
         await this.preferenceRepository.findByUserId(userId);
-      return mapPreferenceFormatUtil(preference);
+      return preferenceFormat(preference);
     } catch (error) {
       this.logger.error(error);
       throw error;

@@ -1,7 +1,7 @@
 import { PreferenceEntity } from 'src/imports/entities';
 import { DayPreferenceEnum, TurnPreferenceEnum } from 'src/imports/enums';
 
-export function mapPreferenceFormatUtil(preference: PreferenceEntity[]) {
+export function preferenceFormat(preference: PreferenceEntity[]) {
   if (!preference || preference.length === 0) {
     return {
       preferences: [
@@ -17,12 +17,12 @@ export function mapPreferenceFormatUtil(preference: PreferenceEntity[]) {
     };
   }
 
-  const buildPreferenceGrid = (filtered: PreferenceEntity[]) => {
+  const buildPreferenceGrid = (filtered: PreferenceEntity[]): boolean[][] => {
     return Array.from({ length: 5 }, (_, dayIndex) => {
       const day = filtered.find(
         (p) => p.day === (String(dayIndex) as DayPreferenceEnum),
       );
-      const grid = Array(6).fill(false);
+      const grid: boolean[] = Array(6).fill(false) as boolean[];
       if (day?.preferenceTimes) {
         day.preferenceTimes.forEach((pt) => {
           grid[Number(pt.selected_time)] = true;
