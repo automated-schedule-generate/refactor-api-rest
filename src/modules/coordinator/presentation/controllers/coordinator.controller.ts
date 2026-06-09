@@ -34,7 +34,7 @@ export class CoordinatorController {
   })
   @Put(':id')
   async updateCoordinator(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() body: UpdateCoordinatorDto,
   ) {
     return await this.updateCoordinatorUseCase.execute(id, body);

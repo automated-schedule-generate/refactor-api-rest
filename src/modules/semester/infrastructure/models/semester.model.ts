@@ -9,6 +9,7 @@ import {
   UpdatedAt,
   BeforeUpdate,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'semester', underscored: true, timestamps: true })
 export class SemesterModel extends Model<
@@ -17,7 +18,7 @@ export class SemesterModel extends Model<
 > {
   @Column({
     type: DataType.UUID,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
     primaryKey: true,
   })
   declare id: string;

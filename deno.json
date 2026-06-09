@@ -30,5 +30,12 @@
     "@contracts": "./src/imports/contracts.ts",
     "@builders": "./src/imports/builders.ts",
     "@decorators": "./src/imports/decorators.ts"
-  }
+  },
+  "allowScripts": [
+    "npm:@nestjs/core@11.1.24",
+    "npm:@scarf/scarf@1.4.0",
+    "npm:argon2@0.44.0",
+    "npm:esbuild@0.28.0",
+    "npm:unrs-resolver@1.12.2"
+  ]
 }

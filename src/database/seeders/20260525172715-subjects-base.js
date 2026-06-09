@@ -1,0 +1,295 @@
+const { uuidv7 } = require('uuidv7');
+
+const courseTSI = {
+  id: '019e8fd2-ce75-77f5-b9ea-18734dd12e5f',
+  subjects: [
+    { name: 'Programação Imperativa', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Redes de Computadores', workload: 90, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Cálculo para Computação', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Ética, Cidadania e Sustentabilidade', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Fundamentos de Computação para Internet', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Fundamentos do Design Digital', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Inglês I', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Administração', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Design de Interface', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Estatística e Probabilidade', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Inglês II', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Interconexão e Serviços de Redes', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Processos Psicológicos e Interação Social', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Banco de Dados', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Desenvolvimento para Web I', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Projeto e Desenvolvimento I', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Desenvolvimento para Web II', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Design de Interação', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Inglês III', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Metodologia Científica', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Pesquisa e Análise de Comportamento', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Programação Orientada a Objetos', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Projeto e Desenvolvimento II', workload: 30, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Segurança de Sistema para Internet', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Administração de Sistemas Operacionais', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Algoritmos e Estruturas de Dados', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Desenvolvimento para Dispositivos Móveis', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Engenharia de Software', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Gestão de Pessoas', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Inglês IV', workload: 30, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Interação Humano-computador', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Projeto e Desenvolvimento III', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Sistemas Distribuídos', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Tecnologias Assistivas', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Administração Avançada de Sistemas Operacionais', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Empreendedorismo e Inovação', workload: 45, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Gestão de Projetos', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Inglês V', workload: 45, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Inteligência Artificial', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Projeto e Desenvolvimento IV', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Testes e Qualidade de Software', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Tópicos Avançados em Análise e Processamento de Dados', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Tópicos Avançados em Bancos de Dados', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Internet das Coisas', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Libras', workload: 30, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Recuperação de Informação', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Tópicos Avançados em Desenvolvimento Web', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Trabalho de Conclusão de Curso', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+  ]
+}
+
+const courseIPI = {
+  id: '019e8fd2-f426-718e-847a-ea85f96f5c49',
+  subjects: [
+    { name: 'Português Instrumental', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Fundamentos da Informática', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Inglês Instrumental', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Matemática Aplicada', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Rede de Computadores', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Lógica de Programação e Estrutura de Dados', workload: 75, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Segurança do Trabalho', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Sistemas Operacionais', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Segurança de Sistemas para Internet', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Banco de Dados', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Desenvolvimento para Web I', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Ética Profissional e Cidadania', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Programação Orientada a Objeto', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Projeto e Prática I', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Interação Humano-Computador', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Engenharia de Software', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Implantação e Administração de Serviços Web', workload: 75, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Desenvolvimento para Web II', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Empreendedorismo', workload: 30, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Projeto e Prática II', workload: 75, is_optional: false, course_semester: 3, prerequisite_id: null },
+  ],
+}
+
+const courseLOG = {
+  id: '019e8fd3-4823-79a3-89c1-ab37db0bf84d',
+  subjects: [
+    { name: 'Ética profissional', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Informática básica', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Administração', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Logística', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Logística Reversa e Meio Ambiente', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Matemática Básica', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Metodologia Científica', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Português Aplicado', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Comércio e Relações Internacionais', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Estatística Básica', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gerenciamento e Economia de Sistemas Logísticos', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gestão de Pessoas', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Inglês Instrumental I', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Legislação e Tributação em Logística', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Logística de Armazenagem', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Logística de Transporte e Distribuição', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Custos Logísticos', workload: 30, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de Cadeia de Suprimentos', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de produção', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de Qualidade', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de Materiais, Estoque e Compras', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Higiene e Segurança do Trabalho', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Inglês Instrumental II', workload: 30, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Tecnologia e Sistemas de Informação Logística', workload: 30, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Tópicos Especiais em Logística', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+  ],
+};
+
+const courseTGQIG = {
+  id: '019e8fd3-6df7-7ee8-8586-1a5fa624012f',
+  subjects: [
+    { name: 'Língua Portuguesa Aplicada', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Fundamentos da Economia', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Fundamentos da Administração', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Ética, Cidadania e Sustentabilidade', workload: 30, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Matemática Aplicada', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Gestão da Qualidade', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Informática', workload: 45, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Metodologia Científica', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gestão de Pessoas', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Estatística I', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Engenharia Econômica', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gestão de Materiais e Logística', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gestão Ambiental', workload: 30, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Ferramentas da Qualidade', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Projeto Integrador I', workload: 45, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Gestão da Produção', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão do Processo', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Estatística II', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de Desenvolvimento do Produto', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão da Qualidade em Serviços', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Tecnologia e Sistemas de Informação Aplicados', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Projeto Integrador II', workload: 45, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Normatização e Certificação da Qualidade', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Metrologia', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Planejamento Estratégico', workload: 30, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Controle Estatístico da Qualidade', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Gestão da Inovação', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Custos de Produção', workload: 30, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Gestão Estratégica da Qualidade', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Metodologia da Pesquisa I', workload: 30, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Ergonomia, Higiene e Segurança do Trabalho', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Gestão de Projetos', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Auditoria da Qualidade', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Noções Gerais do Direito', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Empreendedorismo', workload: 45, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Metodologia da Pesquisa II', workload: 30, is_optional: false, course_semester: 4, prerequisite_id: null },
+  ],
+};
+
+const courseADM = {
+  id: '019e8fd3-232c-792e-a887-fca366ef1737',
+  subjects: [
+    { name: 'Comunicação Empresarial', workload: 40, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Ética Profissional em Administração', workload: 40, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Administração', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Contabilidade', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Introdução à Economia', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Matemática Aplicada à Administração', workload: 60, is_optional: false, course_semester: 1, prerequisite_id: null },
+    { name: 'Economia Brasileira', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Estatística Aplicada', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Introdução à Psicologia', workload: 40, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Matemática Financeira', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Noções de Direito Público e Privado', workload: 40, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Sociologia', workload: 60, is_optional: false, course_semester: 2, prerequisite_id: null },
+    { name: 'Administração e Legislação Tributária', workload: 40, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Comportamento Organizacional', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Direito Empresarial e Trabalhista', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Gestão de Pessoas I', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Metodologia Científica', workload: 60, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Organização, Sistema e Método', workload: 40, is_optional: false, course_semester: 3, prerequisite_id: null },
+    { name: 'Contabilidade Gerencial e de Custos', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Empreendedorismo', workload: 40, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Finanças I', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Marketing I', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Terceiro Setor', workload: 40, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Tecnologia da Informação', workload: 60, is_optional: false, course_semester: 4, prerequisite_id: null },
+    { name: 'Administração da Produção e Operações I', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Finanças II', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Gestão da Qualidade', workload: 40, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Gestão de Pessoas II', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Marketing II', workload: 60, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Processo Gerencial', workload: 40, is_optional: false, course_semester: 5, prerequisite_id: null },
+    { name: 'Administração da Produção e Operações II', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Análise dos Demonstrativos Financeiros', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Gestão de Projetos', workload: 40, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Gestão e Inovação Tecnológica', workload: 40, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Logística Empresarial', workload: 40, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Pesquisa Operacional', workload: 60, is_optional: false, course_semester: 6, prerequisite_id: null },
+    { name: 'Optativa I', workload: 40, is_optional: true, course_semester: 6, prerequisite_id: null },
+    { name: 'Administração Estratégica', workload: 40, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Administração de Materiais', workload: 60, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Administração Pública', workload: 40, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Gestão Ambiental e Sustentabilidade', workload: 40, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Liderança', workload: 40, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Metodologia de Pesquisa I', workload: 60, is_optional: false, course_semester: 7, prerequisite_id: null },
+    { name: 'Optativa II', workload: 40, is_optional: true, course_semester: 7, prerequisite_id: null },
+    { name: 'Gestão de Micro e Pequenas Empresas', workload: 40, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Orçamento e Finanças Públicas', workload: 40, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Mercado de Capitais', workload: 60, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Metodologia de Pesquisa II', workload: 60, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Simulações e Estratégias Empresariais', workload: 60, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Sistemas de Informação', workload: 40, is_optional: false, course_semester: 8, prerequisite_id: null },
+    { name: 'Optativa III', workload: 40, is_optional: true, course_semester: 8, prerequisite_id: null },
+  ],
+};
+
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    const courseMap = [
+      { course_id: courseTSI.id, subjects: courseTSI.subjects },
+      { course_id: courseIPI.id, subjects: courseIPI.subjects },
+      { course_id: courseLOG.id, subjects: courseLOG.subjects },
+      { course_id: courseTGQIG.id, subjects: courseTGQIG.subjects },
+      { course_id: courseADM.id, subjects: courseADM.subjects },
+    ];
+
+    const rows = courseMap.flatMap(({ course_id, subjects }) =>
+      subjects.map(subject => ({
+        ...subject,
+        course_id,
+        id: uuidv7(),
+        created_at: new Date(),
+        updated_at: new Date(),
+      }))
+    );
+
+    const findId = (name, course_id) => rows.find((r) => r.name === name && r.course_id === course_id)?.id ?? null;
+
+    const prerequisitesTSI = {
+      'Desenvolvimento para Web I': 'Programação Imperativa',
+      'Desenvolvimento para Web II': 'Desenvolvimento para Web I',
+      'Interconexão e Serviços de Redes': 'Redes de Computadores',
+      'Estatística e Probabilidade': 'Cálculo para Computação',
+      'Programação Orientada a Objetos': 'Programação Imperativa',
+      'Algoritmos e Estruturas de Dados': 'Programação Imperativa',
+      'Sistemas Distribuídos': 'Redes de Computadores',
+    };
+
+    const prerequisitesIPI = {
+      'Desenvolvimento para Web I': 'Lógica de Programação e Estrutura de Dados',
+      'Programação Orientada a Objeto': 'Lógica de Programação e Estrutura de Dados',
+      'Desenvolvimento para Web II': 'Desenvolvimento para Web I'
+    }
+
+    const prerequisitesTGQIG = {
+      'Estatística II': 'Estatística I',
+      'Projeto Integrador II': 'Projeto Integrador I',
+      'Metodologia da Pesquisa II': 'Metodologia da Pesquisa I'
+    }
+
+    const prerequisitesADM = {
+      'Economia Brasileira': 'Introdução à Economia',
+      'Estatística Aplicada': 'Matemática Aplicada à Administração',
+      'Direito Empresarial e Trabalhista': 'Noções de Direito Público e Privado',
+      'Contabilidade Gerencial e de Custos': 'Introdução à Contabilidade',
+      'Finanças I': 'Matemática Financeira',
+      'Finanças II': 'Finanças I',
+      'Gestão de Pessoas II': 'Gestão de Pessoas I',
+      'Marketing II': 'Marketing I',
+      'Administração da Produção e Operações II': 'Administração da Produção e Operações I',
+      'Análise dos Demonstrativos Financeiros': 'Introdução à Contabilidade',
+      'Liderança': 'Introdução à Psicologia',
+      'Orçamento e Finanças Públicas': 'Administração Pública',
+      'Metodologia de Pesquisa II': 'Metodologia de Pesquisa I',
+      'Sistemas de Informação': 'Tecnologia da Informação'
+    }
+
+    rows.forEach(row => {
+      if (prerequisitesTSI[row.name]) {
+        row.prerequisite_id = findId(prerequisitesTSI[row.name], row.course_id);
+      }
+      if (prerequisitesIPI[row.name]) {
+        row.prerequisite_id = findId(prerequisitesIPI[row.name], row.course_id);
+      }
+      if (prerequisitesTGQIG[row.name]) {
+        row.prerequisite_id = findId(prerequisitesTGQIG[row.name], row.course_id);
+      }
+    });
+
+    await queryInterface.bulkInsert('subject', rows);
+
+  },
+
+  async down(queryInterface, Sequelize) {
+
+  }
+};

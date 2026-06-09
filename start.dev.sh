@@ -17,9 +17,9 @@ rm -Rf dist/ node_modules/ .pnpm-store/ pnpm-lock.yaml deno.lock
 
 pnpm install
 
-pnpm sequelize-cli db:migrate --name 20260429003454-enable-unaccent
-pnpm sequelize-cli db:migrate --name 20260429011230-subject-name-index-unaccent
-pnpm sequelize-cli db:migrate --name 20260429011429-course-name-index-unaccent
-pnpm sequelize-cli db:migrate --name 20260429011439-user-name-index-unaccent
+# pnpm sequelize-cli db:migrate --name 20260429003454-enable-unaccent
+# pnpm sequelize-cli db:migrate --name 20260429011230-subject-name-index-unaccent
+# pnpm sequelize-cli db:migrate --name 20260429011429-course-name-index-unaccent
+# pnpm sequelize-cli db:migrate --name 20260429011439-user-name-index-unaccent
 
 deno serve -A --watch --check --port ${PORT} src/main.ts

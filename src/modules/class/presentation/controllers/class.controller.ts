@@ -52,7 +52,7 @@ export class ClassController {
   @ApiBearerAuth()
   @Put(':id')
   async update(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() body: UpdateClassDto,
   ) {
     return await this.updateClassUseCase.execute(id, body);
@@ -63,7 +63,7 @@ export class ClassController {
   })
   @ApiBearerAuth()
   @Delete(':id')
-  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.deleteClassUseCase.execute(id);
   }
 }

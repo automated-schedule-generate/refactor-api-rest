@@ -8,13 +8,14 @@ import {
   UpdatedAt,
   HasOne,
 } from 'sequelize-typescript';
+import { uuidv7 } from 'uuidv7';
 
 @Table({ tableName: 'user', underscored: true, timestamps: true })
 export class UserModel extends Model<UserModel, Partial<UserModel>> {
   @Column({
     type: DataType.UUID,
     primaryKey: true,
-    defaultValue: DataType.UUIDV4,
+    defaultValue: uuidv7,
   })
   declare id: string;
 

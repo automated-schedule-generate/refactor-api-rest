@@ -47,7 +47,7 @@ export class CourseController {
   @ApiOperation({ summary: 'Find course by id' })
   @Get(':id')
   @HttpCode(200)
-  async findById(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async findById(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.findByIdCourseUseCase.execute(id);
   }
 
@@ -55,7 +55,7 @@ export class CourseController {
   @Put(':id')
   @HttpCode(200)
   async update(
-    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
     @Body() data: RegisterCourseDto,
   ) {
     return await this.updateCourseUseCase.execute(id, data);
@@ -64,7 +64,7 @@ export class CourseController {
   @ApiOperation({ summary: 'Delete course' })
   @Delete(':id')
   @HttpCode(204)
-  async delete(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+  async delete(@Param('id', new ParseUUIDPipe({ version: '7' })) id: string) {
     return await this.deleteCourseUseCase.execute(id);
   }
 }

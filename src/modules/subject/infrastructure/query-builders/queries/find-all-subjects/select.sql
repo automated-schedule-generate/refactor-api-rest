@@ -46,6 +46,7 @@ from (
             cte_subjects."created_at",
             cte_subjects."updated_at",
             cte_subjects.prerequisite,
-            cte_subjects.course
+            cte_subjects.course,
+            cte_subjects.course_semester
         order by cte_subjects.name asc
     ) as result

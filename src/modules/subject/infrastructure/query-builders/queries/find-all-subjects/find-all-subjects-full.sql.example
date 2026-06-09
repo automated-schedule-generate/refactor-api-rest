@@ -8,6 +8,8 @@ with cte_subjects as (
                 prerequisite.name,
                 'workload',
                 prerequisite.workload,
+                'course_semester',
+                prerequisite.course_semester,
                 'is_optional',
                 prerequisite.is_optional,
                 'prerequisite_id',
