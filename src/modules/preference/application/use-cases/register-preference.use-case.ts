@@ -13,6 +13,7 @@ import {
   TeacherRepository,
 } from '@repositories';
 import { Sequelize } from 'sequelize-typescript';
+import { preferenceFormat } from 'src/commons/utils/preference-format.util';
 
 @Injectable()
 export class RegisterPreferenceUseCase {
@@ -69,7 +70,7 @@ export class RegisterPreferenceUseCase {
         }
       }
       await transaction.commit();
-      return preferences;
+      return preferenceFormat(preferences);
     } catch (error) {
       await transaction.rollback();
       this.logger.error(error);
