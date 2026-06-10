@@ -17,7 +17,7 @@ export class FilterFindAllClassDto extends PaginationDto {
     required: false,
     description: 'ID do curso',
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do curso inválido.' })
   @IsOptional()
   course_id?: string;
 
@@ -25,7 +25,7 @@ export class FilterFindAllClassDto extends PaginationDto {
     required: false,
     description: 'ID do semestre',
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do semestre inválido.' })
   @IsOptional()
   semester_id?: string;
 }

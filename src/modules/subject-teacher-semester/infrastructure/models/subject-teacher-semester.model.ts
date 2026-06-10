@@ -31,6 +31,7 @@ export class SubjectTeacherSemesterModel extends Model<
   @Column({
     type: DataType.UUID,
     allowNull: false,
+    unique: false,
   })
   subject_id: string;
 
@@ -38,6 +39,7 @@ export class SubjectTeacherSemesterModel extends Model<
   @Column({
     type: DataType.UUID,
     allowNull: false,
+    unique: false,
   })
   teacher_id: string;
 
@@ -45,6 +47,7 @@ export class SubjectTeacherSemesterModel extends Model<
   @Column({
     type: DataType.UUID,
     allowNull: false,
+    unique: false,
   })
   semester_id: string;
 

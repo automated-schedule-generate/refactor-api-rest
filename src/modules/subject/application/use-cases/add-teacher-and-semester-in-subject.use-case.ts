@@ -43,14 +43,12 @@ export class AddTeacherAndSemesterInSubjectUseCase {
       if (!semesterExist) {
         throw new BadRequestException('Semestre não encontrado');
       }
-      console.log('cheguei aqui');
+
       await this.subjectTeacherSemesterRepository.register(
         subject_id,
         dto.teacher_id,
         dto.semester_id,
       );
-
-      console.log('cheguei aqui 2');
 
       return await this.subjectRepository.findById(subject_id);
     } catch (error) {
