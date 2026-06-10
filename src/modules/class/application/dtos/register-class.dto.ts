@@ -41,7 +41,7 @@ export class RegisterClassDto {
     required: true,
     description: 'ID do curso',
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do curso inválido.' })
   @IsNotEmpty()
   course_id: string;
 
@@ -49,7 +49,7 @@ export class RegisterClassDto {
     required: true,
     description: 'ID do semestre',
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do semestre inválido.' })
   @IsNotEmpty()
   semester_id: string;
 }

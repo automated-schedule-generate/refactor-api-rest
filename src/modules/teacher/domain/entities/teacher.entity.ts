@@ -1,6 +1,7 @@
 import {
   CoordinatorEntity,
   PreferenceEntity,
+  SubjectEntity,
   type UserEntity,
 } from '@entities';
 import { WorkloadEnum } from '@enums';
@@ -18,6 +19,7 @@ export class TeacherEntity {
     public readonly updated_at: Date,
     public coordinators: CoordinatorEntity[] = [],
     public preferences: PreferenceEntity[] = [],
+    public subjects: SubjectEntity[] = [],
   ) {}
 
   toJSON() {
@@ -31,6 +33,7 @@ export class TeacherEntity {
       coordinators:
         this.coordinators.length > 0 ? this.coordinators : undefined,
       preferences: this.preferences.length > 0 ? this.preferences : undefined,
+      subjects: this.subjects.length > 0 ? this.subjects : undefined,
     };
   }
 }

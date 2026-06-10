@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import {
   PreferenceModel,
   PreferenceTimeModel,
+  SubjectModel,
   TeacherModel,
   UserModel,
 } from '@models';
@@ -100,6 +101,15 @@ export class TeacherRepositoryImpl implements TeacherRepository {
           model: UserModel,
           as: 'user',
           required: true,
+        },
+        {
+          model: SubjectModel,
+          as: 'subjects',
+          required: false,
+          through: {
+            where: { is_active: true },
+            attributes: [],
+          },
         },
         ...(preferences
           ? [

@@ -1,5 +1,11 @@
 import { WorkloadEnum } from '@enums';
-import { CoordinatorModel, PreferenceModel, UserModel } from '@models';
+import {
+  CoordinatorModel,
+  PreferenceModel,
+  SubjectModel,
+  SubjectTeacherSemesterModel,
+  UserModel,
+} from '@models';
 import {
   Table,
   Model,
@@ -10,6 +16,7 @@ import {
   CreatedAt,
   UpdatedAt,
   HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'teacher', underscored: true, timestamps: true })
@@ -57,4 +64,7 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
 
   @HasMany(() => PreferenceModel, 'user_id')
   preferences: PreferenceModel[];
+
+  @BelongsToMany(() => SubjectModel, () => SubjectTeacherSemesterModel)
+  subjects: SubjectModel[];
 }

@@ -27,7 +27,7 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
     description: 'ID do curso',
     required: false,
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do curso inválido.' })
   @IsOptional()
   course_id?: string;
 
@@ -35,7 +35,7 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
     description: 'ID do pré-requisito',
     required: false,
   })
-  @IsUUID()
+  @IsUUID('7', { message: 'ID do pré-requisito inválido.' })
   @IsOptional()
   prerequisite_id?: string;
 
