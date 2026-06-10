@@ -1,5 +1,5 @@
-const { Op } = require('sequelize');
-const { uuidv7 } = require('uuidv7');
+import { Op } from 'sequelize';
+// import { uuidv7 } from 'uuidv7';
 
 const courses = [
   {
@@ -35,7 +35,7 @@ const courses = [
 ];
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       'course',

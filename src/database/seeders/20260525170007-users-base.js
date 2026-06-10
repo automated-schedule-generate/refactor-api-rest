@@ -1,5 +1,5 @@
-const argon2 = require('argon2');
-const { Op } = require('sequelize');
+import * as argon2 from 'argon2';
+import { Op } from 'sequelize';
 
 const hash = async (password) => {
   try {
@@ -79,6 +79,4 @@ const obj = {
   },
 };
 
-module.exports = obj;
-
-// export default obj;
+export default obj;

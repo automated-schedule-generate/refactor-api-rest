@@ -1,4 +1,4 @@
-const { uuidv7 } = require('uuidv7');
+import { uuidv7 } from 'uuidv7';
 
 const courseTSI = {
   id: '019e8fd2-ce75-77f5-b9ea-18734dd12e5f',
@@ -1291,7 +1291,7 @@ const courseADM = {
 };
 
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
   async up(queryInterface, Sequelize) {
     const courseMap = [
       { course_id: courseTSI.id, subjects: courseTSI.subjects },
@@ -1371,10 +1371,13 @@ module.exports = {
           row.course_id,
         );
       }
+      if (prerequisitesADM[row.name]) {
+        row.prerequisite_id = findId(prerequisitesADM[row.name], row.course_id);
+      }
     });
 
     await queryInterface.bulkInsert('subject', rows);
   },
 
-  async down(queryInterface, Sequelize) {},
+  async down(queryInterface, Sequelize) { },
 };

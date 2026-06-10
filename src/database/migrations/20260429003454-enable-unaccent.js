@@ -1,7 +1,5 @@
-'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
   async up(queryInterface) {
     await queryInterface.sequelize.query(
       `CREATE EXTENSION IF NOT EXISTS unaccent SCHEMA public;`,
