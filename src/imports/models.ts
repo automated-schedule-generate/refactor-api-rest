@@ -1,5 +1,8 @@
 export * from '../modules/auth/infrastructure/models/session.model';
 export * from '../modules/course/infrastructure/models/course.model';
+export * from '../modules/permission/infrastructure/models/permission.model';
+export * from '../modules/role/infrastructure/models/role.model';
+export * from '../modules/role/infrastructure/models/role-permission.model';
 export * from '../modules/semester/infrastructure/models/semester.model';
 export * from '../modules/class/infrastructure/models/class.model';
 export * from '../modules/subject/infrastructure/models/subject.model';
@@ -10,3 +13,4 @@ export * from '../modules/coordinator/infrastructure/models/coordinator.model';
 export * from '../modules/preference/infrastructure/models/preference.model';
 export * from '../modules/preference-time/infrastructure/models/preference-time.model';
 export * from '../modules/subject-teacher-semester/infrastructure/models/subject-teacher-semester.model';
+export * from '../modules/user-role-organization/infrastructure/models/user-role-organization.model';
