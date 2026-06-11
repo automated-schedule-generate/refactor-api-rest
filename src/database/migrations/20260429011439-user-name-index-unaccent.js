@@ -1,7 +1,5 @@
-'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
-module.exports = {
+export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.sequelize.query(`
       CREATE INDEX IF NOT EXISTS idx_user_name_unaccent

@@ -1,7 +1,7 @@
 const path = require('node:path');
 
 const config = {
-  config: path.resolve(__dirname, 'src/database/config.cjs'),
+  config: path.resolve(__dirname, 'src/database/config.js'),
   'migrations-path': path.resolve(__dirname, 'src/database/migrations'),
   'seeders-path': path.resolve(__dirname, 'src/database/seeders'),
 };
