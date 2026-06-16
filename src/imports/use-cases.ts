@@ -43,6 +43,7 @@ export * from '../modules/semester/application/use-cases/register-semester.use-c
 export * from '../modules/semester/application/use-cases/update-semester.use-case';
 export * from '../modules/subject/application/use-cases/add-teacher-and-semester-in-subject.use-case';
 export * from '../modules/subject/application/use-cases/delete-subject.use-case';
+export * from '../modules/subject/application/use-cases/delete-teacher-and-semester-in-subject.use-case';
 export * from '../modules/subject/application/use-cases/find-all-subjects.use-case';
 export * from '../modules/subject/application/use-cases/find-subject-by-id.use-case';
 export * from '../modules/subject/application/use-cases/register-many-subjects.use-case';

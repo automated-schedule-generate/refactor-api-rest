@@ -5,12 +5,12 @@ import {
   SubjectTeacherSemesterRepository,
   TeacherRepository,
 } from '@repositories';
-import { AddTeacherAndSemesterInSubjectDto } from '@dtos';
+import { DeleteTeacherAndSemesterInSubjectDto } from '@dtos';
 
 @Injectable()
-export class AddTeacherAndSemesterInSubjectUseCase {
+export class DeleteTeacherAndSemesterInSubjectUseCase {
   private readonly logger = new Logger(
-    AddTeacherAndSemesterInSubjectUseCase.name,
+    DeleteTeacherAndSemesterInSubjectUseCase.name,
   );
 
   constructor(
@@ -20,7 +20,7 @@ export class AddTeacherAndSemesterInSubjectUseCase {
     private readonly semesterRepository: SemesterRepository,
   ) {}
 
-  async execute(subject_id: string, dto: AddTeacherAndSemesterInSubjectDto) {
+  async execute(subject_id: string, dto: DeleteTeacherAndSemesterInSubjectDto) {
     try {
       const subjectExist = await this.subjectRepository.findById(subject_id);
 
@@ -44,13 +44,16 @@ export class AddTeacherAndSemesterInSubjectUseCase {
         throw new BadRequestException('Semestre não encontrado');
       }
 
-      await this.subjectTeacherSemesterRepository.register(
+      await this.subjectTeacherSemesterRepository.delete(
         subject_id,
         dto.teacher_id,
         dto.semester_id,
       );
 
-      return subjectExist;
+      return {
+        data: subjectExist,
+        message: 'Professor removido da disciplina com sucesso',
+      };
     } catch (error) {
       this.logger.error(error);
       throw error;

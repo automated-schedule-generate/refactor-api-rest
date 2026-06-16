@@ -19,6 +19,7 @@ export * from '../modules/role/application/dtos/update-role.dto';
 export * from '../modules/semester/application/dtos/register-semester.dto';
 export * from '../modules/semester/application/dtos/update-semester.dto';
 export * from '../modules/subject/application/dtos/add-teacher-and-semester-in-subject.dto';
+export * from '../modules/subject/application/dtos/delete-teacher-and-semester-in-subject.dto';
 export * from '../modules/subject/application/dtos/filter-find-all-subjects.dto';
 export * from '../modules/subject/application/dtos/register-many-subject.dto';
 export * from '../modules/subject/application/dtos/register-subject.dto';
