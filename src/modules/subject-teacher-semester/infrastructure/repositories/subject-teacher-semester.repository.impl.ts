@@ -26,7 +26,21 @@ export class SubjectTeacherSemesterRepositoryImpl implements SubjectTeacherSemes
     return SubjectTeacherSemesterMapper.toEntity(data.dataValues);
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(
+    subject_id: string,
+    teacher_id: string,
+    semester_id: string,
+  ): Promise<void> {
+    await this.model.destroy({
+      where: {
+        subject_id,
+        teacher_id,
+        semester_id,
+      },
+    });
+  }
+
+  async deleteById(id: string): Promise<void> {
     await this.model.destroy({
       where: {
         id,

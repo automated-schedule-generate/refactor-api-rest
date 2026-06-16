@@ -9,5 +9,11 @@ export abstract class SubjectTeacherSemesterRepository {
     semester_id: string,
   ): Promise<SubjectTeacherSemesterEntity>;
 
-  abstract delete(id: string): Promise<void>;
+  abstract delete(
+    subject_id: string,
+    teacher_id: string,
+    semester_id: string,
+  ): Promise<void>;
+
+  abstract deleteById(id: string): Promise<void>;
 }
