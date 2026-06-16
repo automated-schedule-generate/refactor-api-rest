@@ -11,5 +11,6 @@ export * from '../modules/semester/infrastructure/repositories/semester.reposito
 export * from '../modules/subject-teacher-semester/infrastructure/repositories/subject-teacher-semester.repository.impl';
 export * from '../modules/subject/infrastructure/repositories/subject.repository.impl';
 export * from '../modules/teacher/infrastructure/repositories/teacher.repository.impl';
+export * from '../modules/timetable-generate/infrastructure/repositories/timetable-generate.repository.impl';
 export * from '../modules/user-role-organization/infrastructure/repositories/user-role-organization.repository.impl';
 export * from '../modules/user/infrastructure/repositories/user.repository.impl';
