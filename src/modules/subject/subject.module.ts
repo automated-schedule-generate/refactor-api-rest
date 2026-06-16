@@ -13,6 +13,7 @@ import {
   FindAllSubjectsUseCase,
   FindSubjectByIdUseCase,
   AddTeacherAndSemesterInSubjectUseCase,
+  DeleteTeacherAndSemesterInSubjectUseCase,
 } from '@use-cases';
 import {
   CourseModule,
@@ -44,6 +45,7 @@ import { SubjectQueryBuilder } from '@builders';
     FindAllSubjectsUseCase,
     FindSubjectByIdUseCase,
     AddTeacherAndSemesterInSubjectUseCase,
+    DeleteTeacherAndSemesterInSubjectUseCase,
     SubjectQueryBuilder,
   ],
   exports: [

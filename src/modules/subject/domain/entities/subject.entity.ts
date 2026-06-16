@@ -9,6 +9,7 @@ export class SubjectEntity {
     public readonly name: string,
     public readonly workload: number,
     public readonly is_optional: boolean,
+    public readonly course_semester: number,
     public readonly prerequisite_id: string,
     public readonly course_id: string,
     public prerequisite: SubjectEntity | null = null,

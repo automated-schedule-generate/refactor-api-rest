@@ -12,6 +12,7 @@ export class SubjectMapper {
       model.name,
       model.workload,
       model.is_optional,
+      model.course_semester,
       model.prerequisite_id,
       model.course_id,
     );

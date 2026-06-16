@@ -18,6 +18,7 @@ import {
   UpdateSubjectUseCase,
   FindAllSubjectsUseCase,
   FindSubjectByIdUseCase,
+  DeleteTeacherAndSemesterInSubjectUseCase,
 } from '@use-cases';
 import { Post } from '@nestjs/common';
 import {
@@ -26,6 +27,7 @@ import {
   RegisterSubjectDto,
   UpdateSubjectDto,
   FilterFindAllSubjectsDto,
+  DeleteTeacherAndSemesterInSubjectDto,
 } from '@dtos';
 
 @ApiTags('subject')
@@ -39,6 +41,7 @@ export class SubjectController {
     private readonly findAllSubjectsUseCase: FindAllSubjectsUseCase,
     private readonly findSubjectByIdUseCase: FindSubjectByIdUseCase,
     private readonly addTeacherAndSemesterInSubjectUseCase: AddTeacherAndSemesterInSubjectUseCase,
+    private readonly deleteTeacherAndSemesterInSubjectUseCase: DeleteTeacherAndSemesterInSubjectUseCase,
   ) {}
 
   @ApiBearerAuth()
@@ -109,5 +112,17 @@ export class SubjectController {
     @Body() dto: AddTeacherAndSemesterInSubjectDto,
   ) {
     return await this.addTeacherAndSemesterInSubjectUseCase.execute(id, dto);
+  }
+
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Deletar professor e semestre em disciplina',
+  })
+  @Delete(':id/delete-teacher-and-semester')
+  async deleteTeacherAndSemesterInSubject(
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
+    @Body() dto: DeleteTeacherAndSemesterInSubjectDto,
+  ) {
+    return await this.deleteTeacherAndSemesterInSubjectUseCase.execute(id, dto);
   }
 }
