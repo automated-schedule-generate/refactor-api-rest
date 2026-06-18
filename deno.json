@@ -3,7 +3,7 @@
   "unstable": ["sloppy-imports", "detect-cjs"],
   "tasks": {
     "start": "deno serve -A --env-file=.env src/main.ts",
-    "dev": "deno serve -A --env-file=.env --watch --check --port 3000 src/main.ts",
+    "dev": "deno serve -A --env-file=.env --watch --check --port $PORT src/main.ts",
     "dev:docker": "sh -c 'deno serve -A --watch --check --port ${PORT} src/main.ts'",
     "start:prod": "sh -c 'deno serve --parallel -A --port ${PORT} --cached-only dist/main.js'",
     "start:prod-cache": "deno cache dist/main.js"
