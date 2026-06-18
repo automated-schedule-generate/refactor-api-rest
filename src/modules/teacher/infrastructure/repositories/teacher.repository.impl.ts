@@ -90,6 +90,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
     total: number;
   }> {
     const { rows: teachers, count: total } = await this.model.findAndCountAll({
+      distinct: true,
       offset: (page - 1) * limit,
       limit,
       order: [literal('"user.name" ASC'), ['created_at', 'ASC']],
