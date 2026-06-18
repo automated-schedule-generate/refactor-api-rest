@@ -1379,5 +1379,5 @@ export default {
     await queryInterface.bulkInsert('subject', rows);
   },
 
-  async down(queryInterface, Sequelize) { },
+  async down(queryInterface, Sequelize) {},
 };
