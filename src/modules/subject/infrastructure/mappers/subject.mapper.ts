@@ -1,6 +1,6 @@
 import { SubjectEntity } from '@entities';
 import { CourseMapper, SemesterMapper, TeacherMapper } from '@mappers';
-import { SubjectModel } from '@models';
+import { SubjectModel, SubjectTeacherSemesterModel } from '@models';
 
 export class SubjectMapper {
   static toEntity(
@@ -16,6 +16,7 @@ export class SubjectMapper {
       model.prerequisite_id,
       model.course_id,
     );
+
     if (!manual_query) {
       if (model?.prerequisite) {
         subject.prerequisite = this.toEntity(model.prerequisite.dataValues);
@@ -35,6 +36,18 @@ export class SubjectMapper {
         subject.semesters = model.semesters.map((semester) =>
           SemesterMapper.toEntity(semester.dataValues),
         );
+      }
+
+      console.log(model);
+
+      const throughData = (
+        model as unknown as {
+          SubjectTeacherSemesterModel?: SubjectTeacherSemesterModel;
+        }
+      )?.SubjectTeacherSemesterModel;
+
+      if (throughData?.dataValues?.semester_id) {
+        subject.semester_id = throughData.dataValues.semester_id;
       }
     } else {
       if (model?.prerequisite) {

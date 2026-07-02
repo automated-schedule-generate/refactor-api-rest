@@ -3,6 +3,7 @@ import { CourseEntity, SemesterEntity, TeacherEntity } from '@entities';
 export class SubjectEntity {
   public teachers: TeacherEntity[] = [];
   public semesters: SemesterEntity[] = [];
+  public semester_id?: string;
 
   constructor(
     public readonly id: string,

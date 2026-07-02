@@ -109,7 +109,7 @@ export class TeacherRepositoryImpl implements TeacherRepository {
           required: false,
           through: {
             where: { is_active: true },
-            attributes: [],
+            attributes: ['semester_id'],
           },
         },
         ...(preferences
