@@ -18,10 +18,16 @@ export class DeleteSubjectUseCase {
       if (!subjectExist) {
         throw new NotFoundException('Subject not found');
       }
-      const prerequisiteSubjects = await this.subjectRepository.findAll({
-        prerequisite_id: id,
-      });
-      if (prerequisiteSubjects.total > 0) {
+      const prerequisiteSubjects = await this.subjectRepository.findAll(
+        {
+          prerequisite_id: id,
+        },
+        {
+          limit: 1,
+          page: 1,
+        },
+      );
+      if (prerequisiteSubjects.subjects.length > 0) {
         throw new ConflictException({
           message:
             'Subject cannot be deleted because it is a prerequisite for other subjects',

@@ -76,9 +76,9 @@ export class SubjectQueryBuilder implements OnModuleInit {
             ${with_course ? this.queries['cte-subjects-with-course'] : this.queries['cte-subjects']}
             ${wheres.length > 0 ? `where ${wheres.join(' and ')}` : ''}
             order by
-              subject.course_id,
+              subject.name,
               subject.course_semester, 
-              subject.name
+              subject.course_id
             ${limit !== null && offset !== null ? 'limit :limit offset :offset' : ''}
         ),
         cte_teachers as (

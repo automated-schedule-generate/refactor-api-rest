@@ -11,5 +11,7 @@ export * from '../modules/semester/domain/entities/semester.entity';
 export * from '../modules/subject-teacher-semester/domain/entities/subject-teacher-semester.entity';
 export * from '../modules/subject/domain/entities/subject.entity';
 export * from '../modules/teacher/domain/entities/teacher.entity';
+export * from '../modules/timetable-generate/domain/entities/timetable-entry.entity';
+export * from '../modules/timetable-generate/domain/entities/timetable.entity';
 export * from '../modules/user-role-organization/domain/entities/user-role-organization.entity';
 export * from '../modules/user/domain/entities/user.entity';
