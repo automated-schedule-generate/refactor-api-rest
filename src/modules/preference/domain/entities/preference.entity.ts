@@ -1,4 +1,4 @@
-import { PreferenceTimeEntity } from '@entities';
+import { PreferenceTimeEntity, TeacherEntity } from '@entities';
 import { DayPreferenceEnum, TurnPreferenceEnum } from '@enums';
 
 export class PreferenceEntity {
@@ -6,8 +6,9 @@ export class PreferenceEntity {
     public readonly id: string,
     public readonly day: DayPreferenceEnum,
     public readonly turn: TurnPreferenceEnum,
-    public readonly teacherId: string,
+    public readonly teacher_id: string,
     public preferenceTimes?: PreferenceTimeEntity[],
+    public teacher: TeacherEntity | null = null,
   ) {}
 
   toJSON() {
@@ -17,6 +18,7 @@ export class PreferenceEntity {
         this.preferenceTimes && this.preferenceTimes.length > 0
           ? this.preferenceTimes
           : undefined,
+      teacher: this.teacher ? this.teacher : undefined,
     };
   }
 }

@@ -12,6 +12,7 @@ export * from '../modules/organization/application/dtos/update-organization.dto'
 export * from '../modules/permission/application/dtos/register-permission.dto';
 export * from '../modules/permission/application/dtos/update-permission.dto';
 export * from '../modules/preference-time/application/dtos/register-preference-time.dto';
+export * from '../modules/preference/application/dtos/filter-find-all-preference.dto';
 export * from '../modules/preference/application/dtos/register-preference.dto';
 export * from '../modules/role/application/dtos/add-permission-to-role.dto';
 export * from '../modules/role/application/dtos/register-role.dto';

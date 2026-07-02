@@ -14,6 +14,17 @@ export abstract class PreferenceRepository {
   abstract findByUserId(
     userId: string,
   ): Promise<{ preference: PreferenceEntity[]; total: number }>;
-  abstract find(): Promise<{ preference: PreferenceEntity[]; total: number }>;
+  abstract find(
+    where: {
+      teacher_id?: string;
+    },
+    pagination?: {
+      page: number;
+      limit: number;
+    },
+  ): Promise<{
+    preference: PreferenceEntity[];
+    total: number;
+  }>;
   abstract delete(userId: string): Promise<void>;
 }

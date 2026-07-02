@@ -1,13 +1,20 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { PreferenceRepository } from '@repositories';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { PreferenceRepository, TeacherRepository } from '@repositories';
 import { preferenceFormat } from 'src/commons/utils/preference-format.util';
 
 @Injectable()
-export class GetOneTeacherPreference {
-  private readonly logger = new Logger(GetOneTeacherPreference.name);
-  constructor(private readonly preferenceRepository: PreferenceRepository) {}
+export class GetOneTeacherPreferenceUseCase {
+  private readonly logger = new Logger(GetOneTeacherPreferenceUseCase.name);
+  constructor(
+    private readonly preferenceRepository: PreferenceRepository,
+    private readonly teacherRepository: TeacherRepository,
+  ) {}
 
   async execute(userId: string) {
+    const teacherExist = await this.teacherRepository.findByUserId(userId);
+    if (!teacherExist) {
+      throw new NotFoundException('Professor não encontrado');
+    }
     try {
       const { preference } =
         await this.preferenceRepository.findByUserId(userId);
