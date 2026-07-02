@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DatabaseModule } from '@database/database.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { CourseModel } from '@models';
@@ -11,10 +11,17 @@ import {
   FindByIdCourseUseCase,
   UpdateCourseUseCase,
   RegisterCourseUseCase,
+  FindTimetableBySemesterUseCase,
 } from '@use-cases';
+import { CourseQueryBuilder } from '@builders';
+import { SemesterModule } from '@modules';
 
 @Module({
-  imports: [DatabaseModule, SequelizeModule.forFeature([CourseModel])],
+  imports: [
+    DatabaseModule,
+    SequelizeModule.forFeature([CourseModel]),
+    forwardRef(() => SemesterModule),
+  ],
   controllers: [CourseController],
   providers: [
     {
@@ -26,6 +33,8 @@ import {
     FindByIdCourseUseCase,
     UpdateCourseUseCase,
     DeleteCourseUseCase,
+    CourseQueryBuilder,
+    FindTimetableBySemesterUseCase,
   ],
   exports: [
     {

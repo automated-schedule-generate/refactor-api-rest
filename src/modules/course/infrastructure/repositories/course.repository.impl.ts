@@ -4,13 +4,19 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CourseModel } from '@models';
 import { CourseMapper } from '@mappers';
 import { ClassTimeEnum } from '@enums';
-import { Transaction, literal } from 'sequelize';
-import { CourseEntity } from '@entities';
+import { QueryTypes, Transaction, literal } from 'sequelize';
+import { CourseEntity, TimetableEntryEntity } from '@entities';
 import { generateWhereValueToSearchByColumn } from 'src/commons/utils/generate-where-value-to-search-by-column.util';
+import { CourseQueryBuilder } from '../query-builders/course.query-builder';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class CourseRepositoryImpl implements CourseRepository {
-  constructor(@InjectModel(CourseModel) private model: typeof CourseModel) {}
+  constructor(
+    @InjectModel(CourseModel) private readonly model: typeof CourseModel,
+    private readonly sequelize: Sequelize,
+    private readonly courseQueryBuilder: CourseQueryBuilder,
+  ) {}
 
   async register(
     name: string,
@@ -83,5 +89,32 @@ export class CourseRepositoryImpl implements CourseRepository {
 
   async delete(id: string, transaction?: Transaction): Promise<void> {
     await this.model.destroy({ where: { id }, transaction });
+  }
+
+  async findWithTimetableBySemester(
+    semester_id: string,
+  ): Promise<CourseEntity[]> {
+    try {
+      const { query, replacements } =
+        this.courseQueryBuilder.findCourseWithTimetableBySemester(semester_id);
+
+      const data: (CourseModel & {
+        timetable_entries: TimetableEntryEntity[];
+      })[] = await this.sequelize.query(query, {
+        replacements,
+        type: QueryTypes.SELECT,
+      });
+
+      console.log(data);
+
+      return data.map((d) =>
+        CourseMapper.toEntity(d, {
+          timetable_entries: d.timetable_entries,
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 }

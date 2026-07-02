@@ -6,6 +6,7 @@ export * from '../modules/class/application/dtos/update-class.dto';
 export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/filter-find-all-course.dto';
+export * from '../modules/course/application/dtos/find-timetable-by-semester.dto';
 export * from '../modules/course/application/dtos/register-course.dto';
 export * from '../modules/organization/application/dtos/register-organization.dto';
 export * from '../modules/organization/application/dtos/update-organization.dto';

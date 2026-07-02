@@ -90,4 +90,23 @@ export class SemesterRepositoryImpl implements SemesterRepository {
       where: { id },
     });
   }
+
+  async findCurrentSemester(): Promise<SemesterEntity | null> {
+    const semester = await this.model.findOne({
+      where: {
+        is_finished: false,
+        is_active: true,
+      },
+      order: [
+        ['year', 'DESC'],
+        ['semester', 'DESC'],
+      ],
+    });
+
+    if (!semester?.dataValues) {
+      return null;
+    }
+
+    return SemesterMapper.toEntity(semester.dataValues);
+  }
 }

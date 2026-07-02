@@ -11,5 +11,6 @@ export * from '../modules/semester/infrastructure/mappers/semester.mapper';
 export * from '../modules/subject-teacher-semester/infrastructure/mappers/subject-teacher-semester.mapper';
 export * from '../modules/subject/infrastructure/mappers/subject.mapper';
 export * from '../modules/teacher/infrastructure/mappers/teacher.mapper';
+export * from '../modules/timetable-generate/infrastructure/mappers/timetable-entry.mapper';
 export * from '../modules/user-role-organization/infrastructure/mappers/user-role-organization.mapper';
 export * from '../modules/user/infrastructure/mappers/user.mapper';
