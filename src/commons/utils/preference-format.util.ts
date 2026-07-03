@@ -1,7 +1,40 @@
 import { PreferenceEntity } from 'src/imports/entities';
 import { DayPreferenceEnum, TurnPreferenceEnum } from 'src/imports/enums';
 
-export function preferenceFormat(preference: PreferenceEntity[]) {
+type GroupedPreference = {
+  teacher_id: string;
+  preferences: {
+    turn: TurnPreferenceEnum;
+    preference: boolean[][];
+  }[];
+};
+
+export function preferenceFormat(
+  preference: PreferenceEntity[],
+  groupByTeacher: boolean = false,
+) {
+  if (groupByTeacher) {
+    const grouped = preference.reduce<Record<string, PreferenceEntity[]>>(
+      (acc, pref) => {
+        const key = pref.teacher_id;
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(pref);
+        return acc;
+      },
+      {},
+    );
+
+    return Object.entries(grouped).map(
+      ([teacher_id, prefs]): GroupedPreference => ({
+        teacher_id,
+        ...(preferenceFormat(prefs) as {
+          preferences: { turn: TurnPreferenceEnum; preference: boolean[][] }[];
+        }),
+      }),
+    );
+  }
+
+  // resto do código existente...
   if (!preference || preference.length === 0) {
     return {
       preferences: [

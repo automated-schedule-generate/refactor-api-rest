@@ -18,7 +18,7 @@ export class GetOneTeacherPreferenceUseCase {
     try {
       const { preference } =
         await this.preferenceRepository.findByUserId(userId);
-      return preferenceFormat(preference);
+      return preferenceFormat(preference, false);
     } catch (error) {
       this.logger.error(error);
       throw error;
