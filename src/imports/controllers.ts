@@ -10,6 +10,5 @@ export * from '../modules/role/presentation/controllers/role.controller';
 export * from '../modules/semester/presentation/controllers/semester.controller';
 export * from '../modules/subject/presentation/controllers/subject.controller';
 export * from '../modules/teacher/presentation/controllers/teacher.controller';
-export * from '../modules/timetable-generate/presentation/controllers/timetable-generate.controller';
 export * from '../modules/user-role-organization/presentation/controllers/user-role-organization.controller';
 export * from '../modules/user/presentation/controllers/user.controller';
