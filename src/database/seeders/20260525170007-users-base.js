@@ -54,20 +54,61 @@ const users = [
   },
 ];
 
+const organization = {
+  id: '019f3282-927a-7f57-82ed-d3eeea582849',
+  name: 'IFPE (Instituto Federal de Pernambuco) - Campus Igarassu',
+  user_id: '019e8fd1-6825-7317-a3e0-ad547ce9858c',
+  is_active: true,
+  created_at: new Date(),
+  updated_at: new Date(),
+};
+
 /** @type {import('sequelize-cli').Migration} */
-const obj = {
+export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(
-      'user',
-      await Promise.all(
-        users.map(async (user) => ({
-          ...user,
-          password: await hash(user.password),
+    const transaction = await queryInterface.sequelize.transaction();
+
+    try {
+      await queryInterface.bulkInsert(
+        'user',
+        await Promise.all(
+          users.map(async (user) => ({
+            ...user,
+            password: await hash(user.password),
+            created_at: new Date(),
+            updated_at: new Date(),
+          })),
+        ),
+        {
+          transaction,
+        },
+      );
+
+      await queryInterface.bulkInsert('organization', [organization], {
+        transaction,
+      });
+
+      await queryInterface.bulkInsert(
+        'teacher',
+        users.map((user) => ({
+          user_id: user.id,
+          special_need: false,
+          workload: '40',
+          is_active: true,
           created_at: new Date(),
           updated_at: new Date(),
         })),
-      ),
-    );
+        {
+          transaction,
+        },
+      );
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+      console.log(error);
+      throw error;
+    }
   },
 
   async down(queryInterface, Sequelize) {
@@ -78,5 +119,3 @@ const obj = {
     });
   },
 };
-
-export default obj;

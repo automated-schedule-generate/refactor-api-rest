@@ -1,6 +1,11 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { CourseRepository } from '@repositories';
 import { TimetableService } from '@services';
+import { isAxiosError } from 'axios';
 
 @Injectable()
 export class GenerateTimetableUseCase {
@@ -26,6 +31,12 @@ export class GenerateTimetableUseCase {
       };
     } catch (error) {
       this.logger.error(error);
+
+      if (isAxiosError(error)) {
+        throw new InternalServerErrorException(
+          'Não foi possível comunicar com o servidor de horários',
+        );
+      }
       throw error;
     }
   }

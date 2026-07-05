@@ -933,6 +933,20 @@ const teachers = [
 ];
 
 const semester_id = '019eb9d9-877c-7a7c-9927-1eed91b01717';
+const role_id = '019f3281-af68-77af-a4bb-314e5da659e0';
+const organization_id = '019f3282-927a-7f57-82ed-d3eeea582849';
+
+const user_roles = [];
+for (const teacher of teachers) {
+  user_roles.push({
+    id: uuidv7(),
+    user_id: teacher.id,
+    role_id,
+    organization_id,
+    created_at: new Date(),
+    updated_at: new Date(),
+  });
+}
 
 /** @type {import('sequelize-cli').Migration} */
 export default {
@@ -960,17 +974,20 @@ export default {
 
       await queryInterface.bulkInsert(
         'teacher',
-        await Promise.all(
-          teachers.map((teacher) => ({
-            user_id: teacher.id,
-            created_at: new Date(),
-            updated_at: new Date(),
-          })),
-        ),
+        teachers.map((teacher) => ({
+          user_id: teacher.id,
+          workload: '40',
+          created_at: new Date(),
+          updated_at: new Date(),
+        })),
         {
           transaction,
         },
       );
+
+      await queryInterface.bulkInsert('user_role_organization', user_roles, {
+        transaction,
+      });
 
       for (const teacher of teachers) {
         for (const subject of teacher.subjects) {
