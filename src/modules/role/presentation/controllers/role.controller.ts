@@ -1,4 +1,9 @@
-import { AddPermissionToRoleDto, RegisterRoleDto, UpdateRoleDto } from '@dtos';
+import {
+  AddPermissionToRoleDto,
+  FindAllRolesDto,
+  RegisterRoleDto,
+  UpdateRoleDto,
+} from '@dtos';
 import {
   Body,
   Controller,
@@ -19,7 +24,6 @@ import {
   RemovePermissionFromRoleUseCase,
   UpdateRoleUseCase,
 } from '@use-cases';
-import { PaginationDto } from 'src/commons/dtos/pagination.dto';
 
 @ApiTags('role')
 @ApiBearerAuth()
@@ -43,14 +47,11 @@ export class RoleController {
 
   @ApiOperation({ summary: 'Listar todos os papéis' })
   @Get()
-  async findAll(
-    @Query() query: PaginationDto,
-    @Query('search') search?: string,
-  ) {
+  async findAll(@Query() query: FindAllRolesDto) {
     return await this.findAllRolesUseCase.execute(
       query.page,
       query.limit,
-      search,
+      query?.search,
     );
   }
 

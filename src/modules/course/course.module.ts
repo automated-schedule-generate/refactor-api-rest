@@ -11,16 +11,19 @@ import {
   FindByIdCourseUseCase,
   UpdateCourseUseCase,
   RegisterCourseUseCase,
-  FindTimetableBySemesterUseCase,
+  FindTimetableUseCase,
+  GenerateTimetableUseCase,
 } from '@use-cases';
 import { CourseQueryBuilder } from '@builders';
 import { SemesterModule } from '@modules';
+import { TimetableGenerateModule } from '../timetable-generate/timetable-generate.module';
 
 @Module({
   imports: [
     DatabaseModule,
     SequelizeModule.forFeature([CourseModel]),
     forwardRef(() => SemesterModule),
+    TimetableGenerateModule,
   ],
   controllers: [CourseController],
   providers: [
@@ -34,7 +37,8 @@ import { SemesterModule } from '@modules';
     UpdateCourseUseCase,
     DeleteCourseUseCase,
     CourseQueryBuilder,
-    FindTimetableBySemesterUseCase,
+    FindTimetableUseCase,
+    GenerateTimetableUseCase,
   ],
   exports: [
     {

@@ -91,27 +91,47 @@ export class CourseRepositoryImpl implements CourseRepository {
     await this.model.destroy({ where: { id }, transaction });
   }
 
-  async findWithTimetableBySemester(
+  async findWithTimetable(
     semester_id: string,
-  ): Promise<CourseEntity[]> {
+    course_id?: string,
+  ): Promise<{
+    courses: CourseEntity[];
+    total: number;
+  }> {
     try {
       const { query, replacements } =
-        this.courseQueryBuilder.findCourseWithTimetableBySemester(semester_id);
+        this.courseQueryBuilder.findCourseWithTimetableBySemester(
+          semester_id,
+          course_id,
+        );
 
-      const data: (CourseModel & {
-        timetable_entries: TimetableEntryEntity[];
-      })[] = await this.sequelize.query(query, {
+      const data: {
+        result: (CourseModel & {
+          timetable_entries: TimetableEntryEntity[];
+          generated_at: Date;
+        })[];
+        total: string;
+      }[] = await this.sequelize.query(query, {
         replacements,
         type: QueryTypes.SELECT,
       });
 
-      console.log(data);
+      if (!data?.[0]?.result || data?.[0]?.result.length === 0) {
+        return {
+          courses: [],
+          total: 0,
+        };
+      }
 
-      return data.map((d) =>
-        CourseMapper.toEntity(d, {
-          timetable_entries: d.timetable_entries,
-        }),
-      );
+      return {
+        courses: data[0].result.map((d) =>
+          CourseMapper.toEntity(d, {
+            timetable_entries: d.timetable_entries,
+            timetable_generated_at: d.generated_at,
+          }),
+        ),
+        total: Number(data[0].total),
+      };
     } catch (error) {
       console.log(error);
       throw error;

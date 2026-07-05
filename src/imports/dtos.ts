@@ -15,6 +15,7 @@ export * from '../modules/permission/application/dtos/update-permission.dto';
 export * from '../modules/preference-time/application/dtos/register-preference-time.dto';
 export * from '../modules/preference/application/dtos/register-preference.dto';
 export * from '../modules/role/application/dtos/add-permission-to-role.dto';
+export * from '../modules/role/application/dtos/find-all-roles.dto';
 export * from '../modules/role/application/dtos/register-role.dto';
 export * from '../modules/role/application/dtos/update-role.dto';
 export * from '../modules/semester/application/dtos/register-semester.dto';

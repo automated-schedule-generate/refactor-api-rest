@@ -13,4 +13,7 @@ export default () => ({
     expires_in: process.env.JWT_EXPIRES_IN,
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   },
+  timetable: {
+    api_url: process.env.MS_TIMETABLE,
+  },
 });

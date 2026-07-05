@@ -12,14 +12,33 @@ export class CourseQueryBuilder implements OnModuleInit {
     );
   }
 
-  findCourseWithTimetableBySemester(semester_id: string): {
+  findCourseWithTimetableBySemester(
+    semester_id: string,
+    course_id?: string,
+  ): {
     query: string;
-    replacements: Record<string, string | number | null>;
+    replacements: Record<string, string | number | null | undefined>;
   } {
-    const query = this.queries['find-course-with-timetable-by-semester'];
+    const conditions: string[] = [];
+
+    if (course_id) {
+      conditions.push('timetable_entry.course_id = :course_id');
+    }
+
+    let query = this.queries['find-course-with-timetable-by-semester'];
+
+    if (conditions.length > 0) {
+      query = query.replace(
+        '{ adding_conditions }',
+        'where ' + conditions.join(' and '),
+      );
+    } else {
+      query = query.replace('{ adding_conditions }', '');
+    }
 
     const replacements = {
       semester_id,
+      course_id,
     };
 
     return {

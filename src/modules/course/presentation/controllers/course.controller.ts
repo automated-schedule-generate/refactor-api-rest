@@ -20,7 +20,8 @@ import {
   FindByIdCourseUseCase,
   FindAllCourseUseCase,
   RegisterCourseUseCase,
-  FindTimetableBySemesterUseCase,
+  FindTimetableUseCase,
+  GenerateTimetableUseCase,
 } from '@use-cases';
 
 @ApiTags('course')
@@ -33,7 +34,8 @@ export class CourseController {
     private readonly findByIdCourseUseCase: FindByIdCourseUseCase,
     private readonly updateCourseUseCase: UpdateCourseUseCase,
     private readonly deleteCourseUseCase: DeleteCourseUseCase,
-    private readonly findTimetableBySemesterUseCase: FindTimetableBySemesterUseCase,
+    private readonly findTimetableUseCase: FindTimetableUseCase,
+    private readonly generateTimetableUseCase: GenerateTimetableUseCase,
   ) {}
 
   @ApiOperation({ summary: 'Register a new course' })
@@ -77,9 +79,18 @@ export class CourseController {
   @ApiOperation({
     summary: 'find with timetable by semester',
   })
-  @Get('find-timetable-by-semester')
+  @Get('find-timetable')
   @HttpCode(200)
   async findTimetableBySemester(@Query() query: FindTimetableBySemesterDto) {
-    return await this.findTimetableBySemesterUseCase.execute(query);
+    return await this.findTimetableUseCase.execute(query);
+  }
+
+  @ApiOperation({
+    summary: 'generate timetable',
+  })
+  @Post('generate-timetable')
+  @HttpCode(200)
+  async generateTimetable() {
+    return await this.generateTimetableUseCase.execute();
   }
 }

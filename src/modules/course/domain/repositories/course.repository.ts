@@ -35,7 +35,11 @@ export abstract class CourseRepository {
 
   abstract delete(id: string, transaction?: Transaction): Promise<void>;
 
-  abstract findWithTimetableBySemester(
+  abstract findWithTimetable(
     semester_id: string,
-  ): Promise<CourseEntity[]>;
+    course_id?: string,
+  ): Promise<{
+    courses: CourseEntity[];
+    total: number;
+  }>;
 }
