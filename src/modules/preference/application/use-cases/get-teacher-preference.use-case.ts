@@ -10,17 +10,9 @@ export class GetTeacherPreferenceUseCase {
 
   async execute(query: FilterFindAllPreferenceDto) {
     try {
-      const { preference } = await this.preferenceRepository.find(
-        {
-          teacher_id: query.teacher_id,
-        },
-        query?.with_pagination
-          ? {
-              page: query.page,
-              limit: query.limit,
-            }
-          : undefined,
-      );
+      const { preference } = await this.preferenceRepository.find({
+        teacher_id: query.teacher_id,
+      });
       return preferenceFormat(preference, true);
     } catch (error) {
       this.logger.error(error);

@@ -10,14 +10,14 @@ export class GetOneTeacherPreferenceUseCase {
     private readonly teacherRepository: TeacherRepository,
   ) {}
 
-  async execute(userId: string) {
-    const teacherExist = await this.teacherRepository.findByUserId(userId);
+  async execute(user_id: string) {
+    const teacherExist = await this.teacherRepository.findByUserId(user_id);
     if (!teacherExist) {
       throw new NotFoundException('Professor não encontrado');
     }
     try {
       const { preference } =
-        await this.preferenceRepository.findByUserId(userId);
+        await this.preferenceRepository.findByUserId(user_id);
       return preferenceFormat(preference, false);
     } catch (error) {
       this.logger.error(error);

@@ -7,7 +7,7 @@ export class PreferenceEntity {
     public readonly day: DayPreferenceEnum,
     public readonly turn: TurnPreferenceEnum,
     public readonly teacher_id: string,
-    public preferenceTimes?: PreferenceTimeEntity[],
+    public preference_times?: PreferenceTimeEntity[],
     public teacher: TeacherEntity | null = null,
   ) {}
 
@@ -15,8 +15,8 @@ export class PreferenceEntity {
     return {
       ...this,
       preferenceTimes:
-        this.preferenceTimes && this.preferenceTimes.length > 0
-          ? this.preferenceTimes
+        this.preference_times && this.preference_times.length > 0
+          ? this.preference_times
           : undefined,
       teacher: this.teacher ? this.teacher : undefined,
     };

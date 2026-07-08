@@ -11,9 +11,9 @@ type GroupedPreference = {
 
 export function preferenceFormat(
   preference: PreferenceEntity[],
-  groupByTeacher: boolean = false,
+  group_by_teacher: boolean = false,
 ) {
-  if (groupByTeacher) {
+  if (group_by_teacher) {
     const grouped = preference.reduce<Record<string, PreferenceEntity[]>>(
       (acc, pref) => {
         const key = pref.teacher_id;
@@ -56,8 +56,8 @@ export function preferenceFormat(
         (p) => p.day === (String(dayIndex) as DayPreferenceEnum),
       );
       const grid: boolean[] = Array(6).fill(false) as boolean[];
-      if (day?.preferenceTimes) {
-        day.preferenceTimes.forEach((pt) => {
+      if (day?.preference_times) {
+        day.preference_times.forEach((pt) => {
           grid[Number(pt.selected_time)] = true;
         });
       }
