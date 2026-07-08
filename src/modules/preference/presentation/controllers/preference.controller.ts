@@ -1,4 +1,4 @@
-import { RegisterPreferenceDto } from '@dtos';
+import { FilterFindAllPreferenceDto, RegisterPreferenceDto } from '@dtos';
 import {
   Body,
   Controller,
@@ -10,24 +10,25 @@ import {
   Post,
   Put,
   Req,
+  Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   DeletePreferenceUseCase,
-  GetOneTeacherPreference,
+  GetOneTeacherPreferenceUseCase,
   RegisterPreferenceUseCase,
   UpdatePreferenceUseCase,
+  GetTeacherPreferenceUseCase,
 } from '@use-cases';
 import type { IAuthenticatedRequest } from 'src/commons/interfaces/authenticated.interface';
-import { GetTeacherPreference } from '../../application/use-cases/get-teacher-preference.use-case';
 
 @ApiTags('preference')
 @Controller('preference')
 export class PreferenceController {
   constructor(
     private readonly registerPreferenceUseCase: RegisterPreferenceUseCase,
-    private readonly getOneTeacherPreference: GetOneTeacherPreference,
-    private readonly getTeacherPreference: GetTeacherPreference,
+    private readonly getOneTeacherPreference: GetOneTeacherPreferenceUseCase,
+    private readonly getTeacherPreference: GetTeacherPreferenceUseCase,
     private readonly deletePreferenceUseCase: DeletePreferenceUseCase,
     private readonly updatePreferenceUseCase: UpdatePreferenceUseCase,
   ) {}
@@ -62,8 +63,8 @@ export class PreferenceController {
   })
   @Get('')
   @HttpCode(200)
-  async getAll() {
-    return await this.getTeacherPreference.execute();
+  async getAll(@Query() query: FilterFindAllPreferenceDto) {
+    return await this.getTeacherPreference.execute(query);
   }
 
   @ApiBearerAuth()

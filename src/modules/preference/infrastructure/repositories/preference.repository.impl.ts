@@ -1,7 +1,7 @@
 import { PreferenceRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { PreferenceModel, PreferenceTimeModel } from '@models';
+import { PreferenceModel, PreferenceTimeModel, TeacherModel } from '@models';
 import { Transaction } from 'sequelize';
 import { DayPreferenceEnum, TurnPreferenceEnum } from '@enums';
 import { PreferenceMapper } from '@mappers';
@@ -35,7 +35,7 @@ export class PreferenceRepositoryImpl implements PreferenceRepository {
     const { rows: preference, count: total } = await this.model.findAndCountAll(
       {
         where: { user_id: userId },
-        include: [PreferenceTimeModel],
+        include: [PreferenceTimeModel, TeacherModel],
       },
     );
     if (!preference || preference.length === 0) {
@@ -50,10 +50,15 @@ export class PreferenceRepositoryImpl implements PreferenceRepository {
     };
   }
 
-  async find(): Promise<{ preference: PreferenceEntity[]; total: number }> {
+  async find(where: {
+    teacher_id?: string;
+  }): Promise<{ preference: PreferenceEntity[]; total: number }> {
     const { rows: preference, count: total } = await this.model.findAndCountAll(
       {
-        include: [PreferenceTimeModel],
+        include: [PreferenceTimeModel, TeacherModel],
+        where: {
+          ...(where.teacher_id && { user_id: where.teacher_id }),
+        },
       },
     );
     return {

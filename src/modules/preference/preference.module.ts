@@ -8,11 +8,11 @@ import { PreferenceRepositoryImpl } from '@repositories.impl';
 import { PreferenceTimeModule, TeacherModule } from '@modules';
 import {
   DeletePreferenceUseCase,
-  GetOneTeacherPreference,
+  GetOneTeacherPreferenceUseCase,
   RegisterPreferenceUseCase,
   UpdatePreferenceUseCase,
+  GetTeacherPreferenceUseCase,
 } from '@use-cases';
-import { GetTeacherPreference } from './application/use-cases/get-teacher-preference.use-case';
 
 @Module({
   imports: [
@@ -28,8 +28,8 @@ import { GetTeacherPreference } from './application/use-cases/get-teacher-prefer
       useClass: PreferenceRepositoryImpl,
     },
     RegisterPreferenceUseCase,
-    GetOneTeacherPreference,
-    GetTeacherPreference,
+    GetOneTeacherPreferenceUseCase,
+    GetTeacherPreferenceUseCase,
     DeletePreferenceUseCase,
     UpdatePreferenceUseCase,
   ],

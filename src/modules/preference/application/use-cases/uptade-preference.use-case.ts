@@ -57,7 +57,7 @@ export class UpdatePreferenceUseCase {
               preferenceTimes.push(createdPreferenceTime);
             }
           }
-          preference.preferenceTimes = preferenceTimes;
+          preference.preference_times = preferenceTimes;
           preferences.push(preference);
         }
       }

@@ -1,17 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PreferenceRepository } from '@repositories';
-import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
-import { PreferenceEntity } from 'src/imports/entities';
+import { FilterFindAllPreferenceDto } from '../dtos/filter-find-all-preference.dto';
+import { preferenceFormat } from 'src/commons/utils/preference-format.util';
 
 @Injectable()
-export class GetTeacherPreference {
-  private readonly logger = new Logger(GetTeacherPreference.name);
+export class GetTeacherPreferenceUseCase {
+  private readonly logger = new Logger(GetTeacherPreferenceUseCase.name);
   constructor(private readonly preferenceRepository: PreferenceRepository) {}
 
-  async execute() {
+  async execute(query: FilterFindAllPreferenceDto) {
     try {
-      const { preference, total } = await this.preferenceRepository.find();
-      return paginationWrapper<PreferenceEntity>(preference, total);
+      const { preference } = await this.preferenceRepository.find({
+        teacher_id: query.teacher_id,
+      });
+      return preferenceFormat(preference, true);
     } catch (error) {
       this.logger.error(error);
       throw error;
