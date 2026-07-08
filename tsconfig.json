@@ -22,8 +22,6 @@
     "noFallthroughCasesInSwitch": false,
 
     "paths": {
-      "src/*": ["./src/*"],
-
       "@database/*": ["./src/database/*"],
       "@commons/*": ["./src/commons/*"],
 
@@ -43,7 +41,9 @@
       "@enums": ["./src/imports/enums"],
       "@contracts": ["./src/imports/contracts"],
       "@builders": ["./src/imports/builders"],
-      "@decorators": ["./src/imports/decorators"]
+      "@decorators": ["./src/imports/decorators"],
+
+      "src/*": ["./src/*"]
     }
   }
 }

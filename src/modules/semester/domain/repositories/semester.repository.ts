@@ -24,4 +24,6 @@ export abstract class SemesterRepository {
   ): Promise<SemesterEntity | null>;
 
   abstract delete(id: string): Promise<void>;
+
+  abstract findCurrentSemester(): Promise<SemesterEntity | null>;
 }

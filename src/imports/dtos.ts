@@ -6,6 +6,7 @@ export * from '../modules/class/application/dtos/update-class.dto';
 export * from '../modules/coordinator/application/dtos/add-coordinator.dto';
 export * from '../modules/coordinator/application/dtos/update-coordinator.dto';
 export * from '../modules/course/application/dtos/filter-find-all-course.dto';
+export * from '../modules/course/application/dtos/find-timetable-by-semester.dto';
 export * from '../modules/course/application/dtos/register-course.dto';
 export * from '../modules/organization/application/dtos/register-organization.dto';
 export * from '../modules/organization/application/dtos/update-organization.dto';
@@ -15,6 +16,7 @@ export * from '../modules/preference-time/application/dtos/register-preference-t
 export * from '../modules/preference/application/dtos/filter-find-all-preference.dto';
 export * from '../modules/preference/application/dtos/register-preference.dto';
 export * from '../modules/role/application/dtos/add-permission-to-role.dto';
+export * from '../modules/role/application/dtos/find-all-roles.dto';
 export * from '../modules/role/application/dtos/register-role.dto';
 export * from '../modules/role/application/dtos/update-role.dto';
 export * from '../modules/semester/application/dtos/register-semester.dto';
