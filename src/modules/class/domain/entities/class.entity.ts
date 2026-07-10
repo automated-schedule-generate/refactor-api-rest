@@ -1,5 +1,5 @@
 import { CourseEntity, SemesterEntity } from '@entities';
-import { ShiftEnum } from '@enums';
+import { PeriodsEnum, ShiftEnum } from '@enums';
 
 export class ClassEntity {
   public course: CourseEntity | null = null;
@@ -12,6 +12,7 @@ export class ClassEntity {
     public readonly course_semester: number,
     public readonly course_id: string,
     public readonly semester_id: string,
+    public readonly current_semester: PeriodsEnum,
     public readonly is_active: boolean,
     public readonly created_at: Date,
     public readonly updated_at: Date,

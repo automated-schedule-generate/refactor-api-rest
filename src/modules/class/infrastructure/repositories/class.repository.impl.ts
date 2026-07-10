@@ -1,10 +1,10 @@
 import { ClassRepository } from '@repositories';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ClassModel, SemesterModel } from '@models';
+import { ClassModel, CourseModel, SemesterModel } from '@models';
 import { ClassMapper } from '@mappers';
 import { ClassEntity } from '@entities';
-import { ShiftEnum } from '@enums';
+import { PeriodsEnum, ShiftEnum } from '@enums';
 import { WhereOptions } from 'sequelize';
 
 @Injectable()
@@ -17,6 +17,7 @@ export class ClassRepositoryImpl implements ClassRepository {
     course_semester: number,
     course_id: string,
     semester_id: string,
+    current_semester: PeriodsEnum,
   ): Promise<ClassEntity> {
     const classModel = await this.model.create({
       identify: identify ?? undefined,
@@ -24,6 +25,7 @@ export class ClassRepositoryImpl implements ClassRepository {
       course_semester,
       course_id,
       semester_id,
+      current_semester,
     });
 
     return ClassMapper.toEntity(classModel.dataValues);
@@ -52,11 +54,14 @@ export class ClassRepositoryImpl implements ClassRepository {
         {
           model: SemesterModel,
           as: 'semester',
-          attributes: [],
           order: [
             ['year', 'desc'],
             ['semester', 'desc'],
           ],
+        },
+        {
+          model: CourseModel,
+          as: 'course',
         },
       ],
     });
@@ -70,6 +75,20 @@ export class ClassRepositoryImpl implements ClassRepository {
   async findById(id: string): Promise<ClassEntity | null> {
     const classModel = await this.model.findOne({
       where: { id },
+      include: [
+        {
+          model: SemesterModel,
+          as: 'semester',
+          order: [
+            ['year', 'desc'],
+            ['semester', 'desc'],
+          ],
+        },
+        {
+          model: CourseModel,
+          as: 'course',
+        },
+      ],
     });
 
     return classModel ? ClassMapper.toEntity(classModel.dataValues) : null;

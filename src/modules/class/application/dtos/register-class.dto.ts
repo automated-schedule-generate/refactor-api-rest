@@ -1,4 +1,4 @@
-import { ShiftEnum } from '@enums';
+import { PeriodsEnum, ShiftEnum } from '@enums';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEnum,
@@ -36,6 +36,15 @@ export class RegisterClassDto {
   @IsNumber()
   @IsNotEmpty()
   course_semester: number;
+
+  @ApiProperty({
+    required: true,
+    example: '1',
+    description: 'Periodo atual da turma',
+  })
+  @IsEnum(PeriodsEnum)
+  @IsNotEmpty()
+  current_semester: PeriodsEnum;
 
   @ApiProperty({
     required: true,
