@@ -22,11 +22,4 @@ export class UpdateTimetableEntryDto {
   })
   @IsString()
   teacher_id: string;
-
-  @ApiProperty({
-    required: true,
-    description: 'Timetable id',
-  })
-  @IsString()
-  timetable_id: string;
 }

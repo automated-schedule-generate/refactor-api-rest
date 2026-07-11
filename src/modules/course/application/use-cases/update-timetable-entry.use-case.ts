@@ -30,7 +30,7 @@ export class UpdateTImetableEntryUseCase {
           data.slot_index,
           data.teacher_id,
           timetableEntryExist.shift,
-          data.timetable_id,
+          timetableEntryExist.timetable_id,
         );
 
       if (timetableEntryConflicts.length > 0) {
