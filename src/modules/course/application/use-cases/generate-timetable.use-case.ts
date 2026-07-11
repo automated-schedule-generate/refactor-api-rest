@@ -24,7 +24,7 @@ export class GenerateTimetableUseCase {
       void this.timetableService.generate(courses.map((course) => course.id));
 
       return {
-        message: 'Inialization of timetable generation process',
+        message: 'Iniciando processo de geração de horários',
         data: {
           courses_amount: courses.length,
         },
