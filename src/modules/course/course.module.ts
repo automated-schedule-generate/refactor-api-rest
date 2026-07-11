@@ -13,6 +13,7 @@ import {
   RegisterCourseUseCase,
   FindTimetableUseCase,
   GenerateTimetableUseCase,
+  UpdateTImetableEntryUseCase,
 } from '@use-cases';
 import { CourseQueryBuilder } from '@builders';
 import { SemesterModule } from '@modules';
@@ -39,6 +40,7 @@ import { TimetableGenerateModule } from '../timetable-generate/timetable-generat
     CourseQueryBuilder,
     FindTimetableUseCase,
     GenerateTimetableUseCase,
+    UpdateTImetableEntryUseCase,
   ],
   exports: [
     {

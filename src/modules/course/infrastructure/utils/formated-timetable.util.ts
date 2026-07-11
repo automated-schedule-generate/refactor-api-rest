@@ -1,11 +1,16 @@
 import { CourseEntity, TimetableEntryEntity } from 'src/imports/entities';
 import { ClassTimeEnum } from 'src/imports/enums';
 
-export function FormatedTimetableUtil(course: CourseEntity) {
+export function FormatedTimetableUtil(
+  course: CourseEntity,
+  all_semesters: boolean = true,
+) {
   const formated: (TimetableEntryEntity | null)[][][] = [];
   const quantity_row = course.class_time === ClassTimeEnum.MIN_45 ? 6 : 5;
 
-  for (let i = 0; i < course.total_semesters; i++) {
+  const max_semester = all_semesters ? course.total_semesters : 1;
+
+  for (let i = 0; i < max_semester; i++) {
     formated.push([]);
     for (let j = 0; j < quantity_row; j++) {
       formated[i].push([]);

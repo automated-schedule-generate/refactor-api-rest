@@ -94,6 +94,8 @@ export class CourseRepositoryImpl implements CourseRepository {
   async findWithTimetable(
     semester_id: string,
     course_id?: string,
+    course_semester?: string,
+    teacher_id?: string,
   ): Promise<{
     courses: CourseEntity[];
     total: number;
@@ -103,6 +105,8 @@ export class CourseRepositoryImpl implements CourseRepository {
         this.courseQueryBuilder.findCourseWithTimetableBySemester(
           semester_id,
           course_id,
+          course_semester,
+          teacher_id,
         );
 
       const data: {

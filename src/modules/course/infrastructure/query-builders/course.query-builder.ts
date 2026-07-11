@@ -1,3 +1,4 @@
+import { normalizeSql } from '@commons/utils/normalize-sql.util';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as path from 'node:path';
 import { loadSqlQueries } from 'src/commons/utils/load-sql-queries.util';
@@ -15,6 +16,8 @@ export class CourseQueryBuilder implements OnModuleInit {
   findCourseWithTimetableBySemester(
     semester_id: string,
     course_id?: string,
+    course_semester?: string,
+    teacher_id?: string,
   ): {
     query: string;
     replacements: Record<string, string | number | null | undefined>;
@@ -23,6 +26,14 @@ export class CourseQueryBuilder implements OnModuleInit {
 
     if (course_id) {
       conditions.push('timetable_entry.course_id = :course_id');
+    }
+
+    if (course_semester) {
+      conditions.push('timetable_entry.course_semester = :course_semester');
+    }
+
+    if (teacher_id) {
+      conditions.push('timetable_entry.teacher_id = :teacher_id');
     }
 
     let query = this.queries['find-course-with-timetable-by-semester'];
@@ -39,10 +50,12 @@ export class CourseQueryBuilder implements OnModuleInit {
     const replacements = {
       semester_id,
       course_id,
+      course_semester,
+      teacher_id,
     };
 
     return {
-      query,
+      query: normalizeSql(query),
       replacements,
     };
   }

@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { FindTimetableBySemesterDto } from '../dtos/find-timetable-by-semester.dto';
+import { FindTimetableDto } from '@dtos';
 
 import { CourseRepository, SemesterRepository } from 'src/imports/repositories';
 import { paginationWrapper } from 'src/commons/wrappers/pagination.wrapper';
@@ -14,7 +14,7 @@ export class FindTimetableUseCase {
     private readonly semesterRepository: SemesterRepository,
   ) {}
 
-  async execute(dto: FindTimetableBySemesterDto) {
+  async execute(dto: FindTimetableDto) {
     try {
       let semester_id: string = '';
 
@@ -42,11 +42,16 @@ export class FindTimetableUseCase {
       const { courses, total } = await this.courseRepository.findWithTimetable(
         semester_id,
         dto?.course_id,
+        dto?.course_semester,
+        dto?.teacher_id,
       );
 
       return paginationWrapper(
         courses.map((course) => {
-          const { formated, unassigned } = FormatedTimetableUtil(course);
+          const { formated, unassigned } = FormatedTimetableUtil(
+            course,
+            !dto?.course_semester,
+          );
 
           return {
             ...course,

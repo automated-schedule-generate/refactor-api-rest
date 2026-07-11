@@ -38,6 +38,8 @@ export abstract class CourseRepository {
   abstract findWithTimetable(
     semester_id: string,
     course_id?: string,
+    course_semester?: string,
+    teacher_id?: string,
   ): Promise<{
     courses: CourseEntity[];
     total: number;
