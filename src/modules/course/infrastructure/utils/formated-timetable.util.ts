@@ -33,9 +33,9 @@ export function FormatedTimetableUtil(
       continue;
     }
 
-    formated[timetable.course_semester - 1][timetable.slot_index][
-      Number(timetable.day)
-    ] = timetable;
+    formated[all_semesters ? timetable.course_semester - 1 : 0][
+      timetable.slot_index
+    ][Number(timetable.day)] = timetable;
   }
 
   return {
