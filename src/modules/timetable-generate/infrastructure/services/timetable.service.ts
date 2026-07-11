@@ -14,7 +14,6 @@ export class TimetableService {
   }
 
   async generate(course_ids: string[]) {
-    console.log(course_ids);
     await this.api.post<Record<string, unknown>>(
       '/timetable-generation/generate',
       {

@@ -11,7 +11,8 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   RegisterCourseDto,
   FilterFindAllCourseDto,
-  FindTimetableBySemesterDto,
+  FindTimetableDto,
+  UpdateTimetableEntryDto,
 } from '@dtos';
 import { Body, HttpCode, Post } from '@nestjs/common';
 import {
@@ -22,6 +23,7 @@ import {
   RegisterCourseUseCase,
   FindTimetableUseCase,
   GenerateTimetableUseCase,
+  UpdateTImetableEntryUseCase,
 } from '@use-cases';
 
 @ApiTags('course')
@@ -36,6 +38,7 @@ export class CourseController {
     private readonly deleteCourseUseCase: DeleteCourseUseCase,
     private readonly findTimetableUseCase: FindTimetableUseCase,
     private readonly generateTimetableUseCase: GenerateTimetableUseCase,
+    private readonly updateTImetableEntryUseCase: UpdateTImetableEntryUseCase,
   ) {}
 
   @ApiOperation({ summary: 'Register a new course' })
@@ -81,7 +84,7 @@ export class CourseController {
   })
   @Get('find-timetable')
   @HttpCode(200)
-  async findTimetableBySemester(@Query() query: FindTimetableBySemesterDto) {
+  async findTimetableBySemester(@Query() query: FindTimetableDto) {
     return await this.findTimetableUseCase.execute(query);
   }
 
@@ -92,5 +95,17 @@ export class CourseController {
   @HttpCode(200)
   async generateTimetable() {
     return await this.generateTimetableUseCase.execute();
+  }
+
+  @ApiOperation({
+    summary: 'update timetable entry',
+  })
+  @Put('update-timetable-entry/:id')
+  @HttpCode(200)
+  async updateTimetableEntry(
+    @Param('id', new ParseUUIDPipe({ version: '7' })) id: string,
+    @Body() data: UpdateTimetableEntryDto,
+  ) {
+    return await this.updateTImetableEntryUseCase.execute(id, data);
   }
 }

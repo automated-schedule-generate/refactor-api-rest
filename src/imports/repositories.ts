@@ -11,5 +11,6 @@ export * from '../modules/semester/domain/repositories/semester.repository';
 export * from '../modules/subject-teacher-semester/domain/repositories/subject-teacher-semester.repository';
 export * from '../modules/subject/domain/repositories/subject.repository';
 export * from '../modules/teacher/domain/repositories/teacher.repository';
+export * from '../modules/timetable-generate/domain/repositories/timetable-entry.repository';
 export * from '../modules/user-role-organization/domain/repositories/user-role-organization.repository';
 export * from '../modules/user/domain/repositories/user.repository';
