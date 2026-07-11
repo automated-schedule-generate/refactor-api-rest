@@ -11,7 +11,6 @@ export class ClassMapper {
       model.course_semester,
       model.course_id,
       model.semester_id,
-      model.current_semester,
       model.is_active,
       model.created_at,
       model.updated_at,

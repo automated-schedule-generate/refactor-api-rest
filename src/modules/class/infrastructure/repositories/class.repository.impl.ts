@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { ClassModel, CourseModel, SemesterModel } from '@models';
 import { ClassMapper } from '@mappers';
 import { ClassEntity } from '@entities';
-import { PeriodsEnum, ShiftEnum } from '@enums';
+import { ShiftEnum } from '@enums';
 import { WhereOptions } from 'sequelize';
 
 @Injectable()
@@ -17,7 +17,6 @@ export class ClassRepositoryImpl implements ClassRepository {
     course_semester: number,
     course_id: string,
     semester_id: string,
-    current_semester: PeriodsEnum,
   ): Promise<ClassEntity> {
     const classModel = await this.model.create({
       identify: identify ?? undefined,
@@ -25,7 +24,6 @@ export class ClassRepositoryImpl implements ClassRepository {
       course_semester,
       course_id,
       semester_id,
-      current_semester,
     });
 
     return ClassMapper.toEntity(classModel.dataValues);

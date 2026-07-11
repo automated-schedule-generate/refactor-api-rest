@@ -1,4 +1,4 @@
-import { PeriodsEnum, ShiftEnum } from '@enums';
+import { ShiftEnum } from '@enums';
 import { CourseModel, SemesterModel } from '@models';
 import {
   Table,
@@ -38,12 +38,6 @@ export class ClassModel extends Model<ClassModel, Partial<ClassModel>> {
     allowNull: false,
   })
   course_semester: number;
-
-  @Column({
-    type: DataType.ENUM(...Object.values(PeriodsEnum)),
-    allowNull: false,
-  })
-  current_semester: PeriodsEnum;
 
   @ForeignKey(() => CourseModel)
   @Column({

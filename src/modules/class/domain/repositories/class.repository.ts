@@ -1,5 +1,5 @@
 import { ClassEntity } from '@entities';
-import { PeriodsEnum, ShiftEnum } from '@enums';
+import { ShiftEnum } from '@enums';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -10,7 +10,6 @@ export abstract class ClassRepository {
     course_semester: number,
     course_id: string,
     semester_id: string,
-    current_semester: PeriodsEnum,
   ): Promise<ClassEntity>;
 
   abstract findAll(

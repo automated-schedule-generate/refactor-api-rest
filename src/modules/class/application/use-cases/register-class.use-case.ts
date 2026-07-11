@@ -35,7 +35,6 @@ export class RegisterClassUseCase {
       data.course_semester,
       data.course_id,
       data.semester_id,
-      data.current_semester,
     );
   }
 }
