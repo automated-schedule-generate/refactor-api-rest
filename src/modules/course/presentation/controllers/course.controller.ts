@@ -24,6 +24,7 @@ import {
   FindTimetableUseCase,
   GenerateTimetableUseCase,
   UpdateTImetableEntryUseCase,
+  FindProgressTimetableUseCase,
 } from '@use-cases';
 
 @ApiTags('course')
@@ -39,6 +40,7 @@ export class CourseController {
     private readonly findTimetableUseCase: FindTimetableUseCase,
     private readonly generateTimetableUseCase: GenerateTimetableUseCase,
     private readonly updateTImetableEntryUseCase: UpdateTImetableEntryUseCase,
+    private readonly findProgressTimetableUseCase: FindProgressTimetableUseCase,
   ) {}
 
   @ApiOperation({ summary: 'Register a new course' })
@@ -107,5 +109,13 @@ export class CourseController {
     @Body() data: UpdateTimetableEntryDto,
   ) {
     return await this.updateTImetableEntryUseCase.execute(id, data);
+  }
+
+  @ApiOperation({
+    summary: 'Find status progress timetable generate',
+  })
+  @Get('timetable-progress')
+  async timetableProgress() {
+    return await this.findProgressTimetableUseCase.execute();
   }
 }

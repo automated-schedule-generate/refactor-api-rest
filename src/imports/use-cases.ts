@@ -10,6 +10,7 @@ export * from '../modules/coordinator/application/use-cases/update-coordinator.u
 export * from '../modules/course/application/use-cases/delete-course.use-case';
 export * from '../modules/course/application/use-cases/find-all-course.use-case';
 export * from '../modules/course/application/use-cases/find-by-id-course.use-case';
+export * from '../modules/course/application/use-cases/find-progress-timetable.use-case';
 export * from '../modules/course/application/use-cases/find-timetable.use-case';
 export * from '../modules/course/application/use-cases/generate-timetable.use-case';
 export * from '../modules/course/application/use-cases/register-course.use-case';

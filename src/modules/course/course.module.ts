@@ -14,6 +14,7 @@ import {
   FindTimetableUseCase,
   GenerateTimetableUseCase,
   UpdateTImetableEntryUseCase,
+  FindProgressTimetableUseCase,
 } from '@use-cases';
 import { CourseQueryBuilder } from '@builders';
 import { SemesterModule } from '@modules';
@@ -41,6 +42,7 @@ import { TimetableGenerateModule } from '../timetable-generate/timetable-generat
     FindTimetableUseCase,
     GenerateTimetableUseCase,
     UpdateTImetableEntryUseCase,
+    FindProgressTimetableUseCase,
   ],
   exports: [
     {

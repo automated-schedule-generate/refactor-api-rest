@@ -22,6 +22,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
 import { PaginationMiddleware } from './commons/middlewares/pagination.middleware';
 import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-error-format.interceptor';
+import { RedisModule } from '@database/redis/redis.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-
       isGlobal: true,
       load: [configuration],
     }),
+    RedisModule,
     UserModule,
     AuthModule,
     TeacherModule,

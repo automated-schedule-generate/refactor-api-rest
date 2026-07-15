@@ -16,4 +16,7 @@ export default () => ({
   timetable: {
     api_url: process.env.MS_TIMETABLE,
   },
+  redis: {
+    url: process.env.REDIS_URL,
+  },
 });
