@@ -19,8 +19,9 @@ export class FindTimetableUseCase {
       let semester_id: string = '';
 
       if (dto.semester_id) {
-        const semesterExist =
-          await this.semesterRepository.findById(semester_id);
+        const semesterExist = await this.semesterRepository.findById(
+          dto.semester_id,
+        );
 
         if (!semesterExist) {
           throw new BadRequestException('Semester not found');
