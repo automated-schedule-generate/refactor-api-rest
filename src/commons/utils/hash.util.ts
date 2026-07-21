@@ -15,7 +15,6 @@ export class HashUtil {
           memoryCost: 2 ** 16,
           timeCost: 3,
           parallelism: 1,
-          // @ts-expect-error process
           secret: Buffer.from(process.env.JWT_SECRET || ''),
         }),
       );
