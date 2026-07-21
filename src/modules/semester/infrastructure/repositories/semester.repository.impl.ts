@@ -92,8 +92,7 @@ export class SemesterRepositoryImpl implements SemesterRepository {
   }
 
   async findCurrentSemester(): Promise<SemesterEntity | null> {
-    let semester: SemesterModel | null = null;
-    semester = await this.model.findOne({
+    let semester: SemesterModel | null = await this.model.findOne({
       where: {
         is_finished: false,
         is_active: true,

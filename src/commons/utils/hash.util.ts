@@ -7,16 +7,21 @@ export class HashUtil {
 
   static async hash(password: string): Promise<string> {
     try {
-      return await argon2.hash(password, {
-        type: argon2.argon2id,
-        memoryCost: 2 ** 16,
-        timeCost: 3,
-        parallelism: 1,
-        secret: Buffer.from(process.env.JWT_SECRET || ''),
-      });
+      // argon2@0.45's .d.cts flattena os overloads e retorna Promise<any>
+      // para argon2.hash mesmo no caso não-raw (que é sempre string).
+      return String(
+        await argon2.hash(password, {
+          type: argon2.argon2id,
+          memoryCost: 2 ** 16,
+          timeCost: 3,
+          parallelism: 1,
+          // @ts-expect-error process
+          secret: Buffer.from(process.env.JWT_SECRET || ''),
+        }),
+      );
     } catch (error) {
       this.logger.error(error);
-      throw new Error('Erro ao gerar hash');
+      throw new Error('Erro ao gerar hash', { cause: error });
     }
   }
 
@@ -27,7 +32,7 @@ export class HashUtil {
       });
     } catch (error) {
       this.logger.error(error);
-      throw new Error('Erro ao verificar hash');
+      throw new Error('Erro ao verificar hash', { cause: error });
     }
   }
 }
