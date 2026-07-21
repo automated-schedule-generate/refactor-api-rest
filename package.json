@@ -65,8 +65,8 @@
     "ws": "^8.20.1"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^21.2.0",
     "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^20.5.0",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^10.0.1",
     "@nestjs/cli": "^11.0.0",
