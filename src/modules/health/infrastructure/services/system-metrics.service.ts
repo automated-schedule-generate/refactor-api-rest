@@ -182,7 +182,7 @@ export class SystemMetricsService implements OnModuleInit, OnModuleDestroy {
         }
 
         const usage = 100 - (idleDiff / totalDiff) * 100;
-        this.cpuUsageGauge.set(parseFloat(usage.toFixed(2)));
+        this.cpuUsageGauge.set(Number.parseFloat(usage.toFixed(2)));
         resolve();
       }, 100);
     });

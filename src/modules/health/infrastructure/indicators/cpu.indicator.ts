@@ -48,7 +48,7 @@ export class CpuIndicator extends HealthIndicator implements IIndicator {
 
   async isHealthy(key: string, threshold = 90): Promise<HealthIndicatorResult> {
     const usage = await this.getUsage();
-    const rounded = parseFloat(usage.toFixed(2));
+    const rounded = Number.parseFloat(usage.toFixed(2));
 
     this.cpuGauge.set(rounded);
 
