@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common';
 import { NestFastifyApplication } from '@nestjs/platform-fastify';
 
 export function SetPrefixConfig(app: NestFastifyApplication, logger: Logger) {
-  let prefix = '';
+  let prefix: string;
 
   switch (process.env.ENVIRONMENT?.trim()) {
     case 'dev':
