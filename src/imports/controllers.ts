@@ -2,6 +2,8 @@ export * from '../modules/auth/presentation/controllers/auth.controller';
 export * from '../modules/class/presentation/controllers/class.controller';
 export * from '../modules/coordinator/presentation/controllers/coordinator.controller';
 export * from '../modules/course/presentation/controllers/course.controller';
+export * from '../modules/health/presentation/controllers/health.controller';
+export * from '../modules/health/presentation/controllers/metrics.controller';
 export * from '../modules/organization/presentation/controllers/organization.controller';
 export * from '../modules/permission/presentation/controllers/permission.controller';
 export * from '../modules/preference-time/presentation/controllers/preference-time.controller';

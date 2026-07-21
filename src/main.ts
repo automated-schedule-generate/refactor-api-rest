@@ -41,11 +41,6 @@ async function main() {
     origin: '*',
   });
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore - Fastify type clash in Docker build
-  app.getHttpAdapter().get('/healthz', (_, res) => {
-    res.status(200).send('ok');
-  });
   logger.log(
     `Application is running on: 0.0.0.0:${process.env.PORT ?? 3000}/${prefix}`,
   );

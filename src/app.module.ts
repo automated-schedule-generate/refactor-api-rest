@@ -17,12 +17,15 @@ import {
   RoleModule,
   UserRoleOrganizationModule,
   OrganizationModule,
+  HealthModule,
 } from '@modules';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseFormatInterceptor } from './commons/interceptors/response-format.interceptor';
 import { PaginationMiddleware } from './commons/middlewares/pagination.middleware';
 import { ResponseErrorFormatInterceptor } from './commons/interceptors/response-error-format.interceptor';
 import { RedisModule } from '@database/redis/redis.module';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { MetricsController } from '@controllers';
 
 @Module({
   imports: [
@@ -30,7 +33,15 @@ import { RedisModule } from '@database/redis/redis.module';
       isGlobal: true,
       load: [configuration],
     }),
+    PrometheusModule.register({
+      path: '/metrics',
+      defaultMetrics: {
+        enabled: true,
+      },
+      controller: MetricsController,
+    }),
     RedisModule,
+    HealthModule,
     UserModule,
     AuthModule,
     TeacherModule,
