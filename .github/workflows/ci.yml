@@ -21,9 +21,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: ESLint
         run: pnpm run lint
@@ -41,9 +43,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: Regenerar barrel files
         run: pnpm run generate:imports
@@ -71,9 +75,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: Testes unitários com cobertura
         # --passWithNoTests: hoje não há *.spec.ts no projeto ainda.
@@ -135,9 +141,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: Testes e2e
         run: pnpm run test:e2e
@@ -152,9 +160,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: pnpm audit (high/critical)
         # Não bloqueia o PR ainda; serve como alerta até o time triar
@@ -174,9 +184,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        # pnpm-lock.yaml está no .gitignore - sem lockfile commitado para
+        # travar contra, então o pnpm resolve e gera um temporário aqui.
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build de produção
         run: pnpm run build
