@@ -1,0 +1,69 @@
+module:auth:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/auth/**'
+
+module:user:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/user/**'
+
+module:teacher:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/teacher/**'
+
+module:course:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/course/**'
+
+module:subject:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/modules/subject/**'
+          - 'src/modules/subject-teacher-semester/**'
+
+module:class:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/class/**'
+
+module:semester:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/semester/**'
+
+module:preference:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/modules/preference/**'
+          - 'src/modules/preference-time/**'
+
+module:coordinator:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/coordinator/**'
+
+module:organization:
+  - changed-files:
+      - any-glob-to-any-file: 'src/modules/organization/**'
+
+database:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/database/**'
+
+infra:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'Dockerfile'
+          - 'Dockerfile.dev'
+          - 'docker-compose.yml'
+          - '.github/workflows/**'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.spec.ts'
+          - '**/*.e2e-spec.ts'
+          - 'test/**'

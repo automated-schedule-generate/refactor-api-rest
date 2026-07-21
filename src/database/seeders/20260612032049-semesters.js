@@ -21,5 +21,5 @@ export default {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };

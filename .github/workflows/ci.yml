@@ -1,0 +1,182 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - developer
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: ESLint
+        run: pnpm run lint
+
+      - name: Prettier
+        run: pnpm exec prettier --check .
+
+  imports-up-to-date:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Regenerar barrel files
+        run: pnpm run generate:imports
+
+      - name: Verificar se src/imports está atualizado
+        run: |
+          # --ignore-blank-lines/--ignore-all-space: o gerador escreve uma
+          # linha em branco em barrels sem exports, enquanto o arquivo
+          # commitado às vezes está vazio (0 bytes) - isso não é staleness real.
+          if ! git diff --ignore-blank-lines --ignore-all-space --quiet -- src/imports; then
+            echo "❌ src/imports/ está desatualizado."
+            echo "Rode 'pnpm run generate:imports' localmente e commite o resultado."
+            git diff -- src/imports
+            exit 1
+          fi
+          echo "✅ src/imports está atualizado"
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Testes unitários com cobertura
+        # --passWithNoTests: hoje não há *.spec.ts no projeto ainda.
+        # Remova esta flag assim que os primeiros testes forem escritos,
+        # para que a ausência de testes volte a barrar o CI.
+        run: pnpm run test:cov --passWithNoTests
+
+      - name: Upload de cobertura
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: asgen
+          POSTGRES_PASSWORD: asgen
+          POSTGRES_DB: asgen
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U asgen"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      ENVIRONMENT: test
+      PORT: 3000
+      LOGGING: 'false'
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: asgen
+      DB_PASS: asgen
+      DB_NAME: asgen
+      REDIS_URL: redis://localhost:6379
+      JWT_SECRET: ci-test-secret
+      JWT_EXPIRES_IN: 15m
+      JWT_REFRESH_EXPIRES_IN: 7d
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Testes e2e
+        run: pnpm run test:e2e
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: pnpm audit (high/critical)
+        # Não bloqueia o PR ainda; serve como alerta até o time triar
+        # as vulnerabilidades existentes. Remova o continue-on-error
+        # quando quiser que isto passe a barrar merges.
+        continue-on-error: true
+        run: pnpm audit --audit-level=high
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, imports-up-to-date, unit-tests]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build de produção
+        run: pnpm run build
