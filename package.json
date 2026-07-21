@@ -83,7 +83,7 @@
     "chalk": "^5.6.2",
     "console-ninja": "^1.0.0",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^9.18.0",
+    "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
     "eslint-plugin-unused-imports": "^4.4.1",
