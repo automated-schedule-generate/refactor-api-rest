@@ -30,7 +30,6 @@ RUN apk add --no-cache nodejs
 COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/package.json /app/package.json
 
-RUN deno install --prod
-RUN deno cache --sloppy-imports dist/main.js
+RUN deno cache --sloppy-imports /app/dist/main.js
 
 CMD ["sh", "-c", "deno serve --sloppy-imports --parallel -A --port ${PORT} --cached-only dist/main.js"]
