@@ -20,6 +20,23 @@ services:
       - prd
       - dev
 
+  asgen-redis:
+    image: 'redis:8-alpine'
+    container_name: asgen-redis
+    networks:
+      - asgen-network
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping | grep PONG']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - prd
+      - dev
+
   api-prd:
     image: 'asgen-api-prd:latest'
     build:
@@ -37,6 +54,8 @@ services:
       - prd
     depends_on:
       asgen-database:
+        condition: service_healthy
+      asgen-redis:
         condition: service_healthy
 
   api-dev:
@@ -57,6 +76,8 @@ services:
       - dev
     depends_on:
       asgen-database:
+        condition: service_healthy
+      asgen-redis:
         condition: service_healthy
     volumes:
       - type: bind
