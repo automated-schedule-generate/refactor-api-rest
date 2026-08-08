@@ -15,7 +15,7 @@ export class UpdateUserDto {
   })
   @IsNotEmpty({ message: 'O nome é obrigatório' })
   @IsString({ message: 'O nome deve ser uma string' })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 'example@gmail.com',
@@ -23,7 +23,7 @@ export class UpdateUserDto {
   })
   @IsNotEmpty({ message: 'O email é obrigatório' })
   @IsEmail({}, { message: 'Email inválido' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     example: 'Password123!',

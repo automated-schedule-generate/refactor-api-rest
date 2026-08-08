@@ -30,28 +30,28 @@ export class UserRoleOrganizationModel extends Model<
 
   @ForeignKey(() => UserModel)
   @Column({ type: DataType.UUID, allowNull: false })
-  user_id: string;
+  user_id!: string;
 
   @ForeignKey(() => RoleModel)
   @Column({ type: DataType.UUID, allowNull: false })
-  role_id: string;
+  role_id!: string;
 
   @ForeignKey(() => OrganizationModel)
   @Column({ type: DataType.UUID, allowNull: false })
-  organization_id: string;
+  organization_id!: string;
 
   @BelongsTo(() => UserModel)
-  user: UserModel;
+  user!: UserModel;
 
   @BelongsTo(() => RoleModel)
-  role: RoleModel;
+  role!: RoleModel;
 
   @BelongsTo(() => OrganizationModel)
-  organization: OrganizationModel;
+  organization!: OrganizationModel;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

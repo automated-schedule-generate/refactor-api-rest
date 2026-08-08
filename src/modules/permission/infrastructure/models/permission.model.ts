@@ -25,11 +25,11 @@ export class PermissionModel extends Model<
     allowNull: false,
     unique: true,
   })
-  path: string;
+  path!: string;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

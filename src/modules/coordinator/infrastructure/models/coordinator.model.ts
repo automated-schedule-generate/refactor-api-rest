@@ -27,13 +27,13 @@ export class CoordinatorModel extends Model<
     type: DataType.DATE,
     allowNull: false,
   })
-  start: Date;
+  start!: Date;
 
   @Column({
     type: DataType.DATE,
     allowNull: true,
   })
-  end: Date | null;
+  end!: Date | null;
 
   @ForeignKey(() => TeacherModel)
   @Column({
@@ -41,20 +41,20 @@ export class CoordinatorModel extends Model<
     allowNull: false,
     onDelete: 'CASCADE',
   })
-  teacher_id: string;
+  teacher_id!: string;
 
   @BelongsTo(() => TeacherModel)
-  teacher: TeacherModel;
+  teacher!: TeacherModel;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

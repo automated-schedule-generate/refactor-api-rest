@@ -9,7 +9,7 @@ export class RegisterUserDto {
   })
   @IsNotEmpty({ message: 'O nome é obrigatório' })
   @IsString({ message: 'O nome deve ser uma string' })
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 'example@gmail.com',
@@ -17,7 +17,7 @@ export class RegisterUserDto {
   })
   @IsNotEmpty({ message: 'O email é obrigatório' })
   @IsEmail({}, { message: 'Email inválido' })
-  email: string;
+  email!: string;
 
   @ApiProperty({
     example: 'Password123!',
@@ -29,12 +29,12 @@ export class RegisterUserDto {
     message:
       'A senha deve conter letras, números e pelo menos um caractere especial ou letra maiúscula',
   })
-  password: string;
+  password!: string;
 
   @ApiProperty({
     example: '123.456.789-09',
     description: 'CPF do usuário',
   })
   @IsCpfValidator()
-  cpf: string;
+  cpf!: string;
 }

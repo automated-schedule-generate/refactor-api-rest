@@ -26,7 +26,7 @@ export class RegisterClassDto {
   })
   @IsEnum(ShiftEnum)
   @IsNotEmpty()
-  shift: ShiftEnum;
+  shift!: ShiftEnum;
 
   @ApiProperty({
     required: true,
@@ -35,7 +35,7 @@ export class RegisterClassDto {
   })
   @IsNumber()
   @IsNotEmpty()
-  course_semester: number;
+  course_semester!: number;
 
   @ApiProperty({
     required: true,
@@ -43,7 +43,7 @@ export class RegisterClassDto {
   })
   @IsUUID('7', { message: 'ID do curso inválido.' })
   @IsNotEmpty()
-  course_id: string;
+  course_id!: string;
 
   @ApiProperty({
     required: true,
@@ -51,5 +51,5 @@ export class RegisterClassDto {
   })
   @IsUUID('7', { message: 'ID do semestre inválido.' })
   @IsNotEmpty()
-  semester_id: string;
+  semester_id!: string;
 }

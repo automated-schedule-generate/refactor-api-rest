@@ -8,5 +8,5 @@ export class UpdatePermissionDto {
   })
   @IsNotEmpty({ message: 'O caminho é obrigatório' })
   @IsString({ message: 'O caminho deve ser uma string' })
-  path: string;
+  path!: string;
 }

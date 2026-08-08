@@ -15,9 +15,9 @@ export class RolePermissionModel extends Model<
 > {
   @ForeignKey(() => RoleModel)
   @Column({ type: DataType.UUID, allowNull: false })
-  role_id: string;
+  role_id!: string;
 
   @ForeignKey(() => PermissionModel)
   @Column({ type: DataType.UUID, allowNull: false })
-  permission_id: string;
+  permission_id!: string;
 }

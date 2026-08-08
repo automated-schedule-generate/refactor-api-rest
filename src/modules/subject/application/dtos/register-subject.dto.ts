@@ -14,7 +14,7 @@ export class RegisterSubjectDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 40,
@@ -22,7 +22,7 @@ export class RegisterSubjectDto {
   })
   @IsNumber()
   @IsNotEmpty()
-  workload: number;
+  workload!: number;
 
   @ApiProperty({
     example: false,
@@ -31,7 +31,7 @@ export class RegisterSubjectDto {
   })
   @IsBoolean()
   @IsNotEmpty()
-  is_optional: boolean;
+  is_optional!: boolean;
 
   @ApiProperty({
     example: '123e4567-e89b-12d3-a456-426614174000',
@@ -48,5 +48,5 @@ export class RegisterSubjectDto {
   })
   @IsString()
   @IsNotEmpty()
-  course_id: string;
+  course_id!: string;
 }

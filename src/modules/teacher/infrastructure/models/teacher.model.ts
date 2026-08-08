@@ -27,44 +27,44 @@ export class TeacherModel extends Model<TeacherModel, Partial<TeacherModel>> {
     primaryKey: true,
     onDelete: 'CASCADE',
   })
-  user_id: string;
+  user_id!: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
-  special_need: boolean;
+  special_need!: boolean;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  description_special_need: string;
+  description_special_need!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  observation: string;
+  observation!: string;
 
   @Column({
     type: DataType.ENUM(WorkloadEnum.HR_20, WorkloadEnum.HR_40),
     defaultValue: WorkloadEnum.HR_20,
   })
-  workload: WorkloadEnum;
+  workload!: WorkloadEnum;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 
   @BelongsTo(() => UserModel)
-  user: UserModel;
+  user!: UserModel;
 
   @HasMany(() => CoordinatorModel)
-  coordinators: CoordinatorModel[];
+  coordinators!: CoordinatorModel[];
 
   @HasMany(() => PreferenceModel, 'user_id')
-  preferences: PreferenceModel[];
+  preferences!: PreferenceModel[];
 
   @BelongsToMany(() => SubjectModel, () => SubjectTeacherSemesterModel)
-  subjects: SubjectModel[];
+  subjects!: SubjectModel[];
 }

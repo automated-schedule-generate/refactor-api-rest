@@ -9,7 +9,7 @@ export class RegisterSemesterDto {
   })
   @IsString()
   @Matches(/^\d{4}$/)
-  year: string;
+  year!: string;
 
   @ApiProperty({
     example: SemesterEnum.FIRST,
@@ -17,5 +17,5 @@ export class RegisterSemesterDto {
     enum: SemesterEnum,
   })
   @IsEnum(SemesterEnum)
-  semester: SemesterEnum;
+  semester!: SemesterEnum;
 }

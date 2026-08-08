@@ -80,7 +80,7 @@ export const healthMetricProviders = [
     labelNames: ['check', 'status'],
   }),
 
-  ...values.map(({ name, help, labelNames }) =>
+  ...values.map(({ name, help, labelNames = [] }) =>
     makeGaugeProvider({ name, help, labelNames }),
   ),
 ];

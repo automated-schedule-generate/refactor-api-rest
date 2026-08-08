@@ -50,7 +50,7 @@ export class FilterFindAllSubjectsDto extends PaginationDto {
     return true;
   })
   @IsOptional()
-  with_pagination: boolean;
+  with_pagination!: boolean;
 
   @ApiProperty({
     description: 'Busca por nome da disciplina',

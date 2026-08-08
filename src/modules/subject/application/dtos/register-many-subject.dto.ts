@@ -39,7 +39,7 @@ export class RegisterManySubjectDto {
   })
   @IsString()
   @IsNotEmpty()
-  course_id: string;
+  course_id!: string;
 
   @ApiProperty({
     example: [
@@ -62,5 +62,5 @@ export class RegisterManySubjectDto {
   @IsNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => RegisterSubjectItemDto)
-  subjects: RegisterSubjectItemDto[];
+  subjects!: RegisterSubjectItemDto[];
 }

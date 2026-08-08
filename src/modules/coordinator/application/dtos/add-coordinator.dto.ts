@@ -8,7 +8,7 @@ export class AddCoordinatorDto {
   })
   @IsString()
   @IsNotEmpty()
-  user_id: string;
+  user_id!: string;
 
   @ApiProperty({
     example: '2022-01-01',
@@ -16,7 +16,7 @@ export class AddCoordinatorDto {
   })
   @IsString()
   @IsNotEmpty()
-  start_date: string;
+  start_date!: string;
 
   @ApiProperty({
     example: '2022-01-01',

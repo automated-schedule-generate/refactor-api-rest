@@ -35,7 +35,7 @@ export class PreferenceModel extends Model<
     ),
     allowNull: false,
   })
-  day: DayPreferenceEnum;
+  day!: DayPreferenceEnum;
 
   @Column({
     type: DataType.ENUM(
@@ -45,30 +45,30 @@ export class PreferenceModel extends Model<
     ),
     allowNull: false,
   })
-  turn: TurnPreferenceEnum;
+  turn!: TurnPreferenceEnum;
 
   @ForeignKey(() => TeacherModel)
   @Column({
     type: DataType.UUID,
     onDelete: 'CASCADE',
   })
-  user_id: string;
+  user_id!: string;
 
   @BelongsTo(() => TeacherModel)
-  teacher: TeacherModel;
+  teacher!: TeacherModel;
 
   @HasMany(() => PreferenceTimeModel)
-  preferenceTimes: PreferenceTimeModel[];
+  preferenceTimes!: PreferenceTimeModel[];
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

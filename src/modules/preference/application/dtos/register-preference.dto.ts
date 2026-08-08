@@ -33,5 +33,5 @@ export class RegisterPreferenceDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => RegisterPreferenceTimeDto)
-  preferences: RegisterPreferenceTimeDto[];
+  preferences!: RegisterPreferenceTimeDto[];
 }

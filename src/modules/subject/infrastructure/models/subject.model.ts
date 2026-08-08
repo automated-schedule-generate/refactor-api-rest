@@ -30,27 +30,27 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
     type: DataType.STRING,
     allowNull: false,
   })
-  name: string;
+  name!: string;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  workload: number;
+  workload!: number;
 
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   })
-  is_optional: boolean;
+  is_optional!: boolean;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
     defaultValue: 1,
   })
-  course_semester: number;
+  course_semester!: number;
 
   @ForeignKey(() => SubjectModel)
   @Column({
@@ -58,7 +58,7 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
     allowNull: true,
     onDelete: 'SET NULL',
   })
-  prerequisite_id: string;
+  prerequisite_id!: string;
 
   @ForeignKey(() => CourseModel)
   @Column({
@@ -66,29 +66,29 @@ export class SubjectModel extends Model<SubjectModel, Partial<SubjectModel>> {
     allowNull: false,
     onDelete: 'CASCADE',
   })
-  course_id: string;
+  course_id!: string;
 
   @BelongsTo(() => SubjectModel)
-  prerequisite: SubjectModel;
+  prerequisite!: SubjectModel;
 
   @BelongsTo(() => CourseModel)
-  course: CourseModel;
+  course!: CourseModel;
 
   @BelongsToMany(() => TeacherModel, () => SubjectTeacherSemesterModel)
-  teachers: TeacherModel[];
+  teachers!: TeacherModel[];
 
   @BelongsToMany(() => SemesterModel, () => SubjectTeacherSemesterModel)
-  semesters: SemesterModel[];
+  semesters!: SemesterModel[];
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

@@ -33,7 +33,7 @@ export class SubjectTeacherSemesterModel extends Model<
     allowNull: false,
     unique: false,
   })
-  subject_id: string;
+  subject_id!: string;
 
   @ForeignKey(() => TeacherModel)
   @Column({
@@ -41,7 +41,7 @@ export class SubjectTeacherSemesterModel extends Model<
     allowNull: false,
     unique: false,
   })
-  teacher_id: string;
+  teacher_id!: string;
 
   @ForeignKey(() => SemesterModel)
   @Column({
@@ -49,26 +49,26 @@ export class SubjectTeacherSemesterModel extends Model<
     allowNull: false,
     unique: false,
   })
-  semester_id: string;
+  semester_id!: string;
 
   @BelongsTo(() => SubjectModel)
-  subject: SubjectModel;
+  subject!: SubjectModel;
 
   @BelongsTo(() => TeacherModel)
-  teacher: TeacherModel;
+  teacher!: TeacherModel;
 
   @BelongsTo(() => SemesterModel)
-  semester: SemesterModel;
+  semester!: SemesterModel;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

@@ -8,5 +8,5 @@ export class AddPermissionToRoleDto {
   })
   @IsNotEmpty({ message: 'O ID da permissão é obrigatório' })
   @IsUUID('all', { message: 'O ID da permissão deve ser um UUID válido' })
-  permission_id: string;
+  permission_id!: string;
 }

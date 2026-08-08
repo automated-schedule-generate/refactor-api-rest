@@ -26,7 +26,9 @@ export class DatabaseIndicator extends HealthIndicator implements IIndicator {
         database: this.sequelize.getDatabaseName(),
       });
     } catch (error) {
-      const result = this.getStatus(key, false, { message: error.message });
+      const result = this.getStatus(key, false, {
+        message: (error as Error)?.message,
+      });
       throw new HealthCheckError('Database check failed', result);
     }
   }

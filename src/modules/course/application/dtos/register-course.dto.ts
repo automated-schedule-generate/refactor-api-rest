@@ -9,7 +9,7 @@ export class RegisterCourseDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 8,
@@ -17,7 +17,7 @@ export class RegisterCourseDto {
   })
   @IsNumber()
   @IsNotEmpty()
-  total_semesters: number;
+  total_semesters!: number;
 
   @ApiProperty({
     enum: ClassTimeEnum,
@@ -26,5 +26,5 @@ export class RegisterCourseDto {
   })
   @IsEnum(ClassTimeEnum)
   @IsNotEmpty()
-  class_time: ClassTimeEnum;
+  class_time!: ClassTimeEnum;
 }

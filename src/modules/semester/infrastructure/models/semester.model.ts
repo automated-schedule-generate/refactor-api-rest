@@ -27,31 +27,31 @@ export class SemesterModel extends Model<
     type: DataType.STRING(4),
     allowNull: false,
   })
-  year: string;
+  year!: string;
 
   @Column({
     type: DataType.ENUM(...Object.values(SemesterEnum)),
     defaultValue: SemesterEnum.FIRST,
   })
-  semester: SemesterEnum;
+  semester!: SemesterEnum;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  is_finished: boolean;
+  is_finished!: boolean;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 
   @BeforeUpdate
   static async updateIsFinished(

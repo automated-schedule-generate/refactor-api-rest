@@ -8,7 +8,7 @@ export class RegisterTeacherDto {
     description: 'ID do usuário',
   })
   @IsString()
-  user_id: string;
+  user_id!: string;
 
   @ApiProperty({
     enum: WorkloadEnum,
@@ -17,5 +17,5 @@ export class RegisterTeacherDto {
   })
   @IsEnum(WorkloadEnum)
   @IsNotEmpty()
-  workload: WorkloadEnum;
+  workload!: WorkloadEnum;
 }

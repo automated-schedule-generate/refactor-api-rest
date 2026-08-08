@@ -7,19 +7,19 @@ export class UpdateTimetableEntryDto {
     description: 'Day of the week',
   })
   @IsString()
-  day: string;
+  day!: string;
 
   @ApiProperty({
     required: true,
     description: 'Slot index',
   })
   @IsNumber()
-  slot_index: number;
+  slot_index!: number;
 
   @ApiProperty({
     required: true,
     description: 'Teacher id',
   })
   @IsString()
-  teacher_id: string;
+  teacher_id!: string;
 }

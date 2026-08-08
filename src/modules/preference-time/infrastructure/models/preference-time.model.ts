@@ -35,24 +35,24 @@ export class PreferenceTimeModel extends Model<
     ),
     allowNull: false,
   })
-  selected: SelectedTimeEnum;
+  selected!: SelectedTimeEnum;
 
   @ForeignKey(() => PreferenceModel)
   @Column({ type: DataType.UUID, onDelete: 'CASCADE' })
-  preference_id: string;
+  preference_id!: string;
 
   @BelongsTo(() => PreferenceModel, { hooks: true })
-  preference: PreferenceModel;
+  preference!: PreferenceModel;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

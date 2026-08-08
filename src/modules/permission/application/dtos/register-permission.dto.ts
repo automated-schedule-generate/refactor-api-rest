@@ -5,5 +5,5 @@ export class RegisterPermissionDto {
   @ApiProperty({ example: '/admin/users', description: 'Caminho da permissão' })
   @IsNotEmpty({ message: 'O caminho é obrigatório' })
   @IsString({ message: 'O caminho deve ser uma string' })
-  path: string;
+  path!: string;
 }

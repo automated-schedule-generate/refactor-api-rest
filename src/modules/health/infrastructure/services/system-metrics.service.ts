@@ -24,7 +24,7 @@ import {
 
 @Injectable()
 export class SystemMetricsService implements OnModuleInit, OnModuleDestroy {
-  private interval: NodeJS.Timeout;
+  private interval!: NodeJS.Timeout;
 
   constructor(
     @InjectMetric('system_cpu_usage_percent')

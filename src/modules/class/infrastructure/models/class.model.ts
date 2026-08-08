@@ -31,43 +31,43 @@ export class ClassModel extends Model<ClassModel, Partial<ClassModel>> {
     type: DataType.ENUM(...Object.values(ShiftEnum)),
     allowNull: false,
   })
-  shift: ShiftEnum;
+  shift!: ShiftEnum;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  course_semester: number;
+  course_semester!: number;
 
   @ForeignKey(() => CourseModel)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  course_id: string;
+  course_id!: string;
 
   @BelongsTo(() => CourseModel)
-  course: CourseModel;
+  course!: CourseModel;
 
   @ForeignKey(() => SemesterModel)
   @Column({
     type: DataType.UUID,
     allowNull: false,
   })
-  semester_id: string;
+  semester_id!: string;
 
   @BelongsTo(() => SemesterModel)
-  semester: SemesterModel;
+  semester!: SemesterModel;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

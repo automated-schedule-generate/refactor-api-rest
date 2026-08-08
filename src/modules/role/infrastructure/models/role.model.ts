@@ -21,17 +21,17 @@ export class RoleModel extends Model<RoleModel, Partial<RoleModel>> {
   declare id: string;
 
   @Column({ type: DataType.STRING, allowNull: false, unique: true })
-  name: string;
+  name!: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
-  priority: number;
+  priority!: number;
 
   @BelongsToMany(() => PermissionModel, () => RolePermissionModel)
-  permissions: PermissionModel[];
+  permissions!: PermissionModel[];
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

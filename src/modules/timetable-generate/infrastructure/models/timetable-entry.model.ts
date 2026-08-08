@@ -22,44 +22,44 @@ export class TimetableEntryModel extends Model<
   declare id: string;
 
   @Column({ type: DataType.UUID, allowNull: false })
-  timetable_id: string;
+  timetable_id!: string;
 
   @Column({ type: DataType.UUID, allowNull: true })
-  course_id: string;
+  course_id!: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  course_semester: number;
+  course_semester!: number;
 
   @Column({
     type: DataType.ENUM(ShiftEnum.MORNING, ShiftEnum.AFTERNOON),
     allowNull: true,
   })
-  shift: ShiftEnum | null;
+  shift!: ShiftEnum | null;
 
   @Column({ type: DataType.STRING(1), allowNull: true })
-  day: string | null;
+  day!: string | null;
 
   @Column({ type: DataType.INTEGER, allowNull: true })
-  slot_index: number | null;
+  slot_index!: number | null;
 
   @Column({ type: DataType.UUID, allowNull: false })
-  subject_id: string;
+  subject_id!: string;
 
   @Column({ type: DataType.UUID, allowNull: true })
-  teacher_id: string | null;
+  teacher_id!: string | null;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  subject_name: string;
+  subject_name!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
-  teacher_name: string;
+  teacher_name!: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

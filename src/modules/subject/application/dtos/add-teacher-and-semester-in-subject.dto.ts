@@ -9,7 +9,7 @@ export class AddTeacherAndSemesterInSubjectDto {
   @IsUUID('7', { message: 'ID do semestre inválido.' })
   @IsString({ message: 'ID do semestre deve ser uma string.' })
   @IsNotEmpty({ message: 'ID do semestre é obrigatório.' })
-  semester_id: string;
+  semester_id!: string;
 
   @ApiProperty({
     example: 'b29099a4-8c64-4041-98c7-cc1243840d94',
@@ -18,5 +18,5 @@ export class AddTeacherAndSemesterInSubjectDto {
   @IsUUID('7', { message: 'ID do professor inválido.' })
   @IsString({ message: 'ID do professor deve ser uma string.' })
   @IsNotEmpty({ message: 'ID do professor é obrigatório.' })
-  teacher_id: string;
+  teacher_id!: string;
 }

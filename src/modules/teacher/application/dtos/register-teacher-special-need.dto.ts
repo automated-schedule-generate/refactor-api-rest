@@ -7,7 +7,7 @@ export class RegisterTeacherSpecialNeedDto {
     description: 'Necessidade especial',
   })
   @IsBoolean()
-  special_need: boolean;
+  special_need!: boolean;
 
   @ApiProperty({
     example: 'Descrição da necessidade especial',

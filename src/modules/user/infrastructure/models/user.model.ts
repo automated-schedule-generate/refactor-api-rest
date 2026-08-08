@@ -20,16 +20,16 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
   declare id: string;
 
   @Column({ type: DataType.STRING })
-  name: string;
+  name!: string;
 
   @Column({ type: DataType.STRING, unique: true })
-  email: string;
+  email!: string;
 
   @Column({ type: DataType.STRING })
-  password: string;
+  password!: string;
 
   @Column({ type: DataType.STRING, unique: true })
-  cpf: string;
+  cpf!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
   role?: string;
@@ -41,14 +41,14 @@ export class UserModel extends Model<UserModel, Partial<UserModel>> {
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 
   @HasOne(() => TeacherModel)
-  teacher: InstanceType<typeof TeacherModel>;
+  teacher!: InstanceType<typeof TeacherModel>;
 }

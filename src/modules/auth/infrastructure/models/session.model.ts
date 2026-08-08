@@ -22,23 +22,23 @@ export class SessionModel extends Model<SessionModel, Partial<SessionModel>> {
   declare id: string;
 
   @Column({ type: DataType.STRING(2000), allowNull: false })
-  token: string;
+  token!: string;
 
   @Column({ type: DataType.STRING(2000), allowNull: false })
-  refresh_token: string;
+  refresh_token!: string;
 
   @Column({ type: DataType.DATE, allowNull: false })
-  expires_at: Date;
+  expires_at!: Date;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

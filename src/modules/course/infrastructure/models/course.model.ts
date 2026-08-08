@@ -22,29 +22,29 @@ export class CourseModel extends Model<CourseModel, Partial<CourseModel>> {
     type: DataType.STRING,
     allowNull: false,
   })
-  name: string;
+  name!: string;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  total_semesters: number;
+  total_semesters!: number;
 
   @Column({
     type: DataType.ENUM(ClassTimeEnum.MIN_45, ClassTimeEnum.MIN_60),
     defaultValue: ClassTimeEnum.MIN_45,
   })
-  class_time: ClassTimeEnum;
+  class_time!: ClassTimeEnum;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  is_active: boolean;
+  is_active!: boolean;
 
   @CreatedAt
-  created_at: Date;
+  created_at!: Date;
 
   @UpdatedAt
-  updated_at: Date;
+  updated_at!: Date;
 }

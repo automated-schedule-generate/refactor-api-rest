@@ -4,9 +4,9 @@ import { IsNestedBooleanArray } from 'src/imports/decorators';
 
 export class RegisterPreferenceTimeDto {
   @IsEnum(TurnPreferenceEnum)
-  turn: TurnPreferenceEnum;
+  turn!: TurnPreferenceEnum;
 
   @IsArray()
   @IsNestedBooleanArray()
-  preference: boolean[][];
+  preference!: boolean[][];
 }

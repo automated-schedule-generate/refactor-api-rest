@@ -9,7 +9,7 @@ export class LoginDto {
   })
   @IsString()
   @IsNotEmpty()
-  login: string;
+  login!: string;
 
   @ApiProperty({
     example: 'Password123!',
@@ -17,7 +17,7 @@ export class LoginDto {
   })
   @IsString()
   @IsNotEmpty()
-  password: string;
+  password!: string;
 
   @ApiProperty({
     example: 'email',
@@ -25,5 +25,5 @@ export class LoginDto {
   })
   @IsEnum(LoginType, { message: 'Tipo de login inválido' })
   @IsNotEmpty()
-  login_type: LoginType;
+  login_type!: LoginType;
 }
